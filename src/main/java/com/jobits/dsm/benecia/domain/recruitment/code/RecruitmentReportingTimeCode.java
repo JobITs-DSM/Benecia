@@ -1,10 +1,10 @@
 package com.jobits.dsm.benecia.domain.recruitment.code;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-@AllArgsConstructor
+@RequiredArgsConstructor
 public enum RecruitmentReportingTimeCode {
 
     BEFORE_NINE("REPTM1", "9시 이전"),
