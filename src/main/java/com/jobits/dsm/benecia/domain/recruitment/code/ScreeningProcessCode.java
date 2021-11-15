@@ -23,7 +23,7 @@ public enum ScreeningProcessCode {
     SYSTEM_PROGRAMMING("TA0502", "시스템프로그래밍"),
     SECURITY_PROGRAMMING("TA0601", "보안프로그래밍"),
     MOCK_HACKING("TA0602", "모의해킹/취약점분석"),
-    AI("TA0701", "인공지능"),
+    SCREENING_PROCESS_AI("TA0701", "인공지능"),
     BIG_DATA("TA0702", "빅데이터"),
     BLOCK_CHAIN("TA0703", "블록체인");
 
