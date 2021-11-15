@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 public enum WelfareCode {
 
     DORMITORY("WEL001", "기숙사 제공"),
-    MEAL("WEL002", "식사 제공"),
+    MEAL("WEL002", "중식 제공"),
     LAUNCH("WEL003", "석식 제공"),
     SELF_DEVELOP_COST("WEL004", "자기계발비"),
     ARMY_EXCEPTION_REQUEST("WEL005", "병특 신청"),
