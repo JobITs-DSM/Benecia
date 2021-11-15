@@ -16,13 +16,13 @@ public enum TechnologyCode {
     GIT("TCH007", "git"),
     GITHUB("TCH008", "Github"),
     NGINX("TCH009", "nginx"),
-    APACHE("TCH011", "Apache"),
-    FLASK("TCH012", "Flask"),
-    FAST_API("TCH013", "FastAPI"),
-    VUE_JS("TCH014", "Vue.js"),
-    NEST_JS("TCH015", "Nest.js"),
-    DOCKER("TCH016", "Docker"),
-    LINUX("TCH017", "Linux");
+    APACHE("TCH010", "Apache"),
+    FLASK("TCH011", "Flask"),
+    FAST_API("TCH012", "FastAPI"),
+    VUE_JS("TCH013", "Vue.js"),
+    NEST_JS("TCH014", "Nest.js"),
+    DOCKER("TCH015", "Docker"),
+    LINUX("TCH016", "Linux");
 
     private final String code;
     private final String value;
