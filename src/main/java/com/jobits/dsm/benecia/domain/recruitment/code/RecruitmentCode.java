@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum ScreeningProcessCode {
+public enum RecruitmentCode {
     FULL_STACK("TA0101", "풀스택"),
     FRONTEND("TA0102", "웹 프론트엔드"),
     BACKEND("TA0103", "웹 백엔드"),
@@ -23,9 +23,9 @@ public enum ScreeningProcessCode {
     SYSTEM_PROGRAMMING("TA0502", "시스템프로그래밍"),
     SECURITY_PROGRAMMING("TA0601", "보안프로그래밍"),
     MOCK_HACKING("TA0602", "모의해킹/취약점분석"),
-    SCREENING_PROCESS_AI("TA0701", "인공지능"),
-    SCREENING_PROCESS_BIG_DATA("TA0702", "빅데이터"),
-    SCREENING_PROCESS_BLOCK_CHAIN("TA0703", "블록체인");
+    RECRUITMENT_AI("TA0701", "인공지능"),
+    RECRUITMENT_BIG_DATA("TA0702", "빅데이터"),
+    RECRUITMENT_BLOCK_CHAIN("TA0703", "블록체인");
 
     private final String code;
     private final String value;
