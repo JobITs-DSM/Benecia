@@ -21,9 +21,9 @@ public enum BusinessAreaCode {
     MEDICAL_TREATMENT("DIV013", "의료"),
     ASSET_MANAGEMENT("DIV014", "자산 관리"),
     FIN_TECH("DIV015", "핀테크"),
-    BUSINESS_AREA_AI("DIV016", "인공지능"),
-    BUSINESS_AREA_BLOCK_CHAIN("DIV017", "블록체인"),
-    BUSINESS_AREA_BIG_DATA("DIV018", "빅데이터"),
+    AI("DIV016", "인공지능"),
+    BLOCK_CHAIN("DIV017", "블록체인"),
+    BIG_DATA("DIV018", "빅데이터"),
     AEROSPACE("DIV019", "우주항공");
 
     private final String code;
