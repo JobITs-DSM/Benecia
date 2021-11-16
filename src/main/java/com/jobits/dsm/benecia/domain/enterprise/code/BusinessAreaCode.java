@@ -1,4 +1,4 @@
-package com.jobits.dsm.benecia.domain.recruitment.code;
+package com.jobits.dsm.benecia.domain.enterprise.code;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
