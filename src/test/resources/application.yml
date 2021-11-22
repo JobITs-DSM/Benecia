@@ -1,0 +1,24 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
+auth:
+  jwt:
+    exp:
+      refresh: ${JWT_EXP_REFRESH}
+      access: ${JWT_EXP_ACCESS}
+    secret: ${JWT_SECRET_KEY}
+server:
+  servlet:
+    context-path: /v1/api
+  shutdown: graceful
