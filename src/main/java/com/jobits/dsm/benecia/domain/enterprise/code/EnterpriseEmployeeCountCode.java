@@ -3,6 +3,13 @@ package com.jobits.dsm.benecia.domain.enterprise.code;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 @Getter
 @RequiredArgsConstructor
 public enum EnterpriseEmployeeCountCode {
@@ -14,4 +21,13 @@ public enum EnterpriseEmployeeCountCode {
 
     private final String code;
     private final String value;
+
+    private static final Map<String, EnterpriseEmployeeCountCode> map =
+            Collections.unmodifiableMap(Arrays.stream(EnterpriseEmployeeCountCode.values())
+                    .collect(Collectors.toMap(EnterpriseEmployeeCountCode::getCode, Function.identity())));
+
+    public static EnterpriseEmployeeCountCode find(String dbData) {
+        return Optional.of(map.get(dbData))
+                .orElseThrow(() -> new IllegalStateException("adf"));
+    }
 }
