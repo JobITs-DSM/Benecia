@@ -3,6 +3,15 @@ package com.jobits.dsm.benecia.domain.recruitment.code;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 @Getter
 @RequiredArgsConstructor
 public enum ProgrammingLanguageCode {
@@ -27,4 +36,26 @@ public enum ProgrammingLanguageCode {
     private final String code;
     private final String value;
 
+    private static final Map<String, ProgrammingLanguageCode> map =
+            Collections.unmodifiableMap(Arrays.stream(ProgrammingLanguageCode.values())
+                    .collect(Collectors.toMap(ProgrammingLanguageCode::getCode, Function.identity())));
+
+    public static ProgrammingLanguageCode find(String dbData) {
+        return Optional.of(map.get(dbData))
+                .orElseThrow(() -> new IllegalStateException("adf"));
+    }
+
+    @Converter
+    public static class ProgrammingLanguageCodeConverter implements AttributeConverter<ProgrammingLanguageCode, String> {
+
+        @Override
+        public String convertToDatabaseColumn(ProgrammingLanguageCode attribute) {
+            return attribute.getCode();
+        }
+
+        @Override
+        public ProgrammingLanguageCode convertToEntityAttribute(String dbData) {
+            return null;
+        }
+    }
 }
