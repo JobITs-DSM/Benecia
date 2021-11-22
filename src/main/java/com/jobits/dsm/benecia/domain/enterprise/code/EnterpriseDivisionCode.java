@@ -22,4 +22,27 @@ public enum EnterpriseDivisionCode {
     private final String code;
     private final String value;
 
+    private static final Map<String, EnterpriseDivisionCode> map =
+            Collections.unmodifiableMap(Arrays.stream(EnterpriseDivisionCode.values())
+                    .collect(Collectors.toMap(EnterpriseDivisionCode::getCode, Function.identity())));
+
+    public static EnterpriseDivisionCode find(String dbData) {
+        return Optional.of(map.get(dbData))
+                .orElseThrow(() -> new IllegalStateException("adf"));
+    }
+
+    @Converter
+    public static class EnterpriseDivisionCodeConverter implements AttributeConverter<EnterpriseDivisionCode, String> {
+
+        @Override
+        public String convertToDatabaseColumn(EnterpriseDivisionCode attribute) {
+            return attribute.getCode();
+        }
+
+        @Override
+        public EnterpriseDivisionCode convertToEntityAttribute(String dbData) {
+            return null;
+        }
+    }
+
 }
