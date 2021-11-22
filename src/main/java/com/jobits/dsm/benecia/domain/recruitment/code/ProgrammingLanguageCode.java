@@ -1,5 +1,6 @@
 package com.jobits.dsm.benecia.domain.recruitment.code;
 
+import com.jobits.dsm.benecia.domain.recruitment.exception.AttributeConvertFailedException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -55,7 +56,8 @@ public enum ProgrammingLanguageCode {
 
         @Override
         public ProgrammingLanguageCode convertToEntityAttribute(String dbData) {
-            return null;
+            return Optional.of(ProgrammingLanguageCode.find(dbData))
+                    .orElseThrow(AttributeConvertFailedException::new);
         }
     }
 }
