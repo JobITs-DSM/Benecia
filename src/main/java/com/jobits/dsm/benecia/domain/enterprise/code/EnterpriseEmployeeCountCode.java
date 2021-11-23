@@ -1,6 +1,6 @@
 package com.jobits.dsm.benecia.domain.enterprise.code;
 
-import com.jobits.dsm.benecia.domain.recruitment.exception.AttributeConvertFailedException;
+import com.jobits.dsm.benecia.global.exception.AttributeConvertFailedException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -31,7 +31,7 @@ public enum EnterpriseEmployeeCountCode {
 
     public static EnterpriseEmployeeCountCode find(String dbData) {
         return Optional.of(map.get(dbData))
-                .orElseThrow(() -> new IllegalStateException("adf"));
+                .orElseThrow(AttributeConvertFailedException::new);
     }
 
     @Converter
