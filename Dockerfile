@@ -1,4 +1,4 @@
-FROM openjdk:11-jdk
+FROM openjdk:17-jdk
 
 COPY ./build/libs/*.jar app.jar
 
