@@ -1,4 +1,4 @@
-package com.jobits.dsm.benecia.domain.recruitment.exception;
+package com.jobits.dsm.benecia.global.exception;
 
 public class AttributeConvertFailedException extends RuntimeException {
 
