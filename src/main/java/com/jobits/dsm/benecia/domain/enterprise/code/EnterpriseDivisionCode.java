@@ -1,5 +1,6 @@
 package com.jobits.dsm.benecia.domain.enterprise.code;
 
+import com.jobits.dsm.benecia.global.exception.AttributeConvertFailedException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -22,4 +23,27 @@ public enum EnterpriseDivisionCode {
     private final String code;
     private final String value;
 
+    private static final Map<String, EnterpriseDivisionCode> map =
+            Collections.unmodifiableMap(Arrays.stream(EnterpriseDivisionCode.values())
+                    .collect(Collectors.toMap(EnterpriseDivisionCode::getCode, Function.identity())));
+
+    public static EnterpriseDivisionCode find(String dbData) {
+        return Optional.of(map.get(dbData))
+                .orElseThrow(AttributeConvertFailedException::new);
+    }
+
+    @Converter
+    public static class EnterpriseDivisionCodeConverter implements AttributeConverter<EnterpriseDivisionCode, String> {
+
+        @Override
+        public String convertToDatabaseColumn(EnterpriseDivisionCode attribute) {
+            return attribute.getCode();
+        }
+
+        @Override
+        public EnterpriseDivisionCode convertToEntityAttribute(String dbData) {
+            return Optional.of(EnterpriseDivisionCode.find(dbData))
+                    .orElseThrow(AttributeConvertFailedException::new);
+        }
+    }
 }
