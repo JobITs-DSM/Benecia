@@ -1,7 +1,18 @@
 package com.jobits.dsm.benecia.domain.recruitment.code;
 
+import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
+import com.jobits.dsm.benecia.global.exception.AttributeConvertFailedException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Getter
 @RequiredArgsConstructor
@@ -32,4 +43,27 @@ public enum HiringArea {
     private final String value;
     private final String category;
 
+    private static final Map<String, HiringArea> map =
+            Collections.unmodifiableMap(Arrays.stream(HiringArea.values())
+                    .collect(Collectors.toMap(HiringArea::getCode, Function.identity())));
+
+    public static HiringArea find(String dbData) {
+        return Optional.of(map.get(dbData))
+                .orElseThrow(AttributeConvertFailedException::new);
+    }
+
+    @Converter
+    public static class HiringAreaConverter implements AttributeConverter<HiringArea, String> {
+
+        @Override
+        public String convertToDatabaseColumn(HiringArea attribute) {
+            return attribute.getCode();
+        }
+
+        @Override
+        public HiringArea convertToEntityAttribute(String dbData) {
+            return Optional.of(HiringArea.find(dbData))
+                    .orElseThrow(AttributeConvertFailedException::new);
+        }
+    }
 }
