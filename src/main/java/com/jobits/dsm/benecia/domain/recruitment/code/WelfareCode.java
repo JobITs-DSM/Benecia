@@ -1,7 +1,17 @@
 package com.jobits.dsm.benecia.domain.recruitment.code;
 
+import com.jobits.dsm.benecia.global.exception.AttributeConvertFailedException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Getter
 @RequiredArgsConstructor
@@ -17,4 +27,27 @@ public enum WelfareCode {
     private final String code;
     private final String value;
 
+    private static final Map<String, WelfareCode> map =
+            Collections.unmodifiableMap(Arrays.stream(WelfareCode.values())
+                    .collect(Collectors.toMap(WelfareCode::getCode, Function.identity())));
+
+    public static WelfareCode find(String dbData) {
+        return Optional.of(map.get(dbData))
+                .orElseThrow(AttributeConvertFailedException::new);
+    }
+
+    @Converter
+    public static class WelfareCodeConverter implements AttributeConverter<WelfareCode, String> {
+
+        @Override
+        public String convertToDatabaseColumn(WelfareCode attribute) {
+            return attribute.getCode();
+        }
+
+        @Override
+        public WelfareCode convertToEntityAttribute(String dbData) {
+            return Optional.of(WelfareCode.find(dbData))
+                    .orElseThrow(AttributeConvertFailedException::new);
+        }
+    }
 }
