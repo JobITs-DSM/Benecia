@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public enum RecruitmentFullTimePayCode {
 
-    LESS_2400("FPAY01", "22400만원 이하 400백"),
-    MORE_2400("FPAY02", "2400만원 초과 2800만원 이하"),
-    MORE_2800("FPAY03", "2800만원 초과 3200만원 이하"),
+    LESS_2400("FPAY01", "2400만원 이하"),
+    MORE_2400("FPAY02", "2400만원 초과"),
+    MORE_2800("FPAY03", "2800만원 초과"),
     MORE_3200("FPAY04", "3200만원 초과");
 
     private final String code;
