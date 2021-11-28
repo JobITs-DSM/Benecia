@@ -1,7 +1,17 @@
 package com.jobits.dsm.benecia.domain.recruitment.code;
 
+import com.jobits.dsm.benecia.global.exception.AttributeConvertFailedException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Getter
 @RequiredArgsConstructor
@@ -27,4 +37,27 @@ public enum TechnologyCode {
     private final String code;
     private final String value;
 
+    private static final Map<String, TechnologyCode> map =
+            Collections.unmodifiableMap(Arrays.stream(TechnologyCode.values())
+                    .collect(Collectors.toMap(TechnologyCode::getCode, Function.identity())));
+
+    public static TechnologyCode find(String dbData) {
+        return Optional.of(map.get(dbData))
+                .orElseThrow(AttributeConvertFailedException::new);
+    }
+
+    @Converter
+    public static class TechnologyCodeConverter implements AttributeConverter<TechnologyCode, String> {
+
+        @Override
+        public String convertToDatabaseColumn(TechnologyCode attribute) {
+            return attribute.getCode();
+        }
+
+        @Override
+        public TechnologyCode convertToEntityAttribute(String dbData) {
+            return Optional.of(TechnologyCode.find(dbData))
+                    .orElseThrow(AttributeConvertFailedException::new);
+        }
+    }
 }
