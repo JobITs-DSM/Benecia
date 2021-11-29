@@ -45,7 +45,7 @@ public enum RecruitmentFullTimePayCode {
         @Override
         public RecruitmentFullTimePayCode convertToEntityAttribute(String dbData) {
             return Optional.of(RecruitmentFullTimePayCode.find(dbData))
-                    .orElseThrow(AttributeConvertFailedException::new);
+                    .orElseThrow(() -> AttributeConvertFailedException.EXCEPTION);
         }
     }
 }

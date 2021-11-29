@@ -44,7 +44,7 @@ public enum RecruitmentReportingTimeCode {
         @Override
         public RecruitmentReportingTimeCode convertToEntityAttribute(String dbData) {
             return Optional.of(RecruitmentReportingTimeCode.find(dbData))
-                    .orElseThrow(AttributeConvertFailedException::new);
+                    .orElseThrow(() -> AttributeConvertFailedException.EXCEPTION);
         }
     }
 }
