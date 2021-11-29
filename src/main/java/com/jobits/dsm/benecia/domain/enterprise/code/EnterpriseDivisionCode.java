@@ -23,12 +23,12 @@ public enum EnterpriseDivisionCode {
     private final String code;
     private final String value;
 
-    private static final Map<String, EnterpriseDivisionCode> map =
+    private static final Map<String, EnterpriseDivisionCode> MAP =
             Collections.unmodifiableMap(Arrays.stream(EnterpriseDivisionCode.values())
                     .collect(Collectors.toMap(EnterpriseDivisionCode::getCode, Function.identity())));
 
     public static EnterpriseDivisionCode find(String dbData) {
-        return Optional.of(map.get(dbData))
+        return Optional.of(MAP.get(dbData))
                 .orElseThrow(AttributeConvertFailedException::new);
     }
 
