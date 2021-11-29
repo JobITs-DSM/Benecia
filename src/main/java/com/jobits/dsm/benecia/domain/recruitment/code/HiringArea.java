@@ -1,7 +1,6 @@
 package com.jobits.dsm.benecia.domain.recruitment.code;
 
-import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
-import com.jobits.dsm.benecia.global.exception.AttributeConvertFailedException;
+import com.jobits.dsm.benecia.global.error.exception.AttributeConvertFailedException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
