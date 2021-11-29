@@ -1,6 +1,5 @@
 package com.jobits.dsm.benecia.domain.recruitment.code;
 
-import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
 import com.jobits.dsm.benecia.global.exception.AttributeConvertFailedException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -43,12 +42,12 @@ public enum HiringArea {
     private final String value;
     private final String category;
 
-    private static final Map<String, HiringArea> map =
+    private static final Map<String, HiringArea> MAP =
             Collections.unmodifiableMap(Arrays.stream(HiringArea.values())
                     .collect(Collectors.toMap(HiringArea::getCode, Function.identity())));
 
     public static HiringArea find(String dbData) {
-        return Optional.of(map.get(dbData))
+        return Optional.of(MAP.get(dbData))
                 .orElseThrow(AttributeConvertFailedException::new);
     }
 
@@ -62,8 +61,7 @@ public enum HiringArea {
 
         @Override
         public HiringArea convertToEntityAttribute(String dbData) {
-            return Optional.of(HiringArea.find(dbData))
-                    .orElseThrow(AttributeConvertFailedException::new);
+            return find(dbData);
         }
     }
 }
