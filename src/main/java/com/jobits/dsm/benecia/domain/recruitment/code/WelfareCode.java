@@ -27,12 +27,12 @@ public enum WelfareCode {
     private final String code;
     private final String value;
 
-    private static final Map<String, WelfareCode> map =
+    private static final Map<String, WelfareCode> MAP =
             Collections.unmodifiableMap(Arrays.stream(WelfareCode.values())
                     .collect(Collectors.toMap(WelfareCode::getCode, Function.identity())));
 
     public static WelfareCode find(String dbData) {
-        return Optional.of(map.get(dbData))
+        return Optional.of(MAP.get(dbData))
                 .orElseThrow(AttributeConvertFailedException::new);
     }
 
@@ -46,8 +46,7 @@ public enum WelfareCode {
 
         @Override
         public WelfareCode convertToEntityAttribute(String dbData) {
-            return Optional.of(WelfareCode.find(dbData))
-                    .orElseThrow(AttributeConvertFailedException::new);
+            return find(dbData);
         }
     }
 }
