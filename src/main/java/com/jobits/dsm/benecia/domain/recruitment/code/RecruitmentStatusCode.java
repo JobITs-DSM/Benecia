@@ -23,12 +23,12 @@ public enum RecruitmentStatusCode {
     private final String code;
     private final String value;
 
-    private static final Map<String, RecruitmentStatusCode> map =
+    private static final Map<String, RecruitmentStatusCode> MAP =
             Collections.unmodifiableMap(Arrays.stream(RecruitmentStatusCode.values())
                     .collect(Collectors.toMap(RecruitmentStatusCode::getCode, Function.identity())));
 
     public static RecruitmentStatusCode find(String dbData) {
-        return Optional.of(map.get(dbData))
+        return Optional.of(MAP.get(dbData))
                 .orElseThrow(AttributeConvertFailedException::new);
     }
 
@@ -42,8 +42,7 @@ public enum RecruitmentStatusCode {
 
         @Override
         public RecruitmentStatusCode convertToEntityAttribute(String dbData) {
-            return Optional.of(RecruitmentStatusCode.find(dbData))
-                    .orElseThrow(AttributeConvertFailedException::new);
+            return find(dbData);
         }
     }
 }
