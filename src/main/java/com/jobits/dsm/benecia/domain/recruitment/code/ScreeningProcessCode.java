@@ -31,12 +31,12 @@ public enum ScreeningProcessCode {
     private final String code;
     private final String value;
 
-    private static final Map<String, ScreeningProcessCode> map =
+    private static final Map<String, ScreeningProcessCode> MAP =
             Collections.unmodifiableMap(Arrays.stream(ScreeningProcessCode.values())
                     .collect(Collectors.toMap(ScreeningProcessCode::getCode, Function.identity())));
 
     public static ScreeningProcessCode find(String dbData) {
-        return Optional.of(map.get(dbData))
+        return Optional.of(MAP.get(dbData))
                 .orElseThrow(AttributeConvertFailedException::new);
     }
 
@@ -50,8 +50,7 @@ public enum ScreeningProcessCode {
 
         @Override
         public ScreeningProcessCode convertToEntityAttribute(String dbData) {
-            return Optional.of(ScreeningProcessCode.find(dbData))
-                    .orElseThrow(AttributeConvertFailedException::new);
+            return find(dbData);
         }
     }
 }
