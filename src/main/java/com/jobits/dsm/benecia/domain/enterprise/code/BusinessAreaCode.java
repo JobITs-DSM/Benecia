@@ -39,12 +39,12 @@ public enum BusinessAreaCode {
     private final String code;
     private final String value;
 
-    private static final Map<String, BusinessAreaCode> map =
+    private static final Map<String, BusinessAreaCode> MAP =
             Collections.unmodifiableMap(Arrays.stream(BusinessAreaCode.values())
                 .collect(Collectors.toMap(BusinessAreaCode::getCode, Function.identity())));
 
     public static BusinessAreaCode find(String dbData) {
-        return Optional.of(map.get(dbData))
+        return Optional.of(MAP.get(dbData))
                 .orElseThrow(AttributeConvertFailedException::new);
     }
 
@@ -58,8 +58,7 @@ public enum BusinessAreaCode {
 
         @Override
         public BusinessAreaCode convertToEntityAttribute(String dbData) {
-            return Optional.of(BusinessAreaCode.find(dbData))
-                    .orElseThrow(AttributeConvertFailedException::new);
+            return find(dbData);
         }
     }
 }
