@@ -1,8 +1,8 @@
 package com.jobits.dsm.benecia.domain.enterprise.domain;
 
 import com.jobits.dsm.benecia.domain.recruitment.code.ProgrammingLanguageCode;
-import com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguag.ProgrammingLanguage;
-import com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguag.ProgrammingLanguageRepository;
+import com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage.ProgrammingLanguage;
+import com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage.ProgrammingLanguageRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

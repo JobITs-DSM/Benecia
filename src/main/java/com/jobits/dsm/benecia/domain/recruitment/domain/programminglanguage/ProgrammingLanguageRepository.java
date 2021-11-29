@@ -1,4 +1,4 @@
-package com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguag;
+package com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage;
 
 import org.springframework.data.repository.CrudRepository;
 
