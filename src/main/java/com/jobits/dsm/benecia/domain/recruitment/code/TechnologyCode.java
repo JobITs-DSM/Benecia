@@ -37,12 +37,12 @@ public enum TechnologyCode {
     private final String code;
     private final String value;
 
-    private static final Map<String, TechnologyCode> map =
+    private static final Map<String, TechnologyCode> MAP =
             Collections.unmodifiableMap(Arrays.stream(TechnologyCode.values())
                     .collect(Collectors.toMap(TechnologyCode::getCode, Function.identity())));
 
     public static TechnologyCode find(String dbData) {
-        return Optional.of(map.get(dbData))
+        return Optional.of(MAP.get(dbData))
                 .orElseThrow(AttributeConvertFailedException::new);
     }
 
@@ -56,8 +56,7 @@ public enum TechnologyCode {
 
         @Override
         public TechnologyCode convertToEntityAttribute(String dbData) {
-            return Optional.of(TechnologyCode.find(dbData))
-                    .orElseThrow(AttributeConvertFailedException::new);
+            return find(dbData);
         }
     }
 }
