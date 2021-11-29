@@ -1,8 +1,11 @@
 package com.jobits.dsm.benecia.domain.enterprise.code;
 
+import com.jobits.dsm.benecia.global.exception.AttributeConvertFailedException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
@@ -28,6 +31,21 @@ public enum EnterpriseEmployeeCountCode {
 
     public static EnterpriseEmployeeCountCode find(String dbData) {
         return Optional.of(map.get(dbData))
-                .orElseThrow(() -> new IllegalStateException("adf"));
+                .orElseThrow(AttributeConvertFailedException::new);
+    }
+
+    @Converter
+    public static class EnterpriseEmployeeCountCodeConverter implements AttributeConverter<EnterpriseEmployeeCountCode, String> {
+
+        @Override
+        public String convertToDatabaseColumn(EnterpriseEmployeeCountCode attribute) {
+            return attribute.getCode();
+        }
+
+        @Override
+        public EnterpriseEmployeeCountCode convertToEntityAttribute(String dbData) {
+            return Optional.of(EnterpriseEmployeeCountCode.find(dbData))
+                    .orElseThrow(AttributeConvertFailedException::new);
+        }
     }
 }

@@ -1,7 +1,17 @@
 package com.jobits.dsm.benecia.domain.recruitment.code;
 
+import com.jobits.dsm.benecia.global.exception.AttributeConvertFailedException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Getter
 @RequiredArgsConstructor
@@ -21,4 +31,27 @@ public enum ScreeningProcessCode {
     private final String code;
     private final String value;
 
+    private static final Map<String, ScreeningProcessCode> map =
+            Collections.unmodifiableMap(Arrays.stream(ScreeningProcessCode.values())
+                    .collect(Collectors.toMap(ScreeningProcessCode::getCode, Function.identity())));
+
+    public static ScreeningProcessCode find(String dbData) {
+        return Optional.of(map.get(dbData))
+                .orElseThrow(AttributeConvertFailedException::new);
+    }
+
+    @Converter
+    public static class ScreeningProcessCodeConverter implements AttributeConverter<ScreeningProcessCode, String> {
+
+        @Override
+        public String convertToDatabaseColumn(ScreeningProcessCode attribute) {
+            return attribute.getCode();
+        }
+
+        @Override
+        public ScreeningProcessCode convertToEntityAttribute(String dbData) {
+            return Optional.of(ScreeningProcessCode.find(dbData))
+                    .orElseThrow(AttributeConvertFailedException::new);
+        }
+    }
 }
