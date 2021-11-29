@@ -48,7 +48,7 @@ public enum HiringArea {
 
     public static HiringArea find(String dbData) {
         return Optional.of(MAP.get(dbData))
-                .orElseThrow(AttributeConvertFailedException::new);
+                .orElseThrow(() -> AttributeConvertFailedException.EXCEPTION);
     }
 
     @Converter

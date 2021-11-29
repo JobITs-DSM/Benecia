@@ -43,7 +43,7 @@ public enum TechnologyCode {
 
     public static TechnologyCode find(String dbData) {
         return Optional.of(MAP.get(dbData))
-                .orElseThrow(AttributeConvertFailedException::new);
+                .orElseThrow(() -> AttributeConvertFailedException.EXCEPTION);
     }
 
     @Converter

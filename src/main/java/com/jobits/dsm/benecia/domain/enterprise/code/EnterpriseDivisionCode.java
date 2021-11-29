@@ -29,7 +29,7 @@ public enum EnterpriseDivisionCode {
 
     public static EnterpriseDivisionCode find(String dbData) {
         return Optional.of(MAP.get(dbData))
-                .orElseThrow(AttributeConvertFailedException::new);
+                .orElseThrow(() -> AttributeConvertFailedException.EXCEPTION);
     }
 
     @Converter

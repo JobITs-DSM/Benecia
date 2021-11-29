@@ -30,7 +30,7 @@ public enum RecruitmentReportingTimeCode {
 
     public static RecruitmentReportingTimeCode find(String dbData) {
         return Optional.of(map.get(dbData))
-                .orElseThrow(AttributeConvertFailedException::new);
+                .orElseThrow(() -> AttributeConvertFailedException.EXCEPTION);
     }
 
     @Converter

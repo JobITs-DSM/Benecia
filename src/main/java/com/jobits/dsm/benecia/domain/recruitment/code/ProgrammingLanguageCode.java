@@ -43,7 +43,7 @@ public enum ProgrammingLanguageCode {
 
     public static ProgrammingLanguageCode find(String dbData) {
         return Optional.of(map.get(dbData))
-                .orElseThrow(AttributeConvertFailedException::new);
+                .orElseThrow(() -> AttributeConvertFailedException.EXCEPTION);
     }
 
     @Converter

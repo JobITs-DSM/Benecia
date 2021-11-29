@@ -33,7 +33,7 @@ public enum WelfareCode {
 
     public static WelfareCode find(String dbData) {
         return Optional.of(MAP.get(dbData))
-                .orElseThrow(AttributeConvertFailedException::new);
+                .orElseThrow(() -> AttributeConvertFailedException.EXCEPTION);
     }
 
     @Converter

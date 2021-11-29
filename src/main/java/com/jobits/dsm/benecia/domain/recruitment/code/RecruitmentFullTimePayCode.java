@@ -31,7 +31,7 @@ public enum RecruitmentFullTimePayCode {
 
     public static RecruitmentFullTimePayCode find(String dbData) {
         return Optional.of(map.get(dbData))
-                .orElseThrow(AttributeConvertFailedException::new);
+                .orElseThrow(() -> AttributeConvertFailedException.EXCEPTION);
     }
 
     @Converter

@@ -29,7 +29,7 @@ public enum RecruitmentStatusCode {
 
     public static RecruitmentStatusCode find(String dbData) {
         return Optional.of(MAP.get(dbData))
-                .orElseThrow(AttributeConvertFailedException::new);
+                .orElseThrow(() -> AttributeConvertFailedException.EXCEPTION);
     }
 
     @Converter

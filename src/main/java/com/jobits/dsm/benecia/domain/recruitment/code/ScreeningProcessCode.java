@@ -37,7 +37,7 @@ public enum ScreeningProcessCode {
 
     public static ScreeningProcessCode find(String dbData) {
         return Optional.of(MAP.get(dbData))
-                .orElseThrow(AttributeConvertFailedException::new);
+                .orElseThrow(() -> AttributeConvertFailedException.EXCEPTION);
     }
 
     @Converter
