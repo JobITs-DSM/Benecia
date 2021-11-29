@@ -25,12 +25,12 @@ public enum EnterpriseEmployeeCountCode {
     private final String code;
     private final String value;
 
-    private static final Map<String, EnterpriseEmployeeCountCode> map =
+    private static final Map<String, EnterpriseEmployeeCountCode> MAP =
             Collections.unmodifiableMap(Arrays.stream(EnterpriseEmployeeCountCode.values())
                     .collect(Collectors.toMap(EnterpriseEmployeeCountCode::getCode, Function.identity())));
 
     public static EnterpriseEmployeeCountCode find(String dbData) {
-        return Optional.of(map.get(dbData))
+        return Optional.of(MAP.get(dbData))
                 .orElseThrow(AttributeConvertFailedException::new);
     }
 
@@ -44,8 +44,7 @@ public enum EnterpriseEmployeeCountCode {
 
         @Override
         public EnterpriseEmployeeCountCode convertToEntityAttribute(String dbData) {
-            return Optional.of(EnterpriseEmployeeCountCode.find(dbData))
-                    .orElseThrow(AttributeConvertFailedException::new);
+            return find(dbData);
         }
     }
 }
