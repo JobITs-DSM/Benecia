@@ -57,7 +57,7 @@ public enum ProgrammingLanguageCode {
         @Override
         public ProgrammingLanguageCode convertToEntityAttribute(String dbData) {
             return Optional.of(ProgrammingLanguageCode.find(dbData))
-                    .orElseThrow(AttributeConvertFailedException::new);
+                    .orElseThrow(() -> AttributeConvertFailedException.EXCEPTION);
         }
     }
 }
