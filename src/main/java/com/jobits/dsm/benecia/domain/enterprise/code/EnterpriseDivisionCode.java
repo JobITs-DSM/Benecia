@@ -1,10 +1,6 @@
 package com.jobits.dsm.benecia.domain.enterprise.code;
 
-<<<<<<< HEAD
 import com.jobits.dsm.benecia.global.exception.AttributeConvertFailedException;
-=======
-import com.jobits.dsm.benecia.domain.recruitment.exception.AttributeConvertFailedException;
->>>>>>> ce32e879de0f758dc2674815f124dbcfd6b75d67
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -27,12 +23,12 @@ public enum EnterpriseDivisionCode {
     private final String code;
     private final String value;
 
-    private static final Map<String, EnterpriseDivisionCode> map =
+    private static final Map<String, EnterpriseDivisionCode> MAP =
             Collections.unmodifiableMap(Arrays.stream(EnterpriseDivisionCode.values())
                     .collect(Collectors.toMap(EnterpriseDivisionCode::getCode, Function.identity())));
 
     public static EnterpriseDivisionCode find(String dbData) {
-        return Optional.of(map.get(dbData))
+        return Optional.of(MAP.get(dbData))
                 .orElseThrow(AttributeConvertFailedException::new);
     }
 
