@@ -21,13 +21,33 @@ repositories {
 }
 
 dependencies {
+
+    // jpa
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
+
+    // db connectors
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'mysql:mysql-connector-java'
+
+    // web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    // security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // jjwt
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
 }
 
 test {

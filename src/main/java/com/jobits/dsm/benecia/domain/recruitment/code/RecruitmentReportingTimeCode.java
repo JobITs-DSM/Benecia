@@ -1,6 +1,6 @@
 package com.jobits.dsm.benecia.domain.recruitment.code;
 
-import com.jobits.dsm.benecia.global.exception.AttributeConvertFailedException;
+import com.jobits.dsm.benecia.global.error.exception.AttributeConvertFailedException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +30,7 @@ public enum RecruitmentReportingTimeCode {
 
     public static RecruitmentReportingTimeCode find(String dbData) {
         return Optional.of(map.get(dbData))
-                .orElseThrow(AttributeConvertFailedException::new);
+                .orElseThrow(() -> AttributeConvertFailedException.EXCEPTION);
     }
 
     @Converter
@@ -44,7 +44,7 @@ public enum RecruitmentReportingTimeCode {
         @Override
         public RecruitmentReportingTimeCode convertToEntityAttribute(String dbData) {
             return Optional.of(RecruitmentReportingTimeCode.find(dbData))
-                    .orElseThrow(AttributeConvertFailedException::new);
+                    .orElseThrow(() -> AttributeConvertFailedException.EXCEPTION);
         }
     }
 }
