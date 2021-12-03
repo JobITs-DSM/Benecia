@@ -1,12 +1,9 @@
 package com.jobits.dsm.benecia.domain.review.domain;
 
-import com.jobits.dsm.benecia.domain.recruitment.code.ProgrammingLanguageCode;
 import com.jobits.dsm.benecia.domain.review.code.ReviewCode;
 import lombok.*;
 
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -18,6 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 public class Review {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotNull
@@ -32,5 +30,5 @@ public class Review {
     private ReviewCode division;
 
     @NotNull
-    private LocalDateTime registration_date_time;
+    private LocalDateTime registrationDateTime;
 }
