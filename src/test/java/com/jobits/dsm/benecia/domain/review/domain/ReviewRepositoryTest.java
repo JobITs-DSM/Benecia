@@ -23,15 +23,13 @@ public class ReviewRepositoryTest {
 
     @Test
     void 저장_테스트_성공() {
-        Integer tmp = 1;
         Review review = Review.builder()
-                .id(tmp)
                 .training_year("2004")
                 .content("내용")
                 .division(ReviewCode.INTERVIEW_REVIEW)
-                .registration_date_time(LocalDateTime.now())
+                .registrationDateTime(LocalDateTime.now())
                 .build();
-        assertThat(reviewRepository.save(review).getId()).isEqualTo(tmp);
+        assertThat(reviewRepository.save(review).getDivision()).isEqualTo(ReviewCode.INTERVIEW_REVIEW);
 
     }
 }
