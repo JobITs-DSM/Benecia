@@ -1,7 +1,10 @@
 package com.jobits.dsm.benecia.domain.review.domain;
 
+import com.jobits.dsm.benecia.domain.recruitment.code.ProgrammingLanguageCode;
+import com.jobits.dsm.benecia.domain.review.code.ReviewCode;
 import lombok.*;
 
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
@@ -25,9 +28,8 @@ public class Review {
     @Size(max = 255)
     private String content;
 
-    @NotNull
-    @Size(min = 6, max = 6)
-    private String division;
+    @Convert(converter = ReviewCode.ReviewCodeConverter.class)
+    private ReviewCode division;
 
     @NotNull
     private LocalDateTime registration_date_time;
