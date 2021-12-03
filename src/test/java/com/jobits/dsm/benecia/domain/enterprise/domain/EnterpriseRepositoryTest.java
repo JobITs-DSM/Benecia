@@ -24,7 +24,7 @@ class EnterpriseRepositoryTest {
 
     @Test
     void 저장_테스트_성공() {
-        String tmp = "111111111111";
+        String tmp = "000-00-00000";
         Enterprise enterprise = Enterprise.builder()
                 .registration_number(tmp)
                 .build();
