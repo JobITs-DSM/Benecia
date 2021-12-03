@@ -1,11 +1,10 @@
 package com.jobits.dsm.benecia.domain.enterprise.domain;
 
+import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
+import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -30,9 +29,8 @@ public class Enterprise {
     @NotNull
     private Boolean is_convention;
 
-    @NotNull
-    @Size(min = 6, max = 6)
-    private String division;
+    @Convert(converter = EnterpriseDivisionCode.EnterpriseDivisionCodeConverter.class)
+    private EnterpriseDivisionCode division;
 
     @NotNull
     @Size(max = 30)
@@ -48,9 +46,8 @@ public class Enterprise {
     @Column(columnDefinition = "TEXT")
     private String introduction;
 
-    @NotNull
-    @Size(min = 6, max = 6)
-    private String employee_count;
+    @Convert(converter = EnterpriseEmployeeCountCode.EnterpriseEmployeeCountCodeConverter.class)
+    private EnterpriseEmployeeCountCode employee_count;
 
     @NotNull
     @Size(max = 255)
