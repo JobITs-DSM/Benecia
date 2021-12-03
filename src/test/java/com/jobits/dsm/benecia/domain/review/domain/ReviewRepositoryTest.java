@@ -1,9 +1,14 @@
 package com.jobits.dsm.benecia.domain.review.domain;
 
+import com.jobits.dsm.benecia.domain.review.code.ReviewCode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+import java.time.LocalDateTime;
+
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @DataJpaTest
 public class ReviewRepositoryTest {
@@ -23,6 +28,10 @@ public class ReviewRepositoryTest {
                 .id(tmp)
                 .training_year("2004")
                 .content("내용")
-                .division()
+                .division(ReviewCode.INTERVIEW_REVIEW)
+                .registration_date_time(LocalDateTime.now())
+                .build();
+        assertThat(reviewRepository.save(review).getId()).isEqualTo(tmp);
+
     }
 }
