@@ -22,12 +22,11 @@ public class TraningRepositoryTest {
 
     @Test
     void 저장_테스트_성공() {
-        Integer tmp = 1;
+        LocalDateTime localDateTime = LocalDateTime.now();
         Training training = Training.builder()
-                .id(tmp)
-                .begin_date_time(LocalDateTime.now())
-                .end_date_time(null)
+                .beginDateTime(localDateTime)
+                .endDateTime(null)
                 .build();
-        assertThat(trainingRepository.save(training).getId()).isEqualTo(tmp);
+        assertThat(trainingRepository.save(training).getBeginDateTime()).isEqualTo(localDateTime);
     }
 }
