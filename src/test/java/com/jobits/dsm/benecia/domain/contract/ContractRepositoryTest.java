@@ -24,12 +24,11 @@ public class ContractRepositoryTest {
 
     @Test
     void 저장_테스트_성공() {
-        Integer tmp = 1;
+        LocalDateTime localDateTime = LocalDateTime.now();
         Contract contract = Contract.builder()
-                .id(tmp)
-                .date_time(LocalDateTime.now())
+                .dateTime(localDateTime)
                 .build();
 
-        assertThat(contractRepository.save(contract).getId()).isEqualTo(tmp);
+        assertThat(contractRepository.save(contract).getDateTime()).isEqualTo(localDateTime);
     }
 }
