@@ -55,11 +55,11 @@ class EnterpriseRepositoryTest {
                 .build();
 
         Director director = Director.builder()
-                .email("director@gmail.com")
-                .name("박상우")
-                .telephoneNumber("01012345678")
-                .phoneNumber("01023462123")
-                .department("팀장")
+                .directorEmail("director@gmail.com")
+                .directorName("박상우")
+                .directorTelephoneNumber("01012345678")
+                .directorPhoneNumber("01023462123")
+                .directorDepartment("팀장")
                 .build();
 
         return Enterprise.builder()
