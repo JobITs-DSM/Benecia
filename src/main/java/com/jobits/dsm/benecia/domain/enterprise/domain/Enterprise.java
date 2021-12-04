@@ -41,6 +41,11 @@ public class Enterprise {
     private Address address;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "postalCode", column = @Column(name = "branch_postal_code")),
+            @AttributeOverride(name = "address", column = @Column(name = "branch_address")),
+            @AttributeOverride(name = "addressDetail", column = @Column(name = "branch_address_detail"))
+    })
     private Address branchAddress;
 
     @NotNull
