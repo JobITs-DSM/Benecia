@@ -17,6 +17,7 @@ public class Enterprise {
 
     @Id
     @Size(min = 12, max = 12)
+    @Column(columnDefinition = "CHAR(12)")
     private String registrationNumber;
 
     @NotNull
@@ -25,12 +26,15 @@ public class Enterprise {
 
     @NotNull
     @Size(min = 4, max = 4)
+    @Column(columnDefinition = "CHAR(4)")
     private String establishYear;
 
     @NotNull
+    @Column(columnDefinition = "TINYINT(1)")
     private Boolean isConvention;
 
     @Convert(converter = EnterpriseDivisionCode.EnterpriseDivisionCodeConverter.class)
+    @Column(columnDefinition = "CHAR(6)")
     private EnterpriseDivisionCode division;
 
     @NotNull
@@ -42,7 +46,7 @@ public class Enterprise {
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "postalCode", column = @Column(name = "branch_postal_code")),
+            @AttributeOverride(name = "postalCode", column = @Column(name = "branch_postal_code", columnDefinition = "CHAR(5)")),
             @AttributeOverride(name = "address", column = @Column(name = "branch_address")),
             @AttributeOverride(name = "addressDetail", column = @Column(name = "branch_address_detail"))
     })
@@ -53,6 +57,7 @@ public class Enterprise {
     private String introduction;
 
     @Convert(converter = EnterpriseEmployeeCountCode.EnterpriseEmployeeCountCodeConverter.class)
+    @Column(columnDefinition = "CHAR(6)")
     private EnterpriseEmployeeCountCode employeeCount;
 
     @NotNull
@@ -64,10 +69,10 @@ public class Enterprise {
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "email", column = @Column(name = "director_email")),
-            @AttributeOverride(name = "name", column = @Column(name = "director_name")),
-            @AttributeOverride(name = "telephoneNumber", column = @Column(name = "director_telephone_number")),
-            @AttributeOverride(name = "phoneNumber", column = @Column(name = "director_phone_number")),
+            @AttributeOverride(name = "email", column = @Column(name = "director_email", length = 320)),
+            @AttributeOverride(name = "name", column = @Column(name = "director_name", length = 30)),
+            @AttributeOverride(name = "telephoneNumber", column = @Column(name = "director_telephone_number", length = 14)),
+            @AttributeOverride(name = "phoneNumber", column = @Column(name = "director_phone_number", length = 13)),
             @AttributeOverride(name = "department", column = @Column(name = "director_department"))
     })
     private Director director;

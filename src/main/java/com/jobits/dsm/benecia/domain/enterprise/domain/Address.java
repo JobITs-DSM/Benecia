@@ -16,6 +16,7 @@ public class Address {
 
     @NotNull
     @Size(min = 5, max = 5)
+    @Column(columnDefinition = "CHAR(5)")
     private String postalCode;
 
     @NotNull
