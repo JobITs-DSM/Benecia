@@ -3,6 +3,7 @@ package com.jobits.dsm.benecia.domain.enterprise.domain;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
 import lombok.*;
+import lombok.experimental.Delegate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -67,13 +68,7 @@ public class Enterprise {
     @NotNull
     private Integer turnover;
 
+    @Delegate
     @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "email", column = @Column(name = "director_email", length = 320)),
-            @AttributeOverride(name = "name", column = @Column(name = "director_name", length = 30)),
-            @AttributeOverride(name = "telephoneNumber", column = @Column(name = "director_telephone_number", length = 14)),
-            @AttributeOverride(name = "phoneNumber", column = @Column(name = "director_phone_number", length = 13)),
-            @AttributeOverride(name = "department", column = @Column(name = "director_department"))
-    })
     private Director director;
 }
