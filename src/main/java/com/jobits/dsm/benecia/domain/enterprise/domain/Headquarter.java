@@ -16,7 +16,7 @@ public class Headquarter {
 
     @NotNull
     @Size(min = 5, max = 5)
-    private String postal_code;
+    private String postalCode;
 
     @NotNull
     @Size(max = 255)
@@ -24,5 +24,5 @@ public class Headquarter {
 
     @NotNull
     @Size(max = 255)
-    private String address_detail;
+    private String addressDetail;
 }

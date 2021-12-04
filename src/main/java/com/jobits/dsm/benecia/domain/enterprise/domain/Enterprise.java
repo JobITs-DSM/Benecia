@@ -14,9 +14,10 @@ import javax.validation.constraints.Size;
 @Entity
 @Builder
 public class Enterprise {
+
     @Id
     @Size(min = 12, max = 12)
-    private String registration_number;
+    private String registrationNumber;
 
     @NotNull
     @Size(max = 30)
@@ -24,17 +25,17 @@ public class Enterprise {
 
     @NotNull
     @Size(min = 4, max = 4)
-    private String establish_year;
+    private String establishYear;
 
     @NotNull
-    private Boolean is_convention;
+    private Boolean isConvention;
 
     @Convert(converter = EnterpriseDivisionCode.EnterpriseDivisionCodeConverter.class)
     private EnterpriseDivisionCode division;
 
     @NotNull
     @Size(max = 30)
-    private String representative_name;
+    private String representativeName;
 
     @Embedded
     private Headquarter headquarter;
@@ -47,7 +48,7 @@ public class Enterprise {
     private String introduction;
 
     @Convert(converter = EnterpriseEmployeeCountCode.EnterpriseEmployeeCountCodeConverter.class)
-    private EnterpriseEmployeeCountCode employee_count;
+    private EnterpriseEmployeeCountCode employeeCount;
 
     @NotNull
     @Size(max = 255)

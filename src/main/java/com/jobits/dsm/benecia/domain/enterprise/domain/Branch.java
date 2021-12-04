@@ -12,15 +12,16 @@ import javax.validation.constraints.Size;
 @Builder
 @Getter
 public class Branch {
+
     @NotNull
     @Size(min = 5, max = 5)
-    private String branch_postal_code;
+    private String branchPostalCode;
 
     @NotNull
     @Size(max = 255)
-    private String branch_address;
+    private String branchAddress;
 
     @NotNull
     @Size(max = 255)
-    private String branch_address_detail;
+    private String branchAddressDetail;
 }

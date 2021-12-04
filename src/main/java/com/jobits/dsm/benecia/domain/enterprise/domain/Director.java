@@ -13,24 +13,25 @@ import javax.validation.constraints.Size;
 @Builder
 @Getter
 public class Director {
+
     @NotNull
     @Email
     @Size(max = 320)
-    private String director_email;
+    private String directorEmail;
 
     @NotNull
     @Size(max = 30)
-    private String director_name;
+    private String directorName;
 
     @NotNull
     @Size(min = 14, max = 14)
-    private String director_telephone_number;
+    private String directorTelephoneNumber;
 
     @NotNull
     @Size(min = 13, max = 14)
-    private String director_phone_number;
+    private String directorPhoneNumber;
 
     @NotNull
     @Size(max = 255)
-    private String director_department;
+    private String directorDepartment;
 }
