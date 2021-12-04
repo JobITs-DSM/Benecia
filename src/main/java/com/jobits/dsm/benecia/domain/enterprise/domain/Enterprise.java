@@ -63,5 +63,12 @@ public class Enterprise {
     private Integer turnover;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "email", column = @Column(name = "director_email")),
+            @AttributeOverride(name = "name", column = @Column(name = "director_name")),
+            @AttributeOverride(name = "telephoneNumber", column = @Column(name = "director_telephone_number")),
+            @AttributeOverride(name = "phoneNumber", column = @Column(name = "director_phone_number")),
+            @AttributeOverride(name = "department", column = @Column(name = "director_department"))
+    })
     private Director director;
 }
