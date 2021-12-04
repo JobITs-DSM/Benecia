@@ -20,7 +20,7 @@ public class Review {
 
     @NotNull
     @Size(min = 4, max = 4)
-    private String training_year;
+    private String trainingYear;
 
     @NotNull
     @Size(max = 255)
