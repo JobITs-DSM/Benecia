@@ -24,7 +24,7 @@ public class ReviewRepositoryTest {
     @Test
     void 저장_테스트_성공() {
         Review review = Review.builder()
-                .training_year("2004")
+                .trainingYear("2004")
                 .content("내용")
                 .division(ReviewCode.INTERVIEW_REVIEW)
                 .registrationDateTime(LocalDateTime.now())
