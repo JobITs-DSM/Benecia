@@ -38,10 +38,10 @@ public class Enterprise {
     private String representativeName;
 
     @Embedded
-    private Headquarter headquarter;
+    private Address address;
 
     @Embedded
-    private Branch branch;
+    private Address branchAddress;
 
     @NotNull
     @Column(columnDefinition = "TEXT")

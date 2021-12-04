@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-public class Headquarter {
+public class Address {
 
     @NotNull
     @Size(min = 5, max = 5)
