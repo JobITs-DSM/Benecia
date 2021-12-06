@@ -1,5 +1,6 @@
 package com.jobits.dsm.benecia.domain.enterprise.domain;
 
+import com.jobits.dsm.benecia.domain.attatchment.domain.Attachment;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
 import lombok.*;
@@ -71,4 +72,16 @@ public class Enterprise {
     @Delegate
     @Embedded
     private Director director;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    private Attachment businessLicense;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    private Attachment logo;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    private Attachment material;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    private Attachment foreground;
 }
