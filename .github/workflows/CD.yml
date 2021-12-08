@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - feature/48-continuous-deploy
 
 jobs:
   build:
