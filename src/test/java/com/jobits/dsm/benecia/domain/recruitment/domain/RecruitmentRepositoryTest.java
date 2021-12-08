@@ -1,13 +1,15 @@
 package com.jobits.dsm.benecia.domain.recruitment.domain;
 
+import com.jobits.dsm.benecia.domain.recruitment.RecruitmentDate;
+import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentFullTimePayCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.opentest4j.AssertionFailedError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.dao.DataIntegrityViolationException;
+
+import javax.validation.ConstraintViolationException;
+import java.time.LocalDate;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -30,6 +32,24 @@ class RecruitmentRepositoryTest {
         Recruitment recruitment = Recruitment.builder()
                 .recruitmentId(recruitmentId)
                 .status(RecruitmentStatusCode.RECRUITMENT_REQUEST)
+                .documentation(new Documentation("docu1", "docu2", "docu3"))
+                .printDateTime(null)
+                .contracts(null)
+                .form1(null)
+                .form2(null)
+                .form3(null)
+                .fullTimePay(RecruitmentFullTimePayCode.LESS_2400)
+                .hiringAreas(null)
+                .otherLanguage("Languages")
+                .otherSpecifics("Specifics")
+                .otherTechnology(null)
+                .recruitmentDate(RecruitmentDate.builder()
+                        .recruitEndDate(LocalDate.of(2020, 9, 10))
+                        .recruitBeginDate(LocalDate.of(2020, 9, 5))
+                        .requestBeginDate(LocalDate.of(2020, 9, 1))
+                        .build())
+                .preferential("preferential")
+                .report(1)
                 .build();
 
         assertThat(recruitmentRepository.save(recruitment).getRecruitmentId()).isEqualTo(recruitmentId);
@@ -43,7 +63,7 @@ class RecruitmentRepositoryTest {
                 .status(RecruitmentStatusCode.RECRUITMENT_REQUEST)
                 .build();
 
-        assertThrows(DataIntegrityViolationException.class, () -> recruitmentRepository.saveAndFlush(recruitment));
+        assertThrows(ConstraintViolationException.class, () -> recruitmentRepository.saveAndFlush(recruitment));
     }
 
 }

@@ -1,19 +1,26 @@
 package com.jobits.dsm.benecia.domain.recruitment;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Embeddable
 public class RecruitmentDate {
 
-    @NotNull
+    @Column(nullable = false)
     private LocalDate requestBeginDate;
 
-    @NotNull
+    @Column(nullable = false)
     private LocalDate recruitBeginDate;
 
-    @NotNull
+    @Column(nullable = false)
     private LocalDate recruitEndDate;
 
 }
