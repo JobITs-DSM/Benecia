@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @RequiredArgsConstructor
-public enum HiringArea {
+public enum HiringAreaCode {
 
     FULL_STACK("TA0101", "풀스택", "웹프로그래밍"),
     FRONTEND("TA0102", "웹 프론트엔드", "웹프로그래밍"),
@@ -42,25 +42,25 @@ public enum HiringArea {
     private final String value;
     private final String category;
 
-    private static final Map<String, HiringArea> MAP =
-            Collections.unmodifiableMap(Arrays.stream(HiringArea.values())
-                    .collect(Collectors.toMap(HiringArea::getCode, Function.identity())));
+    private static final Map<String, HiringAreaCode> MAP =
+            Collections.unmodifiableMap(Arrays.stream(HiringAreaCode.values())
+                    .collect(Collectors.toMap(HiringAreaCode::getCode, Function.identity())));
 
-    public static HiringArea find(String dbData) {
+    public static HiringAreaCode find(String dbData) {
         return Optional.of(MAP.get(dbData))
                 .orElseThrow(() -> AttributeConvertFailedException.EXCEPTION);
     }
 
     @Converter
-    public static class HiringAreaConverter implements AttributeConverter<HiringArea, String> {
+    public static class HiringAreaCodeConverter implements AttributeConverter<HiringAreaCode, String> {
 
         @Override
-        public String convertToDatabaseColumn(HiringArea attribute) {
+        public String convertToDatabaseColumn(HiringAreaCode attribute) {
             return attribute.getCode();
         }
 
         @Override
-        public HiringArea convertToEntityAttribute(String dbData) {
+        public HiringAreaCode convertToEntityAttribute(String dbData) {
             return find(dbData);
         }
     }

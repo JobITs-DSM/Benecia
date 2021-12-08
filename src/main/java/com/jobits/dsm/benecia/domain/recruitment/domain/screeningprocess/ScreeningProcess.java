@@ -1,0 +1,25 @@
+package com.jobits.dsm.benecia.domain.recruitment.domain.screeningprocess;
+
+import com.jobits.dsm.benecia.domain.recruitment.code.ScreeningProcessCode;
+import lombok.*;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Builder
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+public class ScreeningProcess {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Convert(converter = ScreeningProcessCode.ScreeningProcessCodeConverter.class)
+    private ScreeningProcessCode code;
+
+    @NotNull
+    @Column(columnDefinition = "TINYINT")
+    private Integer procedure;
+}
