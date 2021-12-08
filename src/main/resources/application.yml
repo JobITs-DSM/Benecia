@@ -20,5 +20,5 @@ auth:
     secret: ${JWT_SECRET_KEY}
 server:
   servlet:
-    context-path: /v1/api
+    context-path: /v1
   shutdown: graceful
