@@ -1,6 +1,7 @@
 package com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage;
 
 import com.jobits.dsm.benecia.domain.recruitment.code.ProgrammingLanguageCode;
+import com.jobits.dsm.benecia.domain.recruitment.domain.Recruitment;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,4 +18,8 @@ public class ProgrammingLanguage {
 
     @Convert(converter = ProgrammingLanguageCode.ProgrammingLanguageCodeConverter.class)
     private ProgrammingLanguageCode code;
+
+    @ManyToOne
+    @JoinColumn(name = "recruitment_id")
+    private Recruitment recruitment;
 }
