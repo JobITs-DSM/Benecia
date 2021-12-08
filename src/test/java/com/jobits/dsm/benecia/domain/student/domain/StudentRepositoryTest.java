@@ -17,7 +17,6 @@ class StudentRepositoryTest {
     @Autowired
     private StudentRepository studentRepository;
 
-
     private static final String EMAIL = "email@dsm.hs.kr";
     private static final String PASSWORD = "password";
     private static final String NAME = "name";
@@ -60,11 +59,10 @@ class StudentRepositoryTest {
 
     @Test
     void 저장_실패_테스트_NOTNULL() {
-        final String invalidSerialNumber = "202101";        // 자릿수 부족 테스트
-
         Student student = Student.builder()
                 .email(EMAIL)
                 .name(NAME)
+                .password(null)
                 .studentNumber(EXPECTED_STUDENT_NUMBER)
                 .serialNumber(EXPECTED_SERIAL_NUMBER)
                 .build();
