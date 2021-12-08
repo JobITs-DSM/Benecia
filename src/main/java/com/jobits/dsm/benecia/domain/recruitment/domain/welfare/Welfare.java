@@ -20,6 +20,7 @@ public class Welfare {
     private WelfareCode code;
 
     @ManyToOne
-    @JoinColumn(name = "recruitment_id")
+    @JoinColumn(name = "reception_year")
+    @JoinColumn(name = "registration_number")
     private Recruitment recruitment;
 }
