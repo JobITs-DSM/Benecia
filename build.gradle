@@ -42,3 +42,7 @@ jacocoTestReport {
         xml.required.set(true)
     }
 }
+
+tasks.jar {
+    enabled = false
+}
