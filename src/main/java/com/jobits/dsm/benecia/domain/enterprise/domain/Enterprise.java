@@ -73,13 +73,13 @@ public class Enterprise {
     @Embedded
     private Director director;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     private Attachment businessLicense;
 
     @OneToOne(fetch = FetchType.EAGER)
     private Attachment logo;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     private Attachment material;
 
     @OneToOne(fetch = FetchType.EAGER)
