@@ -15,7 +15,7 @@ public class EnterpriseCodeService {
     public CodeResponse getEmployeeCountCodes() {
         return CodeResponse.builder()
                 .codes(Arrays.stream(EnterpriseEmployeeCountCode.values())
-                        .map(employeeCount -> CodeResponse.of(employeeCount.getCode(), employeeCount.getValue()))
+                        .map(employeeCount -> CodeResponse.of(employeeCount.name(), employeeCount.getValue()))
                         .collect(Collectors.toList()))
                 .build();
     }
