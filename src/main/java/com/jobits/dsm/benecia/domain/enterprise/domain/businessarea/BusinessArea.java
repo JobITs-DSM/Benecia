@@ -18,4 +18,8 @@ public class BusinessArea {
     private Long id;
 
     private BusinessAreaCode code;
+
+    @ManyToOne
+    @JoinColumn(name = "registration_number")
+    private Enterprise enterprise;
 }
