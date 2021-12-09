@@ -1,5 +1,6 @@
 package com.jobits.dsm.benecia.domain.enterprise.service;
 
+import com.jobits.dsm.benecia.domain.enterprise.code.BusinessAreaCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.CodeResponse;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,14 @@ public class EnterpriseCodeService {
         return CodeResponse.builder()
                 .codes(Arrays.stream(EnterpriseEmployeeCountCode.values())
                         .map(employeeCount -> CodeResponse.of(employeeCount.name(), employeeCount.getValue()))
+                        .collect(Collectors.toList()))
+                .build();
+    }
+
+    public CodeResponse getBusinessArea() {
+        return CodeResponse.builder()
+                .codes(Arrays.stream(BusinessAreaCode.values())
+                        .map(businessArea -> CodeResponse.of(businessArea.name(), businessArea.getValue()))
                         .collect(Collectors.toList()))
                 .build();
     }
