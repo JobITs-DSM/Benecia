@@ -1,6 +1,6 @@
 package com.jobits.dsm.benecia.domain.enterprise.presentation;
 
-import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.CodeResponse;
+import com.jobits.dsm.benecia.global.code.CodeResponse;
 import com.jobits.dsm.benecia.domain.enterprise.service.EnterpriseCodeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
