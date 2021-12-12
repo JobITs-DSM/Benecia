@@ -1,7 +1,7 @@
 package com.jobits.dsm.benecia.domain.enterprise.service;
 
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
-import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.CodeResponse;
+import com.jobits.dsm.benecia.global.code.CodeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

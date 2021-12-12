@@ -1,4 +1,4 @@
-package com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response;
+package com.jobits.dsm.benecia.global.code;
 
 import lombok.*;
 
