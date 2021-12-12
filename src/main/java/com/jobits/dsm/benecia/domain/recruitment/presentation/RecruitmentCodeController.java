@@ -16,6 +16,11 @@ public class RecruitmentCodeController {
 
     @GetMapping("/programming-language")
     public CodeResponse programmingLanguage() {
-        return recruitmentCodeService.getProgrammingLanguage();
+        return recruitmentCodeService.getProgrammingLanguageCodes();
+    }
+
+    @GetMapping("/welfare")
+    public CodeResponse welfare() {
+        return recruitmentCodeService.getWelfareCodes();
     }
 }
