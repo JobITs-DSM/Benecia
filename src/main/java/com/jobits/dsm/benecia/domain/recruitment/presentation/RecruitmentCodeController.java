@@ -23,4 +23,29 @@ public class RecruitmentCodeController {
     public CodeResponse welfare() {
         return recruitmentCodeService.getWelfareCodes();
     }
+
+    @GetMapping("/full-time-pay")
+    public CodeResponse fullTimePay() {
+        return recruitmentCodeService.getFullTimePayCodes();
+    }
+
+    @GetMapping("/technology")
+    public CodeResponse technology() {
+        return recruitmentCodeService.getTechnologyCodes();
+    }
+
+    @GetMapping("/screening-process")
+    public CodeResponse screeningProcess() {
+        return recruitmentCodeService.getScreeningProcessCodes();
+    }
+
+    @GetMapping("/hiring-area")
+    public CodeResponse hiringArea() {
+        return recruitmentCodeService.getHiringAreaCodes();
+    }
+
+    @GetMapping("/reporting-time")
+    public CodeResponse reportingTime() {
+        return recruitmentCodeService.getReportingTimeCodes();
+    }
 }
