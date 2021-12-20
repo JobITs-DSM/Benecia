@@ -3,12 +3,14 @@ package com.jobits.dsm.benecia.domain.enterprise.domain;
 import com.jobits.dsm.benecia.domain.attatchment.domain.Attachment;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
+import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessArea;
 import lombok.*;
 import lombok.experimental.Delegate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -84,4 +86,7 @@ public class Enterprise {
 
     @OneToOne(fetch = FetchType.EAGER)
     private Attachment foreground;
+
+    @OneToMany(mappedBy = "enterprise", orphanRemoval = true)
+    private List<BusinessArea> businessAreas;
 }

@@ -18,4 +18,9 @@ public class EnterpriseCodeController {
     public CodeResponse employeeCount() {
         return enterpriseCodeService.getEmployeeCountCodes();
     }
+
+    @GetMapping("/business-area")
+    public CodeResponse businessArea() {
+        return enterpriseCodeService.getBusinessArea();
+    }
 }
