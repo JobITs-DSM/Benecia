@@ -47,7 +47,7 @@ public class Recruitment {
     private Integer workingHour;
 
     @Column(columnDefinition = "CHAR(6)")
-    @Convert(converter = RecruitmentReportingTimeCode.RecruitmentReportingTimeCodeCountCodeConverter.class)
+    @Convert(converter = RecruitmentReportingTimeCode.RecruitmentReportingTimeCodeConverter.class)
     @NotNull
     private RecruitmentReportingTimeCode reportingTime;
 
@@ -83,17 +83,9 @@ public class Recruitment {
     @Embedded
     private Documentation documentation;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "form1")
-    private Attachment form1;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "form2")
-    private Attachment form2;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "form3")
-    private Attachment form3;
+    @Delegate
+    @Embedded
+    private Form form;
 
     @OneToMany(mappedBy = "recruitment", orphanRemoval = true)
     private List<ProgrammingLanguage> programmingLanguages;
