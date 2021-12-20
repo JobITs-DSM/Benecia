@@ -34,7 +34,7 @@ public enum RecruitmentReportingTimeCode {
     }
 
     @Converter
-    public static class RecruitmentReportingTimeCodeCountCodeConverter implements AttributeConverter<RecruitmentReportingTimeCode, String> {
+    public static class RecruitmentReportingTimeCodeConverter implements AttributeConverter<RecruitmentReportingTimeCode, String> {
 
         @Override
         public String convertToDatabaseColumn(RecruitmentReportingTimeCode attribute) {

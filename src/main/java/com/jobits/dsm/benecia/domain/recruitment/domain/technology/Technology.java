@@ -1,6 +1,7 @@
 package com.jobits.dsm.benecia.domain.recruitment.domain.technology;
 
 import com.jobits.dsm.benecia.domain.recruitment.code.TechnologyCode;
+import com.jobits.dsm.benecia.domain.recruitment.domain.Recruitment;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,4 +18,9 @@ public class Technology {
 
     @Convert(converter = TechnologyCode.TechnologyCodeConverter.class)
     private TechnologyCode code;
+
+    @ManyToOne
+    @JoinColumn(name = "reception_year")
+    @JoinColumn(name = "registration_number")
+    private Recruitment recruitment;
 }

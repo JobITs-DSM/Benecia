@@ -1,6 +1,7 @@
 package com.jobits.dsm.benecia.domain.recruitment.domain.hiringarea;
 
 import com.jobits.dsm.benecia.domain.recruitment.code.HiringAreaCode;
+import com.jobits.dsm.benecia.domain.recruitment.domain.Recruitment;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,4 +27,9 @@ public class HiringArea {
 
     @Size(max = 255)
     private String task;
+
+    @ManyToOne
+    @JoinColumn(name = "reception_year")
+    @JoinColumn(name = "registration_number")
+    private Recruitment recruitment;
 }

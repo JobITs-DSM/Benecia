@@ -1,6 +1,7 @@
 package com.jobits.dsm.benecia.domain.recruitment.domain.welfare;
 
 import com.jobits.dsm.benecia.domain.recruitment.code.WelfareCode;
+import com.jobits.dsm.benecia.domain.recruitment.domain.Recruitment;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,4 +18,9 @@ public class Welfare {
 
     @Convert(converter = WelfareCode.WelfareCodeConverter.class)
     private WelfareCode code;
+
+    @ManyToOne
+    @JoinColumn(name = "reception_year")
+    @JoinColumn(name = "registration_number")
+    private Recruitment recruitment;
 }

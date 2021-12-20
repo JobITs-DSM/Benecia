@@ -3,6 +3,7 @@ spring:
     show-sql: false
     hibernate:
       ddl-auto: none
+    database: mysql
   datasource:
     url: ${JDBC_URL}
     driver-class-name: com.mysql.cj.jdbc.Driver
