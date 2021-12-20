@@ -21,7 +21,7 @@ public class EnterpriseCodeService {
                 .build();
     }
 
-    public CodeResponse getBusinessArea() {
+    public CodeResponse getBusinessAreaCodes() {
         return CodeResponse.builder()
                 .codes(Arrays.stream(BusinessAreaCode.values())
                         .map(businessArea -> CodeResponse.of(businessArea.name(), businessArea.getValue()))

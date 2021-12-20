@@ -21,6 +21,6 @@ public class EnterpriseCodeController {
 
     @GetMapping("/business-area")
     public CodeResponse businessArea() {
-        return enterpriseCodeService.getBusinessArea();
+        return enterpriseCodeService.getBusinessAreaCodes();
     }
 }
