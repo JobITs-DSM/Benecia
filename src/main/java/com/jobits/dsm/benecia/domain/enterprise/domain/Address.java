@@ -10,8 +10,9 @@ import javax.validation.constraints.Size;
 @Embeddable
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
+@Setter
 public class Address {
 
     @NotNull
