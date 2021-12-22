@@ -14,35 +14,31 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @Getter
+@Setter
 public class Director {
 
     @NotNull
     @Email
     @Size(max = 320)
     @Column(length = 320)
-    @JsonProperty("email")
-    private String directorEmail;
+    private String email;
 
     @NotNull
     @Size(max = 30)
     @Column(length = 30)
-    @JsonProperty("name")
-    private String directorName;
+    private String name;
 
     @NotNull
     @Size(min = 14, max = 14)
     @Column(length = 14)
-    @JsonProperty("telephone_number")
-    private String directorTelephoneNumber;
+    private String telephoneNumber;
 
     @NotNull
     @Size(min = 13, max = 14)
     @Column(length = 13)
-    @JsonProperty("phone_number")
-    private String directorPhoneNumber;
+    private String phoneNumber;
 
     @NotNull
     @Size(max = 255)
-    @JsonProperty("department")
-    private String directorDepartment;
+    private String department;
 }
