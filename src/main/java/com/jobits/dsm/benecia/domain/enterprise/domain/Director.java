@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 @Getter
 @Setter
 public class Director {
