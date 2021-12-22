@@ -1,7 +1,5 @@
 package com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.jobits.dsm.benecia.domain.enterprise.code.BusinessAreaCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Address;
@@ -14,7 +12,6 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterEnterpriseRequest {

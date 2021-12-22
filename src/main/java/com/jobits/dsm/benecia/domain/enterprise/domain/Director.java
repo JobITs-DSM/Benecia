@@ -1,6 +1,5 @@
 package com.jobits.dsm.benecia.domain.enterprise.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -11,10 +10,9 @@ import javax.validation.constraints.Size;
 
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 @Builder
 @Getter
-@Setter
 public class Director {
 
     @NotNull
