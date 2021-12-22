@@ -1,6 +1,7 @@
 package com.jobits.dsm.benecia.domain.recruitment.service;
 
 import com.jobits.dsm.benecia.domain.recruitment.code.*;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.HiringAreaCodeResponse;
 import com.jobits.dsm.benecia.global.code.CodeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -53,10 +54,10 @@ public class RecruitmentCodeService {
                 .build();
     }
 
-    public CodeResponse getHiringAreaCodes() {
-        return CodeResponse.builder()
+    public HiringAreaCodeResponse getHiringAreaCodes() {
+        return HiringAreaCodeResponse.builder()
                 .codes(Arrays.stream(HiringAreaCode.values())
-                        .map(hiringArea -> CodeResponse.of(hiringArea.name(), hiringArea.getValue()))
+                        .map(HiringAreaCodeResponse::of)
                         .collect(Collectors.toList()))
                 .build();
     }

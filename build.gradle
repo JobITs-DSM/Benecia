@@ -48,6 +48,9 @@ dependencies {
 
     // jjwt
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
+
+    // aws
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.0.1.RELEASE'
 }
 
 test {

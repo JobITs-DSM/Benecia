@@ -11,7 +11,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.apply(new FilterConfig());
+        http
+                .cors().and()
+                .csrf().disable()
+                .sessionManagement().disable()
+                .formLogin().disable()
+                .authorizeRequests()
+                    .anyRequest().permitAll()
+                .and()
+                    .apply(new FilterConfig());
+
     }
 
 }
