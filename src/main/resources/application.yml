@@ -23,3 +23,15 @@ server:
   servlet:
     context-path: /v1
   shutdown: graceful
+cloud:
+  aws:
+    credentials:
+      accessKey: ${AWS_S3_KEY}
+      secretKey: ${AWS_S3_SECRET}
+    s3:
+      bucket: s3-jobits
+      host: ${S3_HOST_NAME}
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
