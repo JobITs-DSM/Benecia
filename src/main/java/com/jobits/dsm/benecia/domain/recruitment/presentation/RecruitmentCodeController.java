@@ -1,5 +1,6 @@
 package com.jobits.dsm.benecia.domain.recruitment.presentation;
 
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.HiringAreaCodeResponse;
 import com.jobits.dsm.benecia.domain.recruitment.service.RecruitmentCodeService;
 import com.jobits.dsm.benecia.global.code.CodeResponse;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +41,7 @@ public class RecruitmentCodeController {
     }
 
     @GetMapping("/hiring-area")
-    public CodeResponse hiringArea() {
+    public HiringAreaCodeResponse hiringArea() {
         return recruitmentCodeService.getHiringAreaCodes();
     }
 

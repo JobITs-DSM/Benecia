@@ -17,7 +17,7 @@ public class ErrorResponse {
         return String.format("""
                 {
                     "status": %s,
-                    "message": $s
+                    "message": %s
                 }
                 """, status, message);
     }

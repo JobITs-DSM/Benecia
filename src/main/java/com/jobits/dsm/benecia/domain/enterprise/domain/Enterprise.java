@@ -72,20 +72,34 @@ public class Enterprise implements UserMarker {
     @NotNull
     private Integer turnover;
 
-    @Delegate
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "email", column = @Column(name = "director_email", length = 320)),
+            @AttributeOverride(name = "name", column = @Column(name = "director_name", length = 30)),
+            @AttributeOverride(name = "telephoneNumber", column = @Column(name = "director_telephone_number", length = 14)),
+            @AttributeOverride(name = "phoneNumber", column = @Column(name = "director_phone_number", length = 13)),
+            @AttributeOverride(name = "department", column = @Column(name = "director_department"))
+    })
     private Director director;
 
+    @Setter
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "businessLicense")
     private Attachment businessLicense;
 
+    @Setter
     @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "logo")
     private Attachment logo;
 
+    @Setter
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "material")
     private Attachment material;
 
+    @Setter
     @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "foreground")
     private Attachment foreground;
 
     @OneToMany(mappedBy = "enterprise", orphanRemoval = true)

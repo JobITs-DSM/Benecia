@@ -13,30 +13,31 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @Getter
+@Setter
 public class Director {
 
     @NotNull
     @Email
     @Size(max = 320)
     @Column(length = 320)
-    private String directorEmail;
+    private String email;
 
     @NotNull
     @Size(max = 30)
     @Column(length = 30)
-    private String directorName;
+    private String name;
 
     @NotNull
     @Size(min = 14, max = 14)
     @Column(length = 14)
-    private String directorTelephoneNumber;
+    private String telephoneNumber;
 
     @NotNull
     @Size(min = 13, max = 14)
     @Column(length = 13)
-    private String directorPhoneNumber;
+    private String phoneNumber;
 
     @NotNull
     @Size(max = 255)
-    private String directorDepartment;
+    private String department;
 }

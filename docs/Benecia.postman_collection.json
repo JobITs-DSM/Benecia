@@ -1,0 +1,1099 @@
+{
+	"info": {
+		"_postman_id": "4dabc4a0-9f61-4d34-959d-4ebc7bbaaad3",
+		"name": "Benecia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/enterprise - 기업",
+			"item": [
+				{
+					"name": "/codes - 코드",
+					"item": [
+						{
+							"name": "/employee-count - 근로자수 코드 목록",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/enterprise/codes/employee-count",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"enterprise",
+										"codes",
+										"employee-count"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/enterprise/codes/employee-count",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"enterprise",
+												"codes",
+												"employee-count"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 09 Dec 2021 00:10:03 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"codes\": [\n        {\n            \"code\": \"FIVE_PEOPLE_OR_LESS\",\n            \"value\": \"5인 이하\"\n        },\n        {\n            \"code\": \"SIX_OR_MORE_AND_TWENTY_OR_LESS\",\n            \"value\": \"6인 이상 20인 이하\"\n        },\n        {\n            \"code\": \"TWENTY_OR_MORE_AND_FIFTY_OR_LESS\",\n            \"value\": \"21인 이상 50인 이하\"\n        },\n        {\n            \"code\": \"FIFTY_OR_MORE\",\n            \"value\": \"50인 이상\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "/business-area - 사업분야 코드 목록",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/enterprise/codes/business-area",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"enterprise",
+										"codes",
+										"business-area"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "사업분야 코드 목록",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/enterprise/codes/business-area",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"enterprise",
+												"codes",
+												"business-area"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 09 Dec 2021 10:02:29 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"codes\": [\n        {\n            \"code\": \"WEB_SERVICE\",\n            \"value\": \"웹 서비스\"\n        },\n        {\n            \"code\": \"MOBILE_SERVICE\",\n            \"value\": \"모바일 서비스\"\n        },\n        {\n            \"code\": \"E_COMMERCE\",\n            \"value\": \"전자 상거래\"\n        },\n        {\n            \"code\": \"SOLUTION\",\n            \"value\": \"솔루션\"\n        },\n        {\n            \"code\": \"ENTERPRISE_RESOURCE_MANAGEMENT\",\n            \"value\": \"전사적 자원 관리\"\n        },\n        {\n            \"code\": \"DELIVERY_ORDER_SERVICE\",\n            \"value\": \"배달 주문 서비스\"\n        },\n        {\n            \"code\": \"EDU_TECH\",\n            \"value\": \"교육\"\n        },\n        {\n            \"code\": \"GAME\",\n            \"value\": \"게임\"\n        },\n        {\n            \"code\": \"SECURITY\",\n            \"value\": \"보안\"\n        },\n        {\n            \"code\": \"CONTENT_CREATION\",\n            \"value\": \"컨텐츠 제작\"\n        },\n        {\n            \"code\": \"IOT_AND_ROBOT\",\n            \"value\": \"IOT/로봇\"\n        },\n        {\n            \"code\": \"FIRMWARE_AND_EQUIPMENT_CONTROL\",\n            \"value\": \"펌웨어/장비제어\"\n        },\n        {\n            \"code\": \"MEDICAL_TREATMENT\",\n            \"value\": \"의료\"\n        },\n        {\n            \"code\": \"ASSET_MANAGEMENT\",\n            \"value\": \"자산 관리\"\n        },\n        {\n            \"code\": \"FIN_TECH\",\n            \"value\": \"핀테크\"\n        },\n        {\n            \"code\": \"AI\",\n            \"value\": \"인공지능\"\n        },\n        {\n            \"code\": \"BLOCK_CHAIN\",\n            \"value\": \"블록체인\"\n        },\n        {\n            \"code\": \"BIG_DATA\",\n            \"value\": \"빅데이터\"\n        },\n        {\n            \"code\": \"AEROSPACE\",\n            \"value\": \"우주항공\"\n        }\n    ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "/ - 기업 등록 - 이거 아님",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "registration_number",
+									"value": "305-83-00024",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "무신사",
+									"type": "text"
+								},
+								{
+									"key": "establish_year",
+									"value": "2016",
+									"type": "text"
+								},
+								{
+									"key": "representative_name",
+									"value": "강정구",
+									"type": "text"
+								},
+								{
+									"key": "address.postal_code",
+									"value": "31233",
+									"type": "text"
+								},
+								{
+									"key": "address.name",
+									"value": "서울특별시 강남구 압구정로46길 5-2",
+									"type": "text"
+								},
+								{
+									"key": "address.detail",
+									"value": "2층",
+									"type": "text"
+								},
+								{
+									"key": "branch.postal_code",
+									"value": "31244",
+									"type": "text"
+								},
+								{
+									"key": "branch.name",
+									"value": "서울특별시 강남구 압구정로46길 5-4",
+									"type": "text"
+								},
+								{
+									"key": "branc.detail",
+									"value": "2층",
+									"type": "text"
+								},
+								{
+									"key": "introduction",
+									"value": "무신사는 2001년 온라인 커뮤니티로 시작해 2005년 무신사 매거진, 2009년 무신사 ... ",
+									"type": "text"
+								},
+								{
+									"key": "employee_count",
+									"value": "FIVE_PEOPLE_OR_LESS",
+									"type": "text"
+								},
+								{
+									"key": "site",
+									"value": "https://www.musinsa.com",
+									"type": "text"
+								},
+								{
+									"key": "turnover",
+									"value": "1000000",
+									"type": "text"
+								},
+								{
+									"key": "director.email",
+									"value": "jiwoourty@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "director.name",
+									"value": "정지우",
+									"type": "text"
+								},
+								{
+									"key": "director.telephone_number",
+									"value": "070-7763-7456",
+									"type": "text"
+								},
+								{
+									"key": "director.phone_number",
+									"value": "010-8442-7456",
+									"type": "text"
+								},
+								{
+									"key": "director.department",
+									"value": "인사부 담당",
+									"type": "text"
+								},
+								{
+									"key": "business_license",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "logo",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "material",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "foreground",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "business_areas[0]",
+									"value": "WEB_SERVICE",
+									"type": "text"
+								},
+								{
+									"key": "business_areas[1]",
+									"value": "MOBILE_SERVICE",
+									"type": "text"
+								},
+								{
+									"key": "business_areas[2]",
+									"value": "E_COMMERCE",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/enterprise",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"enterprise"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/ - 기업 등록 - 이게 진짜",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "registrationNumber",
+									"value": "305-83-00024",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "무신사",
+									"type": "text"
+								},
+								{
+									"key": "establishYear",
+									"value": "2016",
+									"type": "text"
+								},
+								{
+									"key": "representativeName",
+									"value": "강정구",
+									"type": "text"
+								},
+								{
+									"key": "address.postalCode",
+									"value": "31233",
+									"type": "text"
+								},
+								{
+									"key": "address.address",
+									"value": "서울특별시 강남구 압구정로46길 5-2",
+									"type": "text"
+								},
+								{
+									"key": "address.addressDetail",
+									"value": "2층",
+									"type": "text"
+								},
+								{
+									"key": "branch.postalCode",
+									"value": "31244",
+									"type": "text"
+								},
+								{
+									"key": "branch.address",
+									"value": "서울특별시 강남구 압구정로46길 5-4",
+									"type": "text"
+								},
+								{
+									"key": "branch.addressDetail",
+									"value": "2층",
+									"type": "text"
+								},
+								{
+									"key": "introduction",
+									"value": "무신사는 2001년 온라인 커뮤니티로 시작해 2005년 무신사 매거진, 2009년 무신사 ... ",
+									"type": "text"
+								},
+								{
+									"key": "employeeCount",
+									"value": "FIVE_PEOPLE_OR_LESS",
+									"type": "text"
+								},
+								{
+									"key": "site",
+									"value": "https://www.musinsa.com",
+									"type": "text"
+								},
+								{
+									"key": "turnover",
+									"value": "1000000",
+									"type": "text"
+								},
+								{
+									"key": "director.email",
+									"value": "jiwoourty@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "director.name",
+									"value": "정지우",
+									"type": "text"
+								},
+								{
+									"key": "director.telephoneNumber",
+									"value": "070-7763-7456",
+									"type": "text"
+								},
+								{
+									"key": "director.phoneNumber",
+									"value": "010-8442-7456",
+									"type": "text"
+								},
+								{
+									"key": "director.department",
+									"value": "인사부 담당",
+									"type": "text"
+								},
+								{
+									"key": "businessLicense",
+									"type": "file",
+									"src": "/Users/zuzu/Downloads/IMG_2404.jpg"
+								},
+								{
+									"key": "logo",
+									"type": "file",
+									"src": "/Users/zuzu/Downloads/IMG_2407.jpg"
+								},
+								{
+									"key": "material",
+									"type": "file",
+									"src": "/Users/zuzu/Downloads/IMG_8009.jpg"
+								},
+								{
+									"key": "foreground",
+									"type": "file",
+									"src": "/Users/zuzu/Downloads/IMG_8127.JPG"
+								},
+								{
+									"key": "businessAreas[0]",
+									"value": "WEB_SERVICE",
+									"type": "text"
+								},
+								{
+									"key": "businessAreas[1]",
+									"value": "MOBILE_SERVICE",
+									"type": "text"
+								},
+								{
+									"key": "businessAreas[2]",
+									"value": "E_COMMERCE",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/enterprise",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"enterprise"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/ - 기업 등록 Copy",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "registrationNumber",
+											"value": "305-83-00024",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "무신사",
+											"type": "text"
+										},
+										{
+											"key": "establishYear",
+											"value": "2016",
+											"type": "text"
+										},
+										{
+											"key": "representativeName",
+											"value": "강정구",
+											"type": "text"
+										},
+										{
+											"key": "address.postalCode",
+											"value": "31233",
+											"type": "text"
+										},
+										{
+											"key": "address.address",
+											"value": "서울특별시 강남구 압구정로46길 5-2",
+											"type": "text"
+										},
+										{
+											"key": "address.addressDetail",
+											"value": "2층",
+											"type": "text"
+										},
+										{
+											"key": "branch.postalCode",
+											"value": "31244",
+											"type": "text"
+										},
+										{
+											"key": "branch.address",
+											"value": "서울특별시 강남구 압구정로46길 5-4",
+											"type": "text"
+										},
+										{
+											"key": "branch.addressDetail",
+											"value": "2층",
+											"type": "text"
+										},
+										{
+											"key": "introduction",
+											"value": "무신사는 2001년 온라인 커뮤니티로 시작해 2005년 무신사 매거진, 2009년 무신사 ... ",
+											"type": "text"
+										},
+										{
+											"key": "employeeCount",
+											"value": "FIVE_PEOPLE_OR_LESS",
+											"type": "text"
+										},
+										{
+											"key": "site",
+											"value": "https://www.musinsa.com",
+											"type": "text"
+										},
+										{
+											"key": "turnover",
+											"value": "1000000",
+											"type": "text"
+										},
+										{
+											"key": "director.email",
+											"value": "jiwoourty@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "director.name",
+											"value": "정지우",
+											"type": "text"
+										},
+										{
+											"key": "director.telephoneNumber",
+											"value": "070-7763-7456",
+											"type": "text"
+										},
+										{
+											"key": "director.phoneNumber",
+											"value": "010-8442-7456",
+											"type": "text"
+										},
+										{
+											"key": "director.department",
+											"value": "인사부 담당",
+											"type": "text"
+										},
+										{
+											"key": "businessLicense",
+											"type": "file",
+											"src": "/Users/zuzu/Downloads/IMG_2404.jpg"
+										},
+										{
+											"key": "logo",
+											"type": "file",
+											"src": "/Users/zuzu/Downloads/IMG_2407.jpg"
+										},
+										{
+											"key": "material",
+											"type": "file",
+											"src": "/Users/zuzu/Downloads/IMG_8009.jpg"
+										},
+										{
+											"key": "foreground",
+											"type": "file",
+											"src": "/Users/zuzu/Downloads/IMG_8127.JPG"
+										},
+										{
+											"key": "businessAreas[0]",
+											"value": "WEB_SERVICE",
+											"type": "text"
+										},
+										{
+											"key": "businessAreas[1]",
+											"value": "MOBILE_SERVICE",
+											"type": "text"
+										},
+										{
+											"key": "businessAreas[2]",
+											"value": "E_COMMERCE",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/enterprise",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"enterprise"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 22 Dec 2021 05:40:21 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "/recruitment -모집",
+			"item": [
+				{
+					"name": "/codes - 코드",
+					"item": [
+						{
+							"name": "/programming-language - 필요언어",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/recruitment/codes/programming-language",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"recruitment",
+										"codes",
+										"programming-language"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "필요언어 코드 목록",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{LOCAL_URL}}/recruitment/codes/programming-language",
+											"host": [
+												"{{LOCAL_URL}}"
+											],
+											"path": [
+												"recruitment",
+												"codes",
+												"programming-language"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": null,
+									"cookie": [],
+									"body": "{\n    \"codes\": [\n        {\n            \"code\": \"C\",\n            \"value\": \"C\"\n        },\n        {\n            \"code\": \"CPP\",\n            \"value\": \"C++\"\n        },\n        {\n            \"code\": \"C_SHARP\",\n            \"value\": \"C#\"\n        },\n        {\n            \"code\": \"JAVA\",\n            \"value\": \"Java\"\n        },\n        {\n            \"code\": \"KOTLIN\",\n            \"value\": \"Kotlin\"\n        },\n        {\n            \"code\": \"HTMLCSS\",\n            \"value\": \"HTML5/CSS\"\n        },\n        {\n            \"code\": \"JAVASCRIPT\",\n            \"value\": \"JavaScript\"\n        },\n        {\n            \"code\": \"TYPESCRIPT\",\n            \"value\": \"TypeScript\"\n        },\n        {\n            \"code\": \"RUBY\",\n            \"value\": \"Ruby\"\n        },\n        {\n            \"code\": \"GO\",\n            \"value\": \"Go\"\n        },\n        {\n            \"code\": \"PYTHON\",\n            \"value\": \"Python\"\n        },\n        {\n            \"code\": \"R\",\n            \"value\": \"R\"\n        },\n        {\n            \"code\": \"OBJECT_C\",\n            \"value\": \"Object-C\"\n        },\n        {\n            \"code\": \"SWIFT\",\n            \"value\": \"Swift\"\n        },\n        {\n            \"code\": \"DART\",\n            \"value\": \"Dart\"\n        },\n        {\n            \"code\": \"RUST\",\n            \"value\": \"Rust\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "/welfare",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/recruitment/codes/welfare",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"recruitment",
+										"codes",
+										"welfare"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "복리후생 코드 목록",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/recruitment/codes/welfare",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"recruitment",
+												"codes",
+												"welfare"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": null,
+									"cookie": [],
+									"body": "{\n    \"codes\": [\n        {\n            \"code\": \"DORMITORY\",\n            \"value\": \"기숙사 제공\"\n        },\n        {\n            \"code\": \"MEAL\",\n            \"value\": \"중식 제공\"\n        },\n        {\n            \"code\": \"LAUNCH\",\n            \"value\": \"석식 제공\"\n        },\n        {\n            \"code\": \"SELF_DEVELOP_COST\",\n            \"value\": \"자기계발비\"\n        },\n        {\n            \"code\": \"ARMY_EXCEPTION_REQUEST\",\n            \"value\": \"병특 신청\"\n        },\n        {\n            \"code\": \"YOUTH_RECRUITMENT\",\n            \"value\": \"청년내일채움공채\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "/full-time-pay",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/recruitment/codes/full-time-pay",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"recruitment",
+										"codes",
+										"full-time-pay"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "정규적전환급여 코드 목록",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/recruitment/codes/full-time-pay",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"recruitment",
+												"codes",
+												"full-time-pay"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": null,
+									"cookie": [],
+									"body": "{\n    \"codes\": [\n        {\n            \"code\": \"LESS_2400\",\n            \"value\": \"2400만원 이하\"\n        },\n        {\n            \"code\": \"MORE_2400\",\n            \"value\": \"2400만원 초과\"\n        },\n        {\n            \"code\": \"MORE_2800\",\n            \"value\": \"2800만원 초과\"\n        },\n        {\n            \"code\": \"MORE_3200\",\n            \"value\": \"3200만원 초과\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "/technology",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/recruitment/codes/technology",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"recruitment",
+										"codes",
+										"technology"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "기타기술 코드 목록",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/recruitment/codes/technology",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"recruitment",
+												"codes",
+												"technology"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": null,
+									"cookie": [],
+									"body": "{\n    \"codes\": [\n        {\n            \"code\": \"REACT\",\n            \"value\": \"React\"\n        },\n        {\n            \"code\": \"ANGULAR_JS\",\n            \"value\": \"AngularJS\"\n        },\n        {\n            \"code\": \"SPRING\",\n            \"value\": \"Spring\"\n        },\n        {\n            \"code\": \"DJANGO\",\n            \"value\": \"DJango\"\n        },\n        {\n            \"code\": \"EXPRESS\",\n            \"value\": \"Express\"\n        },\n        {\n            \"code\": \"AWS\",\n            \"value\": \"AWS\"\n        },\n        {\n            \"code\": \"GIT\",\n            \"value\": \"git\"\n        },\n        {\n            \"code\": \"GITHUB\",\n            \"value\": \"Github\"\n        },\n        {\n            \"code\": \"NGINX\",\n            \"value\": \"nginx\"\n        },\n        {\n            \"code\": \"APACHE\",\n            \"value\": \"Apache\"\n        },\n        {\n            \"code\": \"FLASK\",\n            \"value\": \"Flask\"\n        },\n        {\n            \"code\": \"FAST_API\",\n            \"value\": \"FastAPI\"\n        },\n        {\n            \"code\": \"VUE_JS\",\n            \"value\": \"Vue.js\"\n        },\n        {\n            \"code\": \"NEST_JS\",\n            \"value\": \"Nest.js\"\n        },\n        {\n            \"code\": \"DOCKER\",\n            \"value\": \"Docker\"\n        },\n        {\n            \"code\": \"LINUX\",\n            \"value\": \"Linux\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "/screening-process",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/recruitment/codes/screening-process",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"recruitment",
+										"codes",
+										"screening-process"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "전형절차 코드 목록",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/recruitment/codes/screening-process",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"recruitment",
+												"codes",
+												"screening-process"
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": null,
+									"cookie": [],
+									"body": "{\n    \"codes\": [\n        {\n            \"code\": \"DOCUMENT\",\n            \"value\": \"서류전형\"\n        },\n        {\n            \"code\": \"PERSONALITY\",\n            \"value\": \"인적성 테스트\"\n        },\n        {\n            \"code\": \"CODING_TEST\",\n            \"value\": \"코딩 테스트\"\n        },\n        {\n            \"code\": \"LIVE_CODING\",\n            \"value\": \"라이브 코딩\"\n        },\n        {\n            \"code\": \"AI_INTERVIEW\",\n            \"value\": \"AI 면접\"\n        },\n        {\n            \"code\": \"ASSIGNMENT\",\n            \"value\": \"과제 제출\"\n        },\n        {\n            \"code\": \"TECHNIQUE_INTERVIEW\",\n            \"value\": \"기술 면접\"\n        },\n        {\n            \"code\": \"CULTURE_INTERVIEW\",\n            \"value\": \"컬쳐 면접\"\n        },\n        {\n            \"code\": \"EXECUTIVE_INTERVIEW\",\n            \"value\": \"임원 면접\"\n        },\n        {\n            \"code\": \"FINAL_INTERVIEW\",\n            \"value\": \"최종 면접\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "/hiring-area",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/recruitment/codes/hiring-area",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"recruitment",
+										"codes",
+										"hiring-area"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "/hiring-area",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/recruitment/codes/hiring-area",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"recruitment",
+												"codes",
+												"hiring-area"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 21 Dec 2021 04:12:15 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"codes\": [\n        {\n            \"code\": \"FULL_STACK\",\n            \"value\": \"풀스택\",\n            \"category\": \"웹프로그래밍\"\n        },\n        {\n            \"code\": \"FRONTEND\",\n            \"value\": \"웹 프론트엔드\",\n            \"category\": \"웹프로그래밍\"\n        },\n        {\n            \"code\": \"BACKEND\",\n            \"value\": \"웹 백엔드\",\n            \"category\": \"웹프로그래밍\"\n        },\n        {\n            \"code\": \"MOBILE_ALL\",\n            \"value\": \"전체\",\n            \"category\": \"모바일\"\n        },\n        {\n            \"code\": \"MOBILE_ANDROID\",\n            \"value\": \"안드로이드\",\n            \"category\": \"모바일\"\n        },\n        {\n            \"code\": \"MOBILE_IOS\",\n            \"value\": \"iOS\",\n            \"category\": \"모바일\"\n        },\n        {\n            \"code\": \"EMBEDDED_ALL\",\n            \"value\": \"전체\",\n            \"category\": \"임베디드\"\n        },\n        {\n            \"code\": \"EMBEDDED_FIRMWARE\",\n            \"value\": \"펌웨어\",\n            \"category\": \"임베디드\"\n        },\n        {\n            \"code\": \"EMBEDDED_APPLICATIONS\",\n            \"value\": \"응용프로그래밍\",\n            \"category\": \"임베디드\"\n        },\n        {\n            \"code\": \"EMBEDDED_SYSTEM\",\n            \"value\": \"시스템프로그래밍\",\n            \"category\": \"임베디드\"\n        },\n        {\n            \"code\": \"GAME_FRONTEND\",\n            \"value\": \"게임 프론트엔드\",\n            \"category\": \"게임\"\n        },\n        {\n            \"code\": \"GAME_BACKEND\",\n            \"value\": \"게임 백엔드\",\n            \"category\": \"게임\"\n        },\n        {\n            \"code\": \"GAME_PLANNER\",\n            \"value\": \"기획\",\n            \"category\": \"게임\"\n        },\n        {\n            \"code\": \"WINDOWS_PROGRAMMING\",\n            \"value\": \"윈도우프로그래밍\",\n            \"category\": \"응용프로그래밍\"\n        },\n        {\n            \"code\": \"SYSTEM_PROGRAMMING\",\n            \"value\": \"시스템프로그래밍\",\n            \"category\": \"응용프로그래밍\"\n        },\n        {\n            \"code\": \"SECURITY_PROGRAMMING\",\n            \"value\": \"보안프로그래밍\",\n            \"category\": \"보안\"\n        },\n        {\n            \"code\": \"MOCK_HACKING\",\n            \"value\": \"모의해킹/취약점분석\",\n            \"category\": \"보안\"\n        },\n        {\n            \"code\": \"AI\",\n            \"value\": \"인공지능\",\n            \"category\": \"기타\"\n        },\n        {\n            \"code\": \"BIG_DATA\",\n            \"value\": \"빅데이터\",\n            \"category\": \"기타\"\n        },\n        {\n            \"code\": \"BLOCK_CHAIN\",\n            \"value\": \"블록체인\",\n            \"category\": \"기타\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "/reporting-time",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/recruitment/codes/reporting-time",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"recruitment",
+										"codes",
+										"reporting-time"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "출근시간 코드 목록",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/recruitment/codes/reporting-time?",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"recruitment",
+												"codes",
+												"reporting-time"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": null
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": null,
+									"cookie": [],
+									"body": "{\n    \"codes\": [\n        {\n            \"code\": \"BEFORE_NINE\",\n            \"value\": \"9시 이전\"\n        },\n        {\n            \"code\": \"BEFORE_TEN\",\n            \"value\": \"10시 이전\"\n        },\n        {\n            \"code\": \"FREE_WORK\",\n            \"value\": \"자율 출근\"\n        }\n    ]\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://3.35.90.39:8080/v1"
+		},
+		{
+			"key": "LOCAL_URL",
+			"value": "http://localhost:8080/v1"
+		}
+	]
+}

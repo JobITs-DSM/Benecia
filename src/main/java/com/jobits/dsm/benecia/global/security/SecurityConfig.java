@@ -23,16 +23,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .cors().and()
                 .csrf().disable()
+                .sessionManagement().disable()
+                .formLogin().disable()
 
                 .authorizeRequests()
                     .antMatchers(HttpMethod.POST, "/v1/student/auth").permitAll()
                     .antMatchers(HttpMethod.POST, "/v1/admin/auth").permitAll()
                     .antMatchers(HttpMethod.POST, "/v1/enterprise/auth").permitAll()
                     .antMatchers(HttpMethod.PUT, "/v1/auth").permitAll()
-                .anyRequest().authenticated()
+                    .anyRequest().authenticated()
 
                 .and()
                 .apply(new FilterConfig(jwtTokenProvider));
+
     }
 
     @Bean
