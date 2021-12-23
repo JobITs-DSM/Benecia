@@ -15,9 +15,9 @@ spring:
 auth:
   jwt:
     exp:
-      refresh: ${JWT_EXP_REFRESH}
-      access: ${JWT_EXP_ACCESS}
-    secret: ${JWT_SECRET_KEY}
+      refresh: ${JWT_EXP_REFRESH:10000}
+      access: ${JWT_EXP_ACCESS:1000}
+    secret: ${JWT_SECRET_KEY:testtest}
 server:
   servlet:
     context-path: /v1/api
