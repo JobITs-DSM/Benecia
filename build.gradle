@@ -51,6 +51,10 @@ dependencies {
 
     // aws
     implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.0.1.RELEASE'
+
+    // redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'it.ozimov:embedded-redis:0.7.2'
 }
 
 test {
