@@ -1,6 +1,7 @@
 package com.jobits.dsm.benecia.domain.student.domain;
 
 import com.jobits.dsm.benecia.domain.application.domain.Application;
+import com.jobits.dsm.benecia.global.security.auth.UserMarker;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @Entity
-public class Student {
+public class Student implements UserMarker {
 
     @Id
     @Size(min = 7, max = 7)
@@ -38,4 +39,9 @@ public class Student {
 
     @OneToMany(mappedBy = "studentSerialNumber", orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Application> applications;
+
+    @Override
+    public String getId() {
+        return serialNumber;
+    }
 }
