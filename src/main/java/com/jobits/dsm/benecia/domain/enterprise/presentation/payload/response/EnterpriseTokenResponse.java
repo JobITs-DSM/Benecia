@@ -6,7 +6,8 @@ import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
 @Getter
-@SuperBuilder
-public class EnterpriseTokenResponse extends Tokens {
-
+@Builder
+public class EnterpriseTokenResponse {
+    private String accessToken;
+    private String refreshToken;
 }
