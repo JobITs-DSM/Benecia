@@ -5,6 +5,8 @@ import com.jobits.dsm.benecia.domain.attatchment.domain.AttachmentRepository;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
 import com.jobits.dsm.benecia.domain.enterprise.domain.EnterpriseRepository;
+import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessArea;
+import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessAreaRepository;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.RegisterEnterpriseRequest;
 import com.jobits.dsm.benecia.infrastructure.s3.S3Util;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ public class EnterpriseService {
     private final S3Util s3Util;
 
     private final EnterpriseRepository enterpriseRepository;
+    private final BusinessAreaRepository businessAreaRepository;
     private final AttachmentRepository attachmentRepository;
 
     @Transactional
@@ -46,6 +49,14 @@ public class EnterpriseService {
         saveEnterpriseAttachment(enterprise, request.getLogo(), enterprise::setLogo);
         saveEnterpriseAttachment(enterprise, request.getMaterial(), enterprise::setMaterial);
         saveEnterpriseAttachment(enterprise, request.getForeground(), enterprise::setForeground);
+
+        request.getBusinessAreas()
+                .forEach(businessAreaCode -> {
+                    enterprise.getBusinessAreas().add(businessAreaRepository.save(BusinessArea.builder()
+                            .code(businessAreaCode)
+                            .enterprise(enterprise)
+                            .build()));
+                });
     }
 
     private void saveEnterpriseAttachment(Enterprise enterprise, MultipartFile file, Consumer<Attachment> consumer) {

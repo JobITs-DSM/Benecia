@@ -17,6 +17,7 @@ public class BusinessArea {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Convert(converter = BusinessAreaCode.BusinessAreaCodeConverter.class)
     private BusinessAreaCode code;
 
     @ManyToOne
