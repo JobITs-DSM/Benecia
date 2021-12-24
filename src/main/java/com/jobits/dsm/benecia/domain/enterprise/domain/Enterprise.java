@@ -10,6 +10,7 @@ import lombok.experimental.Delegate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -102,5 +103,5 @@ public class Enterprise {
     private Attachment foreground;
 
     @OneToMany(mappedBy = "enterprise", orphanRemoval = true)
-    private List<BusinessArea> businessAreas;
+    private final List<BusinessArea> businessAreas = new ArrayList<>();
 }
