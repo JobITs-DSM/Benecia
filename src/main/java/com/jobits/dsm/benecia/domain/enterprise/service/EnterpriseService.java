@@ -5,7 +5,16 @@ import com.jobits.dsm.benecia.domain.attatchment.domain.AttachmentRepository;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
 import com.jobits.dsm.benecia.domain.enterprise.domain.EnterpriseRepository;
+import com.jobits.dsm.benecia.domain.enterprise.domain.cache.EnterpriseRefreshToken;
+import com.jobits.dsm.benecia.domain.enterprise.domain.cache.EnterpriseRefreshTokenRepository;
+import com.jobits.dsm.benecia.domain.enterprise.exceptions.EnterpriseNotFoundException;
+import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.EnterpriseSignInRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.RegisterEnterpriseRequest;
+import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseTokenResponse;
+import com.jobits.dsm.benecia.global.security.dto.Tokens;
+import com.jobits.dsm.benecia.global.security.jwt.JwtTokenProvider;
+import com.jobits.dsm.benecia.global.security.property.JwtProperty;
+import com.jobits.dsm.benecia.global.security.property.JwtRoleProperty;
 import com.jobits.dsm.benecia.infrastructure.s3.S3Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +31,10 @@ public class EnterpriseService {
     private final S3Util s3Util;
 
     private final EnterpriseRepository enterpriseRepository;
+    private final EnterpriseRefreshTokenRepository refreshTokenRepository;
     private final AttachmentRepository attachmentRepository;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtProperty jwtProperty;
 
     @Transactional
     public void registerEnterprise(RegisterEnterpriseRequest request) {
@@ -46,6 +58,27 @@ public class EnterpriseService {
         saveEnterpriseAttachment(enterprise, request.getLogo(), enterprise::setLogo);
         saveEnterpriseAttachment(enterprise, request.getMaterial(), enterprise::setMaterial);
         saveEnterpriseAttachment(enterprise, request.getForeground(), enterprise::setForeground);
+    }
+
+    @Transactional(readOnly = true)
+    public EnterpriseTokenResponse enterpriseSignIn(EnterpriseSignInRequest request) {
+        Enterprise enterprise = enterpriseRepository.findById(request.getRegistrationNumber())
+                        .orElseThrow(() -> EnterpriseNotFoundException.EXCEPTION);
+
+        Tokens tokens = jwtTokenProvider.getToken(request.getRegistrationNumber(), JwtRoleProperty.ENTERPRISE_ROLE);
+
+        EnterpriseRefreshToken refreshToken = EnterpriseRefreshToken.builder()
+                .refreshExp(jwtProperty.getExp().getRefresh())
+                .registrationNumber(enterprise.getRegistrationNumber())
+                .refreshToken(tokens.getRefreshToken())
+                .build();
+
+        refreshTokenRepository.save(refreshToken);
+
+        return EnterpriseTokenResponse.builder()
+                .accessToken(tokens.getAccessToken())
+                .refreshToken(tokens.getRefreshToken())
+                .build();
     }
 
     private void saveEnterpriseAttachment(Enterprise enterprise, MultipartFile file, Consumer<Attachment> consumer) {
