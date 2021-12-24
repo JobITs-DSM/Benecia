@@ -4,6 +4,7 @@ import com.jobits.dsm.benecia.domain.attatchment.domain.Attachment;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
 import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessArea;
+import com.jobits.dsm.benecia.global.security.auth.UserMarker;
 import lombok.*;
 import lombok.experimental.Delegate;
 
@@ -18,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Builder
-public class Enterprise {
+public class Enterprise implements UserMarker {
 
     @Id
     @Size(min = 12, max = 12)
@@ -104,4 +105,14 @@ public class Enterprise {
 
     @OneToMany(mappedBy = "enterprise", orphanRemoval = true)
     private final List<BusinessArea> businessAreas = new ArrayList<>();
+
+    @Override
+    public String getId() {
+        return registrationNumber;
+    }
+
+    @Override
+    public String getPassword() {
+        return registrationNumber;
+    }
 }
