@@ -12,6 +12,11 @@ spring:
     property-naming-strategy: SNAKE_CASE
   lifecycle:
     timeout-per-shutdown-phase: 20s
+  redis:
+    host: localhost
+    port: 6379
+  profiles:
+    active: test
 auth:
   jwt:
     exp:
