@@ -1,10 +1,14 @@
 package com.jobits.dsm.benecia.domain.enterprise.presentation;
 
+import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.EnterpriseSignInRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.RegisterEnterpriseRequest;
+import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseTokenResponse;
 import com.jobits.dsm.benecia.domain.enterprise.service.EnterpriseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @RestController
@@ -17,5 +21,11 @@ public class EnterpriseController {
     @ResponseStatus(HttpStatus.CREATED)
     void create(@ModelAttribute RegisterEnterpriseRequest request) {
         enterpriseService.registerEnterprise(request);
+    }
+
+    @PostMapping("/auth")
+    @ResponseStatus(HttpStatus.CREATED)
+    EnterpriseTokenResponse signUp(@RequestBody @Valid EnterpriseSignInRequest request) {
+        return enterpriseService.enterpriseSignIn(request);
     }
 }
