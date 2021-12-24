@@ -27,9 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
 
                 .authorizeRequests()
-                    .antMatchers(HttpMethod.POST, "/v1/student/auth").permitAll()
-                    .antMatchers(HttpMethod.POST, "/v1/admin/auth").permitAll()
-                    .antMatchers(HttpMethod.POST, "/v1/enterprise/auth").permitAll()
+                    .antMatchers(HttpMethod.POST, "/student/auth").permitAll()
+                    .antMatchers(HttpMethod.POST, "/admin/auth").permitAll()
+                    .antMatchers(HttpMethod.POST, "/enterprise/auth").permitAll()
                     .antMatchers(HttpMethod.PUT, "/v1/auth").permitAll()
                     .anyRequest().authenticated()
 
