@@ -71,7 +71,7 @@ public class EnterpriseService {
                 });
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public EnterpriseTokenResponse enterpriseSignIn(EnterpriseSignInRequest request) {
         Enterprise enterprise = enterpriseRepository.findById(request.getRegistrationNumber())
                 .orElseThrow(() -> EnterpriseNotFoundException.EXCEPTION);
