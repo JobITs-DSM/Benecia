@@ -5,10 +5,15 @@ import com.jobits.dsm.benecia.domain.attatchment.domain.AttachmentRepository;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
 import com.jobits.dsm.benecia.domain.enterprise.domain.EnterpriseRepository;
+<<<<<<< HEAD
 import com.jobits.dsm.benecia.domain.enterprise.domain.cache.EnterpriseRefreshToken;
 import com.jobits.dsm.benecia.domain.enterprise.domain.cache.EnterpriseRefreshTokenRepository;
 import com.jobits.dsm.benecia.domain.enterprise.exceptions.EnterpriseNotFoundException;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.EnterpriseSignInRequest;
+=======
+import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessArea;
+import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessAreaRepository;
+>>>>>>> c935aee6affbf195746ab074fdc9553a45d1a4bb
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.RegisterEnterpriseRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseTokenResponse;
 import com.jobits.dsm.benecia.global.security.dto.Tokens;
@@ -32,6 +37,7 @@ public class EnterpriseService {
 
     private final EnterpriseRepository enterpriseRepository;
     private final EnterpriseRefreshTokenRepository refreshTokenRepository;
+    private final BusinessAreaRepository businessAreaRepository;
     private final AttachmentRepository attachmentRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final JwtProperty jwtProperty;
@@ -58,6 +64,14 @@ public class EnterpriseService {
         saveEnterpriseAttachment(enterprise, request.getLogo(), enterprise::setLogo);
         saveEnterpriseAttachment(enterprise, request.getMaterial(), enterprise::setMaterial);
         saveEnterpriseAttachment(enterprise, request.getForeground(), enterprise::setForeground);
+
+        request.getBusinessAreas()
+                .forEach(businessAreaCode -> {
+                    enterprise.getBusinessAreas().add(businessAreaRepository.save(BusinessArea.builder()
+                            .code(businessAreaCode)
+                            .enterprise(enterprise)
+                            .build()));
+                });
     }
 
     @Transactional(readOnly = true)

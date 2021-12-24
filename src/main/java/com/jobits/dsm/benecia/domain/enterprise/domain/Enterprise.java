@@ -11,6 +11,7 @@ import lombok.experimental.Delegate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -103,7 +104,7 @@ public class Enterprise implements UserMarker {
     private Attachment foreground;
 
     @OneToMany(mappedBy = "enterprise", orphanRemoval = true)
-    private List<BusinessArea> businessAreas;
+    private final List<BusinessArea> businessAreas = new ArrayList<>();
 
     @Override
     public String getId() {
@@ -114,5 +115,4 @@ public class Enterprise implements UserMarker {
     public String getPassword() {
         return registrationNumber;
     }
-
 }
