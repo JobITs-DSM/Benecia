@@ -25,7 +25,7 @@ public class EnterpriseController {
 
     @PostMapping("/auth")
     @ResponseStatus(HttpStatus.CREATED)
-    EnterpriseTokenResponse signUp(@RequestBody @Valid EnterpriseSignInRequest request) {
+    EnterpriseTokenResponse signIn(@RequestBody @Valid EnterpriseSignInRequest request) {
         return enterpriseService.enterpriseSignIn(request);
     }
 }

@@ -5,12 +5,12 @@ import com.jobits.dsm.benecia.domain.attatchment.domain.AttachmentRepository;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
 import com.jobits.dsm.benecia.domain.enterprise.domain.EnterpriseRepository;
+import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessArea;
+import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessAreaRepository;
 import com.jobits.dsm.benecia.domain.enterprise.domain.cache.EnterpriseRefreshToken;
 import com.jobits.dsm.benecia.domain.enterprise.domain.cache.EnterpriseRefreshTokenRepository;
 import com.jobits.dsm.benecia.domain.enterprise.exceptions.EnterpriseNotFoundException;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.EnterpriseSignInRequest;
-import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessArea;
-import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessAreaRepository;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.RegisterEnterpriseRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseTokenResponse;
 import com.jobits.dsm.benecia.global.security.dto.Tokens;
@@ -74,7 +74,7 @@ public class EnterpriseService {
     @Transactional(readOnly = true)
     public EnterpriseTokenResponse enterpriseSignIn(EnterpriseSignInRequest request) {
         Enterprise enterprise = enterpriseRepository.findById(request.getRegistrationNumber())
-                        .orElseThrow(() -> EnterpriseNotFoundException.EXCEPTION);
+                .orElseThrow(() -> EnterpriseNotFoundException.EXCEPTION);
 
         Tokens tokens = jwtTokenProvider.getToken(request.getRegistrationNumber(), JwtRoleProperty.ENTERPRISE_ROLE);
 
@@ -94,14 +94,14 @@ public class EnterpriseService {
 
     private void saveEnterpriseAttachment(Enterprise enterprise, MultipartFile file, Consumer<Attachment> consumer) {
         Optional<String> savedFile = saveFileToStorage(file, "enterprise" + "/" + enterprise.getRegistrationNumber());
-        if(savedFile.isPresent()) {
+        if (savedFile.isPresent()) {
             Attachment attachment = saveFileToDatabase(savedFile.get(), file.getOriginalFilename());
             consumer.accept(attachment);
         }
     }
 
     private Optional<String> saveFileToStorage(MultipartFile file, String directoryName) {
-        if(file == null || file.isEmpty() || file.getOriginalFilename() == null) {
+        if (file == null || file.isEmpty() || file.getOriginalFilename() == null) {
             return Optional.empty();
         }
         return Optional.of(s3Util.saveFile(file, directoryName));
