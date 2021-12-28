@@ -13,6 +13,9 @@ spring:
     property-naming-strategy: SNAKE_CASE
   lifecycle:
     timeout-per-shutdown-phase: 20s
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
 auth:
   jwt:
     exp:
