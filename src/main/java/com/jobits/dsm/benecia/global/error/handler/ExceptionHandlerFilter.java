@@ -26,7 +26,7 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
             Throwable throwable = exception.getCause();
 
             logger.error("Error Occurred: " + throwable.getMessage());
-
+            exception.printStackTrace();
             if (throwable instanceof GlobalException globalException) {
 
                 sendErrorMessage(globalException, response);

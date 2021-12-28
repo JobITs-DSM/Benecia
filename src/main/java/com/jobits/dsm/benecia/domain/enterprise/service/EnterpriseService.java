@@ -97,10 +97,6 @@ public class EnterpriseService {
     }
 
     public EnterpriseListResponse getEnterpriseList() {
-        List<String> code = enterpriseRepository.getBusinessAreas("305-83-23458")
-                .stream().map(BusinessAreaCode::getValue)
-                .collect(Collectors.toList());
-
         return EnterpriseListResponse.builder()
                 .enterprises(enterpriseRepository.findAll()
                         .stream().map(enterprise -> EnterpriseListResponse.of(
@@ -111,7 +107,7 @@ public class EnterpriseService {
                                 enterprise.getTurnover(),
                                 enterprise.getDivision(),
                                 enterprise.getIsConvention(),
-                                enterpriseRepository.getBusinessAreas("305-83-23458")
+                                enterpriseRepository.getBusinessAreas(enterprise.getRegistrationNumber())
                                         .stream().map(BusinessAreaCode::getValue)
                                         .collect(Collectors.toList()),
                                 enterprise.getLastReceptionYear(),
