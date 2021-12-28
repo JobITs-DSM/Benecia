@@ -2,16 +2,19 @@ package com.jobits.dsm.benecia.domain.enterprise.domain;
 
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
+import com.jobits.dsm.benecia.infrastructure.querydsl.QuerydslConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 
 import javax.validation.ConstraintViolationException;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@Import(QuerydslConfig.class)
 @DataJpaTest
 class EnterpriseRepositoryTest {
 
