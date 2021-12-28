@@ -4,9 +4,9 @@ import com.jobits.dsm.benecia.domain.attatchment.domain.Attachment;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
 import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessArea;
+import com.jobits.dsm.benecia.domain.review.domain.Review;
 import com.jobits.dsm.benecia.global.security.auth.UserMarker;
 import lombok.*;
-import lombok.experimental.Delegate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -82,6 +82,8 @@ public class Enterprise implements UserMarker {
     })
     private Director director;
 
+    private Integer lastReceptionYear;
+
     @Setter
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "businessLicense")
@@ -104,6 +106,9 @@ public class Enterprise implements UserMarker {
 
     @OneToMany(mappedBy = "enterprise", orphanRemoval = true)
     private List<BusinessArea> businessAreas;
+
+    @OneToMany(mappedBy = "enterprise", orphanRemoval = true)
+    private List<Review> reviews;
 
     @Override
     public String getId() {
