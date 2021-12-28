@@ -10,7 +10,7 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 @ConstructorBinding
 @ConfigurationProperties(prefix = "auth.jwt")
 public class JwtProperty {
-    private final String secretKey;
+    private final String secret;
     private final JwtExpProperty exp;
 
     @Getter
