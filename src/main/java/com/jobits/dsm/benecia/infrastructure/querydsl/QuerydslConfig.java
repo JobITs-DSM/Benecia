@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 @RequiredArgsConstructor
 public class QuerydslConfig {
 
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Bean
     public JPAQueryFactory jpaQueryFactory() {
