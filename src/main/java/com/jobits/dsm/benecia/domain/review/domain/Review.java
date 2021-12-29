@@ -1,5 +1,6 @@
 package com.jobits.dsm.benecia.domain.review.domain;
 
+import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
 import com.jobits.dsm.benecia.domain.review.code.ReviewCode;
 import lombok.*;
 
@@ -31,4 +32,8 @@ public class Review {
 
     @NotNull
     private LocalDateTime registrationDateTime;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "registration_number")
+    private Enterprise enterprise;
 }

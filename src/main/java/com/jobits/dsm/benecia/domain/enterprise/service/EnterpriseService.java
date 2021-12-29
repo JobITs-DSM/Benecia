@@ -2,6 +2,7 @@ package com.jobits.dsm.benecia.domain.enterprise.service;
 
 import com.jobits.dsm.benecia.domain.attatchment.domain.Attachment;
 import com.jobits.dsm.benecia.domain.attatchment.domain.AttachmentRepository;
+import com.jobits.dsm.benecia.domain.enterprise.code.BusinessAreaCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
 import com.jobits.dsm.benecia.domain.enterprise.domain.EnterpriseRepository;
@@ -12,6 +13,7 @@ import com.jobits.dsm.benecia.domain.enterprise.domain.cache.EnterpriseRefreshTo
 import com.jobits.dsm.benecia.domain.enterprise.exceptions.EnterpriseNotFoundException;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.EnterpriseSignInRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.RegisterEnterpriseRequest;
+import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseListResponse;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseTokenResponse;
 import com.jobits.dsm.benecia.global.security.dto.Tokens;
 import com.jobits.dsm.benecia.global.security.jwt.JwtTokenProvider;
@@ -23,8 +25,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -89,6 +93,27 @@ public class EnterpriseService {
         return EnterpriseTokenResponse.builder()
                 .accessToken(tokens.getAccessToken())
                 .refreshToken(tokens.getRefreshToken())
+                .build();
+    }
+
+    public EnterpriseListResponse getEnterpriseList() {
+        return EnterpriseListResponse.builder()
+                .enterprises(enterpriseRepository.findAll()
+                        .stream().map(enterprise -> EnterpriseListResponse.of(
+                                enterprise.getRegistrationNumber(),
+                                enterprise.getName(),
+                                enterprise.getAddress().getPostalCode(),
+                                enterprise.getEmployeeCount(),
+                                enterprise.getTurnover(),
+                                enterprise.getDivision(),
+                                enterprise.getIsConvention(),
+                                enterpriseRepository.getBusinessAreas(enterprise.getRegistrationNumber())
+                                        .stream().map(BusinessAreaCode::getValue)
+                                        .collect(Collectors.toList()),
+                                enterprise.getLastReceptionYear(),
+                                enterpriseRepository.getContractStudentCount(enterprise.getRegistrationNumber()),
+                                enterpriseRepository.getReviewCount(enterprise.getRegistrationNumber())
+                        )).collect(Collectors.toList()))
                 .build();
     }
 

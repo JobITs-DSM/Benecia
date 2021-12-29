@@ -71,7 +71,7 @@ public class JwtTokenProvider {
 
     private Claims getClaims(String token) {
         try {
-            return Jwts.parser().setSigningKey(jwtProperty.getSecretKey())
+            return Jwts.parser().setSigningKey(jwtProperty.getSecret())
                     .parseClaimsJws(token).getBody();
         } catch (ExpiredJwtException e) {
             throw JwtTokenExpiredException.EXCEPTION;
@@ -86,7 +86,7 @@ public class JwtTokenProvider {
                 .setIssuedAt(new Date())
                 .setHeaderParam(TOKEN_TYPE_HEADER, type)
                 .setSubject(subject)
-                .signWith(SignatureAlgorithm.HS512, jwtProperty.getSecretKey())
+                .signWith(SignatureAlgorithm.HS512, jwtProperty.getSecret())
                 .setExpiration(new Date(System.currentTimeMillis() + exp * 1000))
                 .compact();
     }
