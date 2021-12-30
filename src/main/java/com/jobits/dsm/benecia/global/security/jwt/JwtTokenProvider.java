@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -82,7 +83,7 @@ public class JwtTokenProvider {
 
     private String getToken(String subject, String access, String type, Long exp) {
         return Jwts.builder()
-                .setClaims(Map.of(AUTHORITY_KEY, access))
+                .setClaims(new HashMap<>(Map.of(AUTHORITY_KEY, access)))
                 .setIssuedAt(new Date())
                 .setHeaderParam(TOKEN_TYPE_HEADER, type)
                 .setSubject(subject)
