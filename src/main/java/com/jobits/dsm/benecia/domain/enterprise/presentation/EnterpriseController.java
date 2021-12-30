@@ -2,15 +2,16 @@ package com.jobits.dsm.benecia.domain.enterprise.presentation;
 
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.EnterpriseSignInRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.RegisterEnterpriseRequest;
-import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseListResponse;
+import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseInfoListResponse;
+import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseInfoResponse;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseTokenResponse;
 import com.jobits.dsm.benecia.domain.enterprise.service.EnterpriseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -27,13 +28,18 @@ public class EnterpriseController {
     }
 
     @GetMapping
-    EnterpriseListResponse getEnterpriseList() {
-        return enterpriseService.getEnterpriseList();
+    EnterpriseInfoListResponse getEnterpriseInfoList() {
+        return enterpriseService.getEnterpriseInfoList();
     }
   
     @PostMapping("/auth")
     @ResponseStatus(HttpStatus.CREATED)
     EnterpriseTokenResponse signIn(@RequestBody @Valid EnterpriseSignInRequest request) {
         return enterpriseService.enterpriseSignIn(request);
+    }
+
+    @GetMapping("/{registration_number}")
+    List<EnterpriseInfoResponse> getEnterpriseInfo(@PathVariable("registration_number") String request) {
+        return enterpriseService.getEnterpriseInfo(request);
     }
 }
