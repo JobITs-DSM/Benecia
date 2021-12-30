@@ -1,6 +1,5 @@
 package com.jobits.dsm.benecia.domain.recruitment.domain;
 
-import com.jobits.dsm.benecia.domain.attatchment.domain.Attachment;
 import com.jobits.dsm.benecia.domain.contract.domain.Contract;
 import com.jobits.dsm.benecia.domain.recruitment.RecruitmentDate;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentFullTimePayCode;

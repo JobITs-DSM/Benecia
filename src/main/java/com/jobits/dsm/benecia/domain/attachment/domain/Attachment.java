@@ -1,6 +1,5 @@
-package com.jobits.dsm.benecia.domain.attatchment.domain;
+package com.jobits.dsm.benecia.domain.attachment.domain;
 
-import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
 import lombok.*;
 
 import javax.persistence.*;
