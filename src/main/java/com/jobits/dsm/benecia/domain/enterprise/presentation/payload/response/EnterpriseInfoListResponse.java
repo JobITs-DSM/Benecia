@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Builder
-public class EnterpriseListResponse {
+public class EnterpriseInfoListResponse {
     private final List<EnterpriseInfo> enterprises;
 
     @Getter
