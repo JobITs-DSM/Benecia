@@ -12,6 +12,7 @@ import com.jobits.dsm.benecia.domain.enterprise.domain.cache.EnterpriseRefreshTo
 import com.jobits.dsm.benecia.domain.enterprise.domain.cache.EnterpriseRefreshTokenRepository;
 import com.jobits.dsm.benecia.domain.enterprise.exceptions.EnterpriseNotFoundException;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.EnterpriseSignInRequest;
+import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.ModifyEnterpriseInfoRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.RegisterEnterpriseRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseListResponse;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseTokenResponse;
@@ -21,6 +22,7 @@ import com.jobits.dsm.benecia.global.security.property.JwtProperty;
 import com.jobits.dsm.benecia.global.security.property.JwtRoleProperty;
 import com.jobits.dsm.benecia.infrastructure.s3.S3Util;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -115,6 +117,24 @@ public class EnterpriseService {
                                 enterpriseRepository.getReviewCount(enterprise.getRegistrationNumber())
                         )).collect(Collectors.toList()))
                 .build();
+    }
+
+    @Transactional
+    public void modifyEnterpriseInfo(String registrationNumber, ModifyEnterpriseInfoRequest request) {
+        Enterprise enterprise = enterpriseRepository.findById(registrationNumber)
+                .orElseThrow(() -> EnterpriseNotFoundException.EXCEPTION);
+
+        enterpriseRepository.modifyEnterpriseInfo(registrationNumber, request);
+
+        enterprise.getBusinessAreas().clear();
+
+        request.getBusinessAreas()
+                .forEach(businessAreaCode -> {
+                    enterprise.getBusinessAreas().add(businessAreaRepository.save(BusinessArea.builder()
+                            .code(businessAreaCode)
+                            .enterprise(enterprise)
+                            .build()));
+                });
     }
 
     private void saveEnterpriseAttachment(Enterprise enterprise, MultipartFile file, Consumer<Attachment> consumer) {
