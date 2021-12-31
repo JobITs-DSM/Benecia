@@ -11,6 +11,7 @@ import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessArea
 import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessAreaRepository;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.ModifyEnterpriseInfoRequest;
 import com.jobits.dsm.benecia.infrastructure.querydsl.QuerydslConfig;
+import com.jobits.dsm.benecia.infrastructure.redis.EmbeddedRedisConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import java.util.regex.Pattern;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Import(QuerydslConfig.class)
+@Import({ QuerydslConfig.class, EmbeddedRedisConfig.class })
 public class EnterpriseServiceTest {
 
     @Autowired
