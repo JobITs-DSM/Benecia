@@ -11,6 +11,7 @@ import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessArea
 import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessAreaRepository;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.ModifyEnterpriseInfoRequest;
 import com.jobits.dsm.benecia.infrastructure.querydsl.QuerydslConfig;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +23,7 @@ import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import(QuerydslConfig.class)
 public class EnterpriseServiceTest {
 
@@ -34,6 +35,11 @@ public class EnterpriseServiceTest {
 
     @Autowired
     private BusinessAreaRepository businessAreaRepository;
+
+    @BeforeEach
+    void cleanUp() {
+        enterpriseRepository.deleteAll();
+    }
 
     @Test
     void 사업자번호_정규표현식() {
