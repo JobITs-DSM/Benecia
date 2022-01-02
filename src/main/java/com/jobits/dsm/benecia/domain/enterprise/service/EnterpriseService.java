@@ -67,12 +67,11 @@ public class EnterpriseService {
         saveEnterpriseAttachment(enterprise, request.getForeground(), enterprise::setForeground);
 
         request.getBusinessAreas()
-                .forEach(businessAreaCode -> {
-                    enterprise.getBusinessAreas().add(businessAreaRepository.save(BusinessArea.builder()
+                .forEach(businessAreaCode -> enterprise.getBusinessAreas()
+                        .add(businessAreaRepository.save(BusinessArea.builder()
                             .code(businessAreaCode)
                             .enterprise(enterprise)
-                            .build()));
-                });
+                            .build())));
     }
 
     @Transactional

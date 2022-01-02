@@ -7,6 +7,7 @@ import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
 import com.jobits.dsm.benecia.domain.recruitment.domain.hiringarea.HiringArea;
 import com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage.ProgrammingLanguage;
 import com.jobits.dsm.benecia.domain.recruitment.domain.screeningprocess.ScreeningProcess;
+import com.jobits.dsm.benecia.domain.recruitment.domain.tag.Tag;
 import com.jobits.dsm.benecia.domain.recruitment.domain.technology.Technology;
 import com.jobits.dsm.benecia.domain.recruitment.domain.welfare.Welfare;
 import com.jobits.dsm.benecia.domain.training.domain.Training;
@@ -18,6 +19,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -86,24 +88,27 @@ public class Recruitment {
     private Form form;
 
     @OneToMany(mappedBy = "recruitment", orphanRemoval = true)
-    private List<ProgrammingLanguage> programmingLanguages;
+    private final List<ProgrammingLanguage> programmingLanguages = new ArrayList<>();
 
     @OneToMany(mappedBy = "recruitment", orphanRemoval = true)
-    private List<HiringArea> hiringAreas;
+    private final List<HiringArea> hiringAreas = new ArrayList<>();
 
     @OneToMany(mappedBy = "recruitment", orphanRemoval = true)
-    private List<Training> trainings;
+    private final List<Training> trainings = new ArrayList<>();
 
     @OneToMany(mappedBy = "recruitment", orphanRemoval = true)
-    private List<Contract> contracts;
+    private final List<Contract> contracts = new ArrayList<>();
 
     @OneToMany(mappedBy = "recruitment", orphanRemoval = true)
-    private List<Welfare> welfare;
+    private final List<Welfare> welfare = new ArrayList<>();
 
     @OneToMany(mappedBy = "recruitment", orphanRemoval = true)
-    private List<ScreeningProcess> screeningProcesses;
+    private final List<ScreeningProcess> screeningProcesses = new ArrayList<>();
 
     @OneToMany(mappedBy = "recruitment", orphanRemoval = true)
-    private List<Technology> technologies;
+    private final List<Technology> technologies = new ArrayList<>();
+
+    @OneToMany(mappedBy = "recruitment", orphanRemoval = true)
+    private final List<Tag> tags = new ArrayList<>();
 
 }
