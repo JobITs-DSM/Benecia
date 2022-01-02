@@ -5,6 +5,7 @@ import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
 import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessArea;
 import com.jobits.dsm.benecia.domain.review.domain.Review;
+import com.jobits.dsm.benecia.global.able.Savable;
 import com.jobits.dsm.benecia.global.security.auth.UserMarker;
 import lombok.*;
 
@@ -19,7 +20,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Builder
-public class Enterprise implements UserMarker {
+public class Enterprise implements UserMarker, Savable {
 
     @Id
     @Size(min = 12, max = 12)
@@ -110,6 +111,11 @@ public class Enterprise implements UserMarker {
 
     @OneToMany(mappedBy = "enterprise", orphanRemoval = true)
     private List<Review> reviews;
+
+    @Override
+    public String getDirectoryName() {
+        return "enterprise";
+    }
 
     @Override
     public String getId() {

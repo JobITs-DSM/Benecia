@@ -11,6 +11,7 @@ import com.jobits.dsm.benecia.domain.recruitment.domain.tag.Tag;
 import com.jobits.dsm.benecia.domain.recruitment.domain.technology.Technology;
 import com.jobits.dsm.benecia.domain.recruitment.domain.welfare.Welfare;
 import com.jobits.dsm.benecia.domain.training.domain.Training;
+import com.jobits.dsm.benecia.global.able.Savable;
 import lombok.*;
 import lombok.experimental.Delegate;
 import org.springframework.data.annotation.CreatedDate;
@@ -28,7 +29,7 @@ import java.util.List;
 @Builder
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Recruitment {
+public class Recruitment implements Savable {
 
     @EmbeddedId
     private RecruitmentId recruitmentId;
@@ -111,4 +112,13 @@ public class Recruitment {
     @OneToMany(mappedBy = "recruitment", orphanRemoval = true)
     private final List<Tag> tags = new ArrayList<>();
 
+    @Override
+    public String getDirectoryName() {
+        return "recruitment";
+    }
+
+    @Override
+    public String getId() {
+        return recruitmentId.getRegistrationNumber();
+    }
 }
