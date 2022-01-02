@@ -53,6 +53,10 @@ dependencies {
 
     // querydsl
     implementation 'com.querydsl:querydsl-jpa'
+    annotationProcessor(
+            "javax.persistence:javax.persistence-api",
+            "javax.annotation:javax.annotation-api",
+            "com.querydsl:querydsl-apt:4.4.0:jpa")
 
     // configuration
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
