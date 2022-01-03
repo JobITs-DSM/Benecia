@@ -148,7 +148,7 @@ public class EnterpriseService {
         if (attachment == null) {
             return null;
         }
-        return EnterpriseInfoResponse.of(attachment.getFileName(), attachment.getOriginalFileName());
+        return new AttachmentDetails(attachment.getFileName(), attachment.getOriginalFileName());
     }
 
     private void saveEnterpriseAttachment(Enterprise enterprise, MultipartFile file, Consumer<Attachment> consumer) {
