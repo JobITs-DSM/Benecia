@@ -11,7 +11,7 @@ import javax.annotation.PreDestroy;
 @Configuration
 public class EmbeddedRedisConfig {
 
-    private static final RedisServer redisServer = new RedisServer(6376);
+    private static final RedisServer redisServer = new RedisServer(6379);
 
     @PostConstruct
     void setup() {
