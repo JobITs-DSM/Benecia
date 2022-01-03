@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@Import({ QuerydslConfig.class, EmbeddedRedisConfig.class })
+@Import(QuerydslConfig.class)
 public class EnterpriseServiceTest {
 
     @Autowired
