@@ -35,8 +35,4 @@ public class EnterpriseInfoResponse {
         private String fileName;
         private String originalFileName;
     }
-
-    public static AttachmentDetails of(String fileName, String originalFileName) {
-        return new AttachmentDetails(fileName, originalFileName);
-    }
 }
