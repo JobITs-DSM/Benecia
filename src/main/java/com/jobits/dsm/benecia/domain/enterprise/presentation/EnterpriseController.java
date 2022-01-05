@@ -1,6 +1,7 @@
 package com.jobits.dsm.benecia.domain.enterprise.presentation;
 
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.EnterpriseSignInRequest;
+import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.ModifyEnterpriseInfoRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.RegisterEnterpriseRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseInfoListResponse;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseInfoResponse;
@@ -41,5 +42,11 @@ public class EnterpriseController {
     @GetMapping("/{registration_number}")
     List<EnterpriseInfoResponse> getEnterpriseInfo(@PathVariable("registration_number") String request) {
         return enterpriseService.getEnterpriseInfo(request);
+    }
+  
+    @PutMapping("/{registration_number}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void modifyEnterpriseInfo(@PathVariable("registration_number") String registrationNumber, @RequestBody @Valid ModifyEnterpriseInfoRequest request) {
+        enterpriseService.modifyEnterpriseInfo(registrationNumber, request);
     }
 }

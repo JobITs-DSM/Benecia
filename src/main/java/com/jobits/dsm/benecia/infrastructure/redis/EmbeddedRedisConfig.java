@@ -11,11 +11,14 @@ import javax.annotation.PreDestroy;
 @Configuration
 public class EmbeddedRedisConfig {
 
-    private static final RedisServer redisServer = new RedisServer(6379);
+    private static RedisServer redisServer = null;
 
     @PostConstruct
     void setup() {
-        redisServer.start();
+        if (redisServer == null || !redisServer.isActive()) {
+            redisServer = new RedisServer(6379);
+            redisServer.start();   
+        }
     }
 
     @PreDestroy
