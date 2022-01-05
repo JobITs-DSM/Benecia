@@ -1,7 +1,7 @@
 package com.jobits.dsm.benecia.domain.enterprise.service;
 
-import com.jobits.dsm.benecia.domain.attatchment.domain.Attachment;
-import com.jobits.dsm.benecia.domain.attatchment.domain.AttachmentRepository;
+import com.jobits.dsm.benecia.domain.attachment.domain.Attachment;
+import com.jobits.dsm.benecia.domain.attachment.domain.AttachmentRepository;
 import com.jobits.dsm.benecia.domain.enterprise.code.BusinessAreaCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
@@ -14,7 +14,9 @@ import com.jobits.dsm.benecia.domain.enterprise.exceptions.EnterpriseNotFoundExc
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.EnterpriseSignInRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.ModifyEnterpriseInfoRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.RegisterEnterpriseRequest;
-import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseListResponse;
+import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseInfoListResponse;
+import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseInfoResponse;
+import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseInfoResponse.AttachmentDetails;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseTokenResponse;
 import com.jobits.dsm.benecia.global.security.dto.Tokens;
 import com.jobits.dsm.benecia.global.security.jwt.JwtTokenProvider;
@@ -98,10 +100,10 @@ public class EnterpriseService {
                 .build();
     }
 
-    public EnterpriseListResponse getEnterpriseList() {
-        return EnterpriseListResponse.builder()
+    public EnterpriseInfoListResponse getEnterpriseInfoList() {
+        return EnterpriseInfoListResponse.builder()
                 .enterprises(enterpriseRepository.findAll()
-                        .stream().map(enterprise -> EnterpriseListResponse.of(
+                        .stream().map(enterprise -> EnterpriseInfoListResponse.of(
                                 enterprise.getRegistrationNumber(),
                                 enterprise.getName(),
                                 enterprise.getAddress().getPostalCode(),
@@ -119,6 +121,38 @@ public class EnterpriseService {
                 .build();
     }
 
+    public List<EnterpriseInfoResponse> getEnterpriseInfo(String request) {
+        return enterpriseRepository.findById(request)
+                .stream().map(enterprise -> EnterpriseInfoResponse.builder()
+                        .registrationNumber(enterprise.getRegistrationNumber())
+                        .name(enterprise.getName())
+                        .establishYear(enterprise.getEstablishYear())
+                        .representativeName(enterprise.getRepresentativeName())
+                        .address(enterprise.getAddress())
+                        .branch(enterprise.getBranchAddress())
+                        .introduction(enterprise.getIntroduction())
+                        .employeeCount(enterprise.getEmployeeCount().getValue())
+                        .site(enterprise.getSite())
+                        .turnover(enterprise.getTurnover())
+                        .director(enterprise.getDirector())
+                        .businessAreas(enterprise.getBusinessAreas()
+                                .stream().map(code -> code.getCode().getValue())
+                                .collect(Collectors.toList()))
+                        .businessLicense(checkNull(enterprise.getBusinessLicense()))
+                        .logo(checkNull(enterprise.getLogo()))
+                        .material(checkNull(enterprise.getMaterial()))
+                        .foreground(checkNull(enterprise.getForeground()))
+                        .build()
+                ).collect(Collectors.toList());
+    }
+
+    private AttachmentDetails checkNull(Attachment attachment) {
+        if (attachment == null) {
+            return null;
+        }
+        return new AttachmentDetails(attachment.getFileName(), attachment.getOriginalFileName());
+    }
+  
     @Transactional
     public void modifyEnterpriseInfo(String registrationNumber, ModifyEnterpriseInfoRequest request) {
         Enterprise enterprise = enterpriseRepository.findById(registrationNumber)

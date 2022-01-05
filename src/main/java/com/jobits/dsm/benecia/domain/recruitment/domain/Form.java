@@ -1,6 +1,6 @@
 package com.jobits.dsm.benecia.domain.recruitment.domain;
 
-import com.jobits.dsm.benecia.domain.attatchment.domain.Attachment;
+import com.jobits.dsm.benecia.domain.attachment.domain.Attachment;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
