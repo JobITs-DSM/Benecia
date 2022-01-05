@@ -1,6 +1,7 @@
 package com.jobits.dsm.benecia.domain.enterprise.presentation;
 
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.EnterpriseSignInRequest;
+import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.ModifyEnterpriseInfoRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.RegisterEnterpriseRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseListResponse;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseTokenResponse;
@@ -35,5 +36,11 @@ public class EnterpriseController {
     @ResponseStatus(HttpStatus.CREATED)
     EnterpriseTokenResponse signIn(@RequestBody @Valid EnterpriseSignInRequest request) {
         return enterpriseService.enterpriseSignIn(request);
+    }
+
+    @PutMapping("/{registration_number}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void modifyEnterpriseInfo(@PathVariable("registration_number") String registrationNumber, @RequestBody @Valid ModifyEnterpriseInfoRequest request) {
+        enterpriseService.modifyEnterpriseInfo(registrationNumber, request);
     }
 }
