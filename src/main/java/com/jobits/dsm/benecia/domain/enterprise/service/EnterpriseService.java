@@ -24,7 +24,6 @@ import com.jobits.dsm.benecia.global.security.property.JwtProperty;
 import com.jobits.dsm.benecia.global.security.property.JwtRoleProperty;
 import com.jobits.dsm.benecia.infrastructure.s3.S3Util;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
