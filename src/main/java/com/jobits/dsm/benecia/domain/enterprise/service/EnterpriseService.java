@@ -1,6 +1,6 @@
 package com.jobits.dsm.benecia.domain.enterprise.service;
 
-import com.jobits.dsm.benecia.domain.attatchment.facade.AttachmentFacade;
+import com.jobits.dsm.benecia.domain.attachment.facade.AttachmentFacade;
 import com.jobits.dsm.benecia.domain.enterprise.code.BusinessAreaCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
@@ -11,18 +11,14 @@ import com.jobits.dsm.benecia.domain.enterprise.domain.cache.EnterpriseRefreshTo
 import com.jobits.dsm.benecia.domain.enterprise.domain.cache.EnterpriseRefreshTokenRepository;
 import com.jobits.dsm.benecia.domain.enterprise.exceptions.EnterpriseNotFoundException;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.EnterpriseSignInRequest;
-import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.ModifyEnterpriseInfoRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.RegisterEnterpriseRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseInfoListResponse;
-import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseInfoResponse;
-import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseInfoResponse.AttachmentDetails;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseTokenResponse;
 import com.jobits.dsm.benecia.global.security.dto.Tokens;
 import com.jobits.dsm.benecia.global.security.jwt.JwtTokenProvider;
 import com.jobits.dsm.benecia.global.security.property.JwtProperty;
 import com.jobits.dsm.benecia.global.security.property.JwtRoleProperty;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,7 +1,7 @@
-package com.jobits.dsm.benecia.domain.attatchment.facade;
+package com.jobits.dsm.benecia.domain.attachment.facade;
 
-import com.jobits.dsm.benecia.domain.attatchment.domain.Attachment;
-import com.jobits.dsm.benecia.domain.attatchment.domain.AttachmentRepository;
+import com.jobits.dsm.benecia.domain.attachment.domain.Attachment;
+import com.jobits.dsm.benecia.domain.attachment.domain.AttachmentRepository;
 import com.jobits.dsm.benecia.global.able.Savable;
 import com.jobits.dsm.benecia.infrastructure.s3.S3Util;
 import lombok.RequiredArgsConstructor;
