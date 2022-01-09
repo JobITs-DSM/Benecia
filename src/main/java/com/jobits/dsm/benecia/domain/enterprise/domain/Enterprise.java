@@ -1,6 +1,6 @@
 package com.jobits.dsm.benecia.domain.enterprise.domain;
 
-import com.jobits.dsm.benecia.domain.attatchment.domain.Attachment;
+import com.jobits.dsm.benecia.domain.attachment.domain.Attachment;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
 import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessArea;
