@@ -1,6 +1,5 @@
 package com.jobits.dsm.benecia.domain.recruitment.domain;
 
-import com.jobits.dsm.benecia.domain.recruitment.RecruitmentDate;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentFullTimePayCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
 import com.jobits.dsm.benecia.infrastructure.querydsl.QuerydslConfig;
@@ -37,10 +36,8 @@ class RecruitmentRepositoryTest {
                 .status(RecruitmentStatusCode.RECRUITMENT_REQUEST)
                 .documentation(new Documentation("docu1", "docu2", "docu3"))
                 .printDateTime(null)
-                .contracts(null)
                 .form(new Form(null, null, null))
                 .fullTimePay(RecruitmentFullTimePayCode.LESS_2400)
-                .hiringAreas(null)
                 .otherLanguage("Languages")
                 .otherSpecifics("Specifics")
                 .otherTechnology(null)

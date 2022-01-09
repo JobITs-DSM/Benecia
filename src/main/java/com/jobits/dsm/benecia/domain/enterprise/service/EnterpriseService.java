@@ -151,7 +151,7 @@ public class EnterpriseService {
         }
         return new AttachmentDetails(attachment.getFileName(), attachment.getOriginalFileName());
     }
-  
+
     @Transactional
     public void modifyEnterpriseInfo(String registrationNumber, ModifyEnterpriseInfoRequest request) {
         Enterprise enterprise = enterpriseRepository.findById(registrationNumber)
