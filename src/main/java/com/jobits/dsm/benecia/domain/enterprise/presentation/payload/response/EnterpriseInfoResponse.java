@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @Builder
 public class EnterpriseInfoResponse {
+
     private final String registrationNumber;
     private final String name;
     private final String establishYear;

@@ -120,8 +120,8 @@ public class EnterpriseService {
                 .build();
     }
 
-    public List<EnterpriseInfoResponse> getEnterpriseInfo(String request) {
-        return enterpriseRepository.findById(request)
+    public List<EnterpriseInfoResponse> getEnterpriseInfo(String registrationNumber) {
+        return enterpriseRepository.findById(registrationNumber)
                 .stream().map(enterprise -> EnterpriseInfoResponse.builder()
                         .registrationNumber(enterprise.getRegistrationNumber())
                         .name(enterprise.getName())

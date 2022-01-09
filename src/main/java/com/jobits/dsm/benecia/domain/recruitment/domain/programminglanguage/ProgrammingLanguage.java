@@ -13,7 +13,8 @@ import javax.persistence.*;
 @Entity
 public class ProgrammingLanguage {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Convert(converter = ProgrammingLanguageCode.ProgrammingLanguageCodeConverter.class)
