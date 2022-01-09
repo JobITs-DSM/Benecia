@@ -1,14 +1,11 @@
 package com.jobits.dsm.benecia.domain.enterprise.domain;
 
 import com.jobits.dsm.benecia.domain.enterprise.code.BusinessAreaCode;
-import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.QBusinessArea;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.ModifyEnterpriseInfoRequest;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.Modifying;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.jobits.dsm.benecia.domain.contract.domain.QContract.contract;
 import static com.jobits.dsm.benecia.domain.enterprise.domain.QEnterprise.enterprise;
