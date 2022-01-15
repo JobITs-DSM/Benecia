@@ -2,6 +2,7 @@ package com.jobits.dsm.benecia.domain.recruitment.domain.screeningprocess;
 
 import com.jobits.dsm.benecia.domain.recruitment.code.ScreeningProcessCode;
 import com.jobits.dsm.benecia.domain.recruitment.domain.Recruitment;
+import com.jobits.dsm.benecia.domain.recruitment.domain.RecruitmentId;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,7 +23,7 @@ public class ScreeningProcess {
 
     @NotNull
     @Column(columnDefinition = "TINYINT")
-    private Integer procedure;
+    private Integer gradations;
 
     @ManyToOne
     @JoinColumn(name = "reception_year")
