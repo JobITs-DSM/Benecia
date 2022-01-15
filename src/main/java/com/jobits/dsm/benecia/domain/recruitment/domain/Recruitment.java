@@ -1,7 +1,7 @@
 package com.jobits.dsm.benecia.domain.recruitment.domain;
 
 import com.jobits.dsm.benecia.domain.contract.domain.Contract;
-import com.jobits.dsm.benecia.domain.recruitment.RecruitmentDate;
+import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentFullTimePayCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentReportingTimeCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
@@ -31,6 +31,11 @@ public class Recruitment {
 
     @EmbeddedId
     private RecruitmentId recruitmentId;
+
+    @MapsId("registrationNumber")
+    @ManyToOne
+    @JoinColumn(name = "registration_number", referencedColumnName = "registrationNumber")
+    private Enterprise registrationNumber;
 
     @Convert(converter = RecruitmentStatusCode.RecruitmentStatusCodeConverter.class)
     private RecruitmentStatusCode status;
