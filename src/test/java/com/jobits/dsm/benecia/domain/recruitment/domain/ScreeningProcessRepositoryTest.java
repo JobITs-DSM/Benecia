@@ -30,7 +30,7 @@ public class ScreeningProcessRepositoryTest {
     void 저장_성공_테스트() {
         ScreeningProcess screeningProcess = ScreeningProcess.builder()
                 .code(ScreeningProcessCode.CODING_TEST)
-                .procedure(1)
+                .gradations(1)
                 .build();
         assertThat(screeningProcessRepository.save(screeningProcess).getCode()).isEqualTo(ScreeningProcessCode.CODING_TEST);
     }
@@ -39,7 +39,7 @@ public class ScreeningProcessRepositoryTest {
     void 저장_실패_테스트_Size_초과() {
         ScreeningProcess screeningProcess = ScreeningProcess.builder()
                 .code(ScreeningProcessCode.CODING_TEST)
-                .procedure(256)
+                .gradations(256)
                 .build();
         assertThrows(DataIntegrityViolationException.class, () -> screeningProcessRepository.save(screeningProcess));
     }
