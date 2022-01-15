@@ -16,7 +16,7 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
     @Override
     public List<RecruitmentVO> getRecruitmentInfoList() {
         return queryFactory
-                .select(new QRecruitmentInfoVO(
+                .select(new QRecruitmentVO(
                                 recruitment.recruitmentId.receptionYear,
                                 recruitment.registrationNumber,
                                 recruitment.status,
