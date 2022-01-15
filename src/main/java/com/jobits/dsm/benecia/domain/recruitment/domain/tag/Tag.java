@@ -1,24 +1,25 @@
-package com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage;
+package com.jobits.dsm.benecia.domain.recruitment.domain.tag;
 
-import com.jobits.dsm.benecia.domain.recruitment.code.ProgrammingLanguageCode;
 import com.jobits.dsm.benecia.domain.recruitment.domain.Recruitment;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
+@Entity
 @Builder
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity
-public class ProgrammingLanguage {
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @Convert(converter = ProgrammingLanguageCode.ProgrammingLanguageCodeConverter.class)
-    private ProgrammingLanguageCode code;
+    @NotNull
+    @Column(length = 30)
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "reception_year")
