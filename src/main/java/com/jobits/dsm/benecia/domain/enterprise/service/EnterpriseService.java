@@ -24,7 +24,6 @@ import com.jobits.dsm.benecia.global.security.property.JwtProperty;
 import com.jobits.dsm.benecia.global.security.property.JwtRoleProperty;
 import com.jobits.dsm.benecia.infrastructure.s3.S3Util;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -121,8 +120,8 @@ public class EnterpriseService {
                 .build();
     }
 
-    public List<EnterpriseInfoResponse> getEnterpriseInfo(String request) {
-        return enterpriseRepository.findById(request)
+    public List<EnterpriseInfoResponse> getEnterpriseInfo(String registrationNumber) {
+        return enterpriseRepository.findById(registrationNumber)
                 .stream().map(enterprise -> EnterpriseInfoResponse.builder()
                         .registrationNumber(enterprise.getRegistrationNumber())
                         .name(enterprise.getName())
@@ -152,7 +151,7 @@ public class EnterpriseService {
         }
         return new AttachmentDetails(attachment.getFileName(), attachment.getOriginalFileName());
     }
-  
+
     @Transactional
     public void modifyEnterpriseInfo(String registrationNumber, ModifyEnterpriseInfoRequest request) {
         Enterprise enterprise = enterpriseRepository.findById(registrationNumber)
