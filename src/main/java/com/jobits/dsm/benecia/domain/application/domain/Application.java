@@ -1,6 +1,7 @@
 package com.jobits.dsm.benecia.domain.application.domain;
 
 import com.jobits.dsm.benecia.domain.application.code.ApplicationCode;
+import com.jobits.dsm.benecia.domain.recruitment.domain.Recruitment;
 import com.jobits.dsm.benecia.domain.recruitment.domain.hiringarea.HiringArea;
 import com.jobits.dsm.benecia.domain.student.domain.Student;
 import lombok.*;
@@ -30,9 +31,15 @@ public class Application {
     private LocalDateTime dateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(columnDefinition = "CHAR(7)")
+    @JoinColumn(name = "student_serial_number")
     private Student studentSerialNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hiring_area_id")
     private HiringArea hiringAreaId;
+
+    @ManyToOne
+    @JoinColumn(name = "reception_year")
+    @JoinColumn(name = "registration_number")
+    private Recruitment recruitment;
 }
