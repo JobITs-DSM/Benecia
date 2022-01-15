@@ -16,8 +16,8 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-@DataJpaTest
-@Import(QuerydslConfig.class)
+//@DataJpaTest
+//@Import(QuerydslConfig.class)
 class RecruitmentRepositoryTest {
 
     @Autowired
