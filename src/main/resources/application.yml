@@ -24,6 +24,9 @@ auth:
       refresh: ${JWT_EXP_REFRESH}
       access: ${JWT_EXP_ACCESS}
     secret: ${JWT_SECRET_KEY}
+  admin:
+    id: ${ADMIN_ID}
+    password: ${ADMIN_PASSWORD}
 server:
   servlet:
     context-path: /v1
