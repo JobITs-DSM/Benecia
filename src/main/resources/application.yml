@@ -37,7 +37,7 @@ cloud:
       accessKey: ${AWS_S3_KEY}
       secretKey: ${AWS_S3_SECRET}
     s3:
-      bucket: s3-jobits
+      bucket: s3-jobits-v1
       host: ${S3_HOST_NAME}
     region:
       static: ap-northeast-2
