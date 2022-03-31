@@ -8,7 +8,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum AttachmentErrorCode implements ErrorAttribute {
 
-    FILE_SAVE_FAILED(400, "File Save Failed");
+    FILE_SAVE_FAILED(400, "File Save Failed"),
+    ATTACHMENT_NOT_FOUND(404, "Attachment Not Found");
 
     private final int status;
     private final String message;
