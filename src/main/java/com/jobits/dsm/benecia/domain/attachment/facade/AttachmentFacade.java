@@ -2,6 +2,7 @@ package com.jobits.dsm.benecia.domain.attachment.facade;
 
 import com.jobits.dsm.benecia.domain.attachment.domain.Attachment;
 import com.jobits.dsm.benecia.domain.attachment.domain.AttachmentRepository;
+import com.jobits.dsm.benecia.domain.attachment.exceptions.AttachmentNotFoundException;
 import com.jobits.dsm.benecia.domain.attachment.exceptions.FileSaveFailedException;
 import com.jobits.dsm.benecia.global.able.Savable;
 import com.jobits.dsm.benecia.infrastructure.s3.S3Util;
@@ -19,6 +20,11 @@ public class AttachmentFacade {
     private final S3Util s3Util;
 
     private final AttachmentRepository attachmentRepository;
+
+    public Attachment findById(Integer id) {
+        return attachmentRepository.findById(id)
+                .orElseThrow(() -> AttachmentNotFoundException.EXCEPTION);
+    }
 
     public Attachment saveAttachment(MultipartFile file) {
         Optional<String> savedFile = saveFileToStorage(file, "attachment");
