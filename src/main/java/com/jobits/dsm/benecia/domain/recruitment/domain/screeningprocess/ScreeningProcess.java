@@ -22,7 +22,7 @@ public class ScreeningProcess {
 
     @NotNull
     @Column(columnDefinition = "TINYINT")
-    private Integer procedure;
+    private Integer gradations;
 
     @ManyToOne
     @JoinColumn(name = "reception_year")
