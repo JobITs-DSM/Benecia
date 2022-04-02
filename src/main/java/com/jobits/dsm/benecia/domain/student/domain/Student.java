@@ -40,6 +40,10 @@ public class Student implements UserMarker {
     @OneToMany(mappedBy = "studentSerialNumber", orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Application> applications;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id")
+    private Department department;
+
     @Override
     public String getId() {
         return serialNumber;
