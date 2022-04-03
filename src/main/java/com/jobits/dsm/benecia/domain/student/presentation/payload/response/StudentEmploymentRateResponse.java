@@ -1,4 +1,4 @@
-package com.jobits.dsm.benecia.domain.student.presentation.payload;
+package com.jobits.dsm.benecia.domain.student.presentation.payload.response;
 
 import lombok.Builder;
 import lombok.Getter;

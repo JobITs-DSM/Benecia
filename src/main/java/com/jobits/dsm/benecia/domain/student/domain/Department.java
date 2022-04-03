@@ -21,4 +21,7 @@ public class Department {
     private String description;
 
     private String image;
+
+    @Column(length = 30)
+    private String teacher;
 }

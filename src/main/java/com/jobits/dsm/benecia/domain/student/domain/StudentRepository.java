@@ -8,4 +8,7 @@ public interface StudentRepository extends JpaRepository<Student, String> {
 
     Integer countAllBySerialNumberBetween(String start, String end);
     Integer countAllByIsFoundJobIsTrueAndSerialNumberBetween(String start, String end);
+
+    Integer countAllBySerialNumberBetweenAndDepartment(String start, String end, Department department);
+    Integer countAllByIsFoundJobIsTrueAndSerialNumberBetweenAndDepartment(String start, String end, Department department);
 }

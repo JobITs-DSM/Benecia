@@ -1,26 +1,54 @@
 package com.jobits.dsm.benecia.domain.student.service;
 
+import com.jobits.dsm.benecia.domain.student.domain.Department;
+import com.jobits.dsm.benecia.domain.student.domain.DepartmentRepository;
 import com.jobits.dsm.benecia.domain.student.domain.Student;
 import com.jobits.dsm.benecia.domain.student.domain.StudentRepository;
-import com.jobits.dsm.benecia.domain.student.presentation.payload.StudentEmploymentRateResponse;
+import com.jobits.dsm.benecia.domain.student.presentation.payload.response.DepartmentInformationListResponse;
+import com.jobits.dsm.benecia.domain.student.presentation.payload.response.StudentEmploymentRateResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class StudentService {
 
     private final StudentRepository studentRepository;
+    private final DepartmentRepository departmentRepository;
 
     public StudentEmploymentRateResponse getEmploymentRate() {
 
         Integer countOfStudent = studentRepository.countAllBySerialNumberBetween(Student.getFirstSerialNumber(), Student.getLastSerialNumber());
         Integer countOfFoundJobStudent = studentRepository.countAllByIsFoundJobIsTrueAndSerialNumberBetween(Student.getFirstSerialNumber(), Student.getLastSerialNumber());
         
-        Float employmentResponse = countOfFoundJobStudent.floatValue() / countOfStudent * 100;
+        Float employmentRate = countOfFoundJobStudent.floatValue() / countOfStudent * 100;
 
         return StudentEmploymentRateResponse.builder()
-                .percent(employmentResponse)
+                .percent(employmentRate)
                 .build();
+    }
+
+    public List<DepartmentInformationListResponse> getDepartmentInformationList() {
+        List<Department> departments = departmentRepository.findAll();
+
+        return departments.stream().map(department -> {
+            Integer countOfStudent = studentRepository.countAllBySerialNumberBetweenAndDepartment(Student.getFirstSerialNumber(), Student.getLastSerialNumber(), department);
+            Integer countOfFoundJobStudent = studentRepository.countAllByIsFoundJobIsTrueAndSerialNumberBetweenAndDepartment(Student.getFirstSerialNumber(), Student.getLastSerialNumber(), department);
+
+            Float employmentRate = countOfFoundJobStudent.floatValue() / countOfStudent * 100;
+
+            return DepartmentInformationListResponse.builder()
+                    .image(department.getImage())
+                    .name(department.getName())
+                    .percent(employmentRate)
+                    .studentCount(countOfStudent)
+                    .foundJobStudentCount(countOfFoundJobStudent)
+                    .teacherName(department.getTeacher())
+                    .description(department.getDescription())
+                    .build();
+        }).collect(Collectors.toList());
     }
 }
