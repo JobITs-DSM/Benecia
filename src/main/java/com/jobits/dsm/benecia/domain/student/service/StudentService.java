@@ -38,7 +38,8 @@ public class StudentService {
             Integer countOfStudent = studentRepository.countAllBySerialNumberBetweenAndDepartment(Student.getFirstSerialNumber(), Student.getLastSerialNumber(), department);
             Integer countOfFoundJobStudent = studentRepository.countAllByIsFoundJobIsTrueAndSerialNumberBetweenAndDepartment(Student.getFirstSerialNumber(), Student.getLastSerialNumber(), department);
 
-            Float employmentRate = countOfFoundJobStudent.floatValue() / countOfStudent * 100;
+            // 분모 0 처리
+            Float employmentRate = countOfStudent == 0 ? 0 : countOfFoundJobStudent.floatValue() / countOfStudent * 100;
 
             return DepartmentInformationListResponse.builder()
                     .image(department.getImage())
