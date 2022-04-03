@@ -19,6 +19,7 @@ import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.En
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseInfoResponse;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseInfoResponse.AttachmentDetails;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseTokenResponse;
+import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.LeadingEnterpriseListResponse;
 import com.jobits.dsm.benecia.global.security.dto.Tokens;
 import com.jobits.dsm.benecia.global.security.jwt.JwtTokenProvider;
 import com.jobits.dsm.benecia.global.security.property.JwtProperty;
@@ -165,5 +166,15 @@ public class EnterpriseService {
                             .enterprise(enterprise)
                             .build()));
                 });
+    }
+
+    public List<LeadingEnterpriseListResponse> getLeadingEnterprise() {
+        List<Enterprise> enterprises = enterpriseRepository.findAll();
+
+        return enterprises.stream().map(enterprise -> LeadingEnterpriseListResponse.builder()
+                .name(enterprise.getName())
+                .region(enterprise.getRegion().getName())
+                .build()
+        ).collect(Collectors.toList());
     }
 }

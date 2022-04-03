@@ -6,6 +6,7 @@ import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.Reg
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseInfoListResponse;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseInfoResponse;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseTokenResponse;
+import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.LeadingEnterpriseListResponse;
 import com.jobits.dsm.benecia.domain.enterprise.service.EnterpriseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -48,5 +49,10 @@ public class EnterpriseController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void modifyEnterpriseInfo(@PathVariable("registration_number") String registrationNumber, @RequestBody @Valid ModifyEnterpriseInfoRequest request) {
         enterpriseService.modifyEnterpriseInfo(registrationNumber, request);
+    }
+
+    @GetMapping("/leading")
+    List<LeadingEnterpriseListResponse> leadingEnterprise() {
+        return enterpriseService.getLeadingEnterprise();
     }
 }

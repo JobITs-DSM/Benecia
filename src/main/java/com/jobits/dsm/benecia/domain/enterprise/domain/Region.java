@@ -16,5 +16,5 @@ public class Region {
     private Integer id;
 
     @Column(length = 30)
-    private String regionName;
+    private String name;
 }
