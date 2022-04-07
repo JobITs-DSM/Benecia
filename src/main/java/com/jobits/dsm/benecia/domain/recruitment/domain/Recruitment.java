@@ -36,9 +36,9 @@ public class Recruitment implements Savable {
     private RecruitmentId recruitmentId;
 
     @MapsId("registrationNumber")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "registration_number", referencedColumnName = "registrationNumber")
-    private Enterprise registrationNumber;
+    private Enterprise enterprise;
 
     @Convert(converter = RecruitmentStatusCode.RecruitmentStatusCodeConverter.class)
     private RecruitmentStatusCode status;
