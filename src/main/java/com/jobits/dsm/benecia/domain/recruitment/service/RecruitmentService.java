@@ -16,8 +16,6 @@ import java.util.stream.Collectors;
 public class RecruitmentService {
 
     private final RecruitmentRepository recruitmentRepository;
-    private final HiringAreaRepository hiringAreaRepository;
-    private final ApplicationRepository applicationRepository;
 
     public RecruitmentInfoListResponse getRecruitmentInfoList() {
         return RecruitmentInfoListResponse.builder()
@@ -32,17 +30,5 @@ public class RecruitmentService {
                                 .build()
                         ).collect(Collectors.toList()))
                 .build();
-    }
-
-    private List<RecruitmentInfoListResponse.HiringInfo> getHiringInfoList(String receptionYear, Enterprise registrationNumber) {
-        return hiringAreaRepository.getHiringInfoList(receptionYear, registrationNumber)
-                .stream().map(hiring -> RecruitmentInfoListResponse.HiringInfo.builder()
-                        .hiringArea(hiring.getHiringArea())
-                        .recruitCount(hiring.getRecruitCount())
-                        .applicantCount(applicationRepository.getApplicantCount(hiring.getHiringId()))
-                        .build()
-                )
-                .collect(Collectors.toList());
-
     }
 }
