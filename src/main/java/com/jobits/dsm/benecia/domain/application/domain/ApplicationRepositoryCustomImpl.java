@@ -13,8 +13,9 @@ public class ApplicationRepositoryCustomImpl implements ApplicationRepositoryCus
     @Override
     public Long getApplicantCount(Integer hiringAreaId) {
         return queryFactory
-                .selectFrom(application)
+                .select(application.count())
+                .from(application)
                 .where(application.hiringAreaId.id.eq(hiringAreaId))
-                .fetchCount();
+                .fetchOne();
     }
 }
