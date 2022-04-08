@@ -19,17 +19,11 @@ public class RecruitmentInfoListResponse {
     public static class RecruitmentInfo {
         private final RecruitmentStatusCode status;
         private final String name;
-        private final List<HiringInfo> hiring;
+        private final List<HiringAreaCode> hiring;
+        private final Integer recruitCount;
+        private final Long applicantCount;
         private final EnterpriseDivisionCode division;
         private final LocalDate recruitBeginDate;
         private final LocalDate recruitEndDate;
-    }
-
-    @Getter
-    @Builder
-    public static class HiringInfo {
-        private final HiringAreaCode hiringArea;
-        private final Integer recruitCount;
-        private final Long applicantCount;
     }
 }
