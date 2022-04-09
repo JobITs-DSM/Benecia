@@ -1,5 +1,6 @@
 package com.jobits.dsm.benecia.domain.recruitment.domain;
 
+import com.jobits.dsm.benecia.domain.application.domain.Application;
 import com.jobits.dsm.benecia.domain.contract.domain.Contract;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentFullTimePayCode;
@@ -117,6 +118,9 @@ public class Recruitment implements Savable {
 
     @OneToMany(mappedBy = "recruitment", orphanRemoval = true)
     private final List<Tag> tags = new ArrayList<>();
+
+    @OneToMany(mappedBy = "recruitment", orphanRemoval = true)
+    private final List<Application> applications = new ArrayList<>();
 
     @Override
     public String getDirectoryName() {
