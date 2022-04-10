@@ -52,11 +52,11 @@ public class RegisterEnterpriseRequest {
 
     private List<BusinessAreaCode> businessAreas;
 
-    private MultipartFile businessLicense;
+    private Integer businessLicense;
 
-    private MultipartFile logo;
+    private Integer logo;
 
-    private MultipartFile material;
+    private Integer material;
 
-    private MultipartFile foreground;
+    private Integer foreground;
 }

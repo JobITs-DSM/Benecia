@@ -2,6 +2,7 @@ package com.jobits.dsm.benecia.domain.enterprise.service;
 
 import com.jobits.dsm.benecia.domain.attachment.domain.Attachment;
 import com.jobits.dsm.benecia.domain.attachment.domain.AttachmentRepository;
+import com.jobits.dsm.benecia.domain.attachment.facade.AttachmentFacade;
 import com.jobits.dsm.benecia.domain.enterprise.code.BusinessAreaCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
@@ -18,6 +19,7 @@ import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.En
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseInfoResponse;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseInfoResponse.AttachmentDetails;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.EnterpriseTokenResponse;
+import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.response.LeadingEnterpriseListResponse;
 import com.jobits.dsm.benecia.global.security.dto.Tokens;
 import com.jobits.dsm.benecia.global.security.jwt.JwtTokenProvider;
 import com.jobits.dsm.benecia.global.security.property.JwtProperty;
@@ -45,6 +47,7 @@ public class EnterpriseService {
     private final AttachmentRepository attachmentRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final JwtProperty jwtProperty;
+    private final AttachmentFacade attachmentFacade;
 
     @Transactional
     public void registerEnterprise(RegisterEnterpriseRequest request) {
@@ -63,11 +66,6 @@ public class EnterpriseService {
                 .turnover(request.getTurnover())
                 .director(request.getDirector())
                 .build());
-
-        saveEnterpriseAttachment(enterprise, request.getBusinessLicense(), enterprise::setBusinessLicense);
-        saveEnterpriseAttachment(enterprise, request.getLogo(), enterprise::setLogo);
-        saveEnterpriseAttachment(enterprise, request.getMaterial(), enterprise::setMaterial);
-        saveEnterpriseAttachment(enterprise, request.getForeground(), enterprise::setForeground);
 
         request.getBusinessAreas()
                 .forEach(businessAreaCode -> {
@@ -170,25 +168,13 @@ public class EnterpriseService {
                 });
     }
 
-    private void saveEnterpriseAttachment(Enterprise enterprise, MultipartFile file, Consumer<Attachment> consumer) {
-        Optional<String> savedFile = saveFileToStorage(file, "enterprise" + "/" + enterprise.getRegistrationNumber());
-        if (savedFile.isPresent()) {
-            Attachment attachment = saveFileToDatabase(savedFile.get(), file.getOriginalFilename());
-            consumer.accept(attachment);
-        }
-    }
+    public List<LeadingEnterpriseListResponse> getLeadingEnterprise() {
+        List<Enterprise> enterprises = enterpriseRepository.findAll();
 
-    private Optional<String> saveFileToStorage(MultipartFile file, String directoryName) {
-        if (file == null || file.isEmpty() || file.getOriginalFilename() == null) {
-            return Optional.empty();
-        }
-        return Optional.of(s3Util.saveFile(file, directoryName));
-    }
-
-    private Attachment saveFileToDatabase(String fileName, String originalFileName) {
-        return attachmentRepository.save(Attachment.builder()
-                .fileName(fileName)
-                .originalFileName(originalFileName)
-                .build());
+        return enterprises.stream().map(enterprise -> LeadingEnterpriseListResponse.builder()
+                .name(enterprise.getName())
+                .region(enterprise.getRegion().getName())
+                .build()
+        ).collect(Collectors.toList());
     }
 }

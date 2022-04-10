@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -37,11 +38,27 @@ public class Student implements UserMarker {
     @Size(max = 60)
     private String password;
 
+    @NotNull
+    @Column(columnDefinition = "TINYINT(1)")
+    private Boolean isFoundJob;
+
     @OneToMany(mappedBy = "studentSerialNumber", orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Application> applications;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id")
+    private Department department;
 
     @Override
     public String getId() {
         return serialNumber;
+    }
+
+    public static String getFirstSerialNumber() {
+        return LocalDate.now().minusYears(2).getYear() + "001";
+    }
+
+    public static String getLastSerialNumber() {
+        return LocalDate.now().minusYears(2).getYear() + "100";
     }
 }

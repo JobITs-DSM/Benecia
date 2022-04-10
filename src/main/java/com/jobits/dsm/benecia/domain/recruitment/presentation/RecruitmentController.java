@@ -7,10 +7,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.CreateRecruitmentRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/recruitment")
+@RequestMapping("recruitment")
 public class RecruitmentController {
 
     private final RecruitmentService recruitmentService;
@@ -18,5 +23,11 @@ public class RecruitmentController {
     @GetMapping
     public RecruitmentInfoListResponse getRecruitmentInfoList(RecruitmentInfoListRequest request) {
         return recruitmentService.getRecruitmentInfoList(request);
+    }
+    
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    void create(@Valid @RequestBody CreateRecruitmentRequest request) {
+        recruitmentService.createRecruitment(request);
     }
 }

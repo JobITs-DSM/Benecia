@@ -112,6 +112,10 @@ public class Enterprise implements UserMarker, Savable {
     @OneToMany(mappedBy = "enterprise", orphanRemoval = true)
     private List<Review> reviews;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "region")
+    private Region region;
+
     @Override
     public String getDirectoryName() {
         return "enterprise";
