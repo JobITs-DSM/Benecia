@@ -27,11 +27,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
 
                 .authorizeRequests()
-                    .antMatchers(HttpMethod.POST, "/student/auth").permitAll()
-                    .antMatchers(HttpMethod.POST, "/admin/auth").permitAll()
-                    .antMatchers(HttpMethod.POST, "/enterprise/auth").permitAll()
-                    .antMatchers(HttpMethod.PUT, "/v1/auth").permitAll()
-                    .anyRequest().authenticated()
+                .antMatchers(HttpMethod.POST, "/student/auth").permitAll()
+                .antMatchers(HttpMethod.POST, "/admin/auth").permitAll()
+                .antMatchers(HttpMethod.POST, "/enterprise/auth").permitAll()
+                .antMatchers(HttpMethod.PUT, "/v1/auth").permitAll()
+                .antMatchers(HttpMethod.GET, "/recruitment").permitAll()
+                .anyRequest().authenticated()
 
                 .and()
                 .apply(new FilterConfig(jwtTokenProvider));
