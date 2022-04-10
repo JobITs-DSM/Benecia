@@ -1,12 +1,14 @@
 package com.jobits.dsm.benecia.domain.recruitment.domain;
 
+import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
 import com.querydsl.core.group.GroupBy;
-import com.querydsl.core.types.ExpressionUtils;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.jobits.dsm.benecia.domain.application.domain.QApplication.*;
@@ -21,12 +23,19 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<RecruitmentVO> getRecruitmentInfoList() {
+    public List<RecruitmentVO> getRecruitmentInfoList(String receptionYear, String keyword, RecruitmentStatusCode recruitStatus, LocalDate beginDate, LocalDate endDate) {
         return queryFactory
                 .selectFrom(recruitment)
                 .join(recruitment.hiringAreas, hiringArea)
                 .leftJoin(recruitment.applications, application)
                 .join(recruitment.enterprise, enterprise)
+                .where(
+                        recruitment.recruitmentId.receptionYear.eq(receptionYear),
+                        keywordEq(keyword),
+                        recruitment.status.eq(recruitStatus),
+                        recruitment.recruitmentDate.recruitBeginDate.goe(beginDate),
+                        recruitment.recruitmentDate.recruitEndDate.loe(endDate)
+                )
                 .orderBy(recruitment.recruitmentDate.recruitBeginDate.desc())
                 .transform(groupBy(recruitment.enterprise.registrationNumber, recruitment.recruitmentId.receptionYear, recruitment.recruitmentDate.recruitBeginDate)
                         .list(new QRecruitmentVO(
@@ -48,5 +57,9 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                                 recruitment.recruitmentDate.recruitEndDate
                         ))
                 );
+    }
+
+    private BooleanExpression keywordEq(String keyword) {
+        return keyword == null || keyword.isEmpty() ? null : recruitment.enterprise.name.eq(keyword);
     }
 }
