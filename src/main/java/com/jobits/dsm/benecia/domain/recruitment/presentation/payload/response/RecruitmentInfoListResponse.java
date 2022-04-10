@@ -19,7 +19,7 @@ public class RecruitmentInfoListResponse {
     public static class RecruitmentInfo {
         private final RecruitmentStatusCode status;
         private final String name;
-        private final List<HiringAreaCode> hiring;
+        private final List<String> hiring;
         private final Integer recruitCount;
         private final Long applicantCount;
         private final EnterpriseDivisionCode division;
