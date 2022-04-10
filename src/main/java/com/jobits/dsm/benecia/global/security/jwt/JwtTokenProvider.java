@@ -1,5 +1,6 @@
 package com.jobits.dsm.benecia.global.security.jwt;
 
+import com.jobits.dsm.benecia.global.security.auth.AdminAuthDetails;
 import com.jobits.dsm.benecia.global.security.auth.EnterpriseDetailsService;
 import com.jobits.dsm.benecia.global.security.auth.StudentDetailsService;
 import com.jobits.dsm.benecia.global.security.dto.Tokens;
@@ -62,12 +63,11 @@ public class JwtTokenProvider {
         String subject = claims.getSubject();
         String role = claims.get(AUTHORITY_KEY).toString();
 
-        if (role.equals(JwtRoleProperty.STUDENT_ROLE)) {
-            return studentDetailsService.loadUserByUsername(subject);
-        } else {
-            return enterpriseDetailsService.loadUserByUsername(subject);
-        }
-
+        return switch (role) {
+            case JwtRoleProperty.STUDENT_ROLE -> studentDetailsService.loadUserByUsername(subject);
+            case JwtRoleProperty.ENTERPRISE_ROLE -> enterpriseDetailsService.loadUserByUsername(subject);
+            default -> new AdminAuthDetails();
+        };
     }
 
     private Claims getClaims(String token) {

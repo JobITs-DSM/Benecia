@@ -2,14 +2,17 @@ package com.jobits.dsm.benecia.domain.recruitment.domain;
 
 import com.jobits.dsm.benecia.domain.attachment.domain.Attachment;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Embeddable
 public class Form {
 
