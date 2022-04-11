@@ -16,8 +16,8 @@ public class RecruitmentTag {
 
     @MapsId("tagId")
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
-    private Tag tagId;
+    @JoinColumn
+    private Tag tag;
 
     @MapsId("recruitmentId")
     @ManyToOne
