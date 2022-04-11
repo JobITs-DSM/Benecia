@@ -20,5 +20,4 @@ public class RecruitmentId implements Serializable {
 
     @Column(length = 12)
     private String registrationNumber;
-
 }

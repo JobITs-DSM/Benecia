@@ -27,15 +27,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
 
                 .authorizeRequests()
-                    .antMatchers(HttpMethod.POST, "/student/auth").permitAll()
-                    .antMatchers(HttpMethod.POST, "/admin/auth").permitAll()
-                    .antMatchers(HttpMethod.POST, "/enterprise/auth").permitAll()
-                    .antMatchers(HttpMethod.GET, "/enterprise/leading").permitAll()
-                    .antMatchers(HttpMethod.GET, "/student/employment").permitAll()
-                    .antMatchers(HttpMethod.GET, "/student/department").permitAll()
-                    .antMatchers(HttpMethod.PUT, "/v1/auth").permitAll()
-                    .anyRequest().authenticated()
-
+                .antMatchers(HttpMethod.POST, "/student/auth").permitAll()
+                .antMatchers(HttpMethod.POST, "/admin/auth").permitAll()
+                .antMatchers(HttpMethod.POST, "/enterprise/auth").permitAll()
+                .antMatchers(HttpMethod.PUT, "/v1/auth").permitAll()
+                .antMatchers(HttpMethod.GET, "/recruitment").permitAll()
+                .antMatchers(HttpMethod.POST, "/student/auth").permitAll()
+                .antMatchers(HttpMethod.POST, "/admin/auth").permitAll()
+                .antMatchers(HttpMethod.POST, "/enterprise/auth").permitAll()
+                .antMatchers(HttpMethod.GET, "/enterprise/leading").permitAll()
+                .antMatchers(HttpMethod.GET, "/student/employment").permitAll()
+                .antMatchers(HttpMethod.GET, "/student/department").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .apply(new FilterConfig(jwtTokenProvider));
 
