@@ -22,8 +22,8 @@ public class RecruitmentTag {
     @MapsId("recruitmentId")
     @ManyToOne
     @JoinColumns({
-            @JoinColumn(name = "reception_year", referencedColumnName = "reception_year"),
-            @JoinColumn(name = "registration_number", referencedColumnName = "registration_number")
+            @JoinColumn(name = "reception_year"),
+            @JoinColumn(name = "registration_number")
     })
     private Recruitment recruitment;
 }
