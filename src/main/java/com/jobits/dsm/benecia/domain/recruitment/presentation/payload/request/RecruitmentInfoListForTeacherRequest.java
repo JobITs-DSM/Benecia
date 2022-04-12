@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class RecruitmentInfoListRequest {
+public class RecruitmentInfoListForTeacherRequest {
     private String recruitmentYear;
     private String keyword;
     private String recruitStatus;

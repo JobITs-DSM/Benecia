@@ -23,7 +23,7 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<RecruitmentVO> getRecruitmentInfoList(String receptionYear, String keyword, RecruitmentStatusCode recruitStatus, LocalDate beginDate, LocalDate endDate) {
+    public List<RecruitmentInfoListForTeacherVO> getRecruitmentInfoList(String receptionYear, String keyword, RecruitmentStatusCode recruitStatus, LocalDate beginDate, LocalDate endDate) {
         return queryFactory
                 .selectFrom(recruitment)
                 .join(recruitment.hiringAreas, hiringArea)
@@ -38,7 +38,7 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                 )
                 .orderBy(recruitment.recruitmentDate.recruitBeginDate.desc())
                 .transform(groupBy(recruitment.enterprise.registrationNumber, recruitment.recruitmentId.receptionYear, recruitment.recruitmentDate.recruitBeginDate)
-                        .list(new QRecruitmentVO(
+                        .list(new QRecruitmentInfoListForTeacherVO(
                                 recruitment.status,
                                 recruitment.enterprise.name,
                                 GroupBy.list(hiringArea.code),
