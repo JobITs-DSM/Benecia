@@ -1,7 +1,6 @@
 package com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response;
 
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
-import com.jobits.dsm.benecia.domain.recruitment.code.HiringAreaCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Builder
-public class RecruitmentInfoListResponse {
+public class RecruitmentInfoListForTeacherResponse {
     private final List<RecruitmentInfo> recruitments;
 
     @Getter
