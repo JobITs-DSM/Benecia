@@ -1,7 +1,7 @@
 package com.jobits.dsm.benecia.domain.recruitment.presentation;
 
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.RecruitmentInfoListRequest;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentInfoListResponse;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.RecruitmentInfoListForTeacherRequest;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentInfoListForTeacherResponse;
 import com.jobits.dsm.benecia.domain.recruitment.service.RecruitmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +21,7 @@ public class RecruitmentController {
     private final RecruitmentService recruitmentService;
 
     @GetMapping
-    public RecruitmentInfoListResponse getRecruitmentInfoList(RecruitmentInfoListRequest request) {
+    public RecruitmentInfoListForTeacherResponse getRecruitmentInfoList(RecruitmentInfoListForTeacherRequest request) {
         return recruitmentService.getRecruitmentInfoList(request);
     }
     

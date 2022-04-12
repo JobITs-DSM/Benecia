@@ -3,16 +3,14 @@ package com.jobits.dsm.benecia.domain.recruitment.service;
 import com.jobits.dsm.benecia.domain.recruitment.code.HiringAreaCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
 import com.jobits.dsm.benecia.domain.recruitment.domain.RecruitmentRepository;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.RecruitmentInfoListRequest;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentInfoListResponse;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.RecruitmentInfoListForTeacherRequest;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentInfoListForTeacherResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.jobits.dsm.benecia.domain.attachment.domain.Attachment;
 import com.jobits.dsm.benecia.domain.attachment.facade.AttachmentFacade;
-import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
 import com.jobits.dsm.benecia.domain.recruitment.domain.*;
-import com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage.ProgrammingLanguageRepository;
 import com.jobits.dsm.benecia.domain.recruitment.facade.RecruitmentFacade;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.CreateRecruitmentRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,13 +30,13 @@ public class RecruitmentService {
     private final RecruitmentFacade recruitmentFacade;
     private final AttachmentFacade attachmentFacade;
 
-    public RecruitmentInfoListResponse getRecruitmentInfoList(RecruitmentInfoListRequest request) {
+    public RecruitmentInfoListForTeacherResponse getRecruitmentInfoList(RecruitmentInfoListForTeacherRequest request) {
         RecruitmentStatusCode recruitmentStatus = RecruitmentStatusCode.find(request.getRecruitStatus());
         LocalDate beginDate = LocalDate.parse(request.getBeginDate(), DateTimeFormatter.ISO_DATE);
         LocalDate endDate = LocalDate.parse(request.getEndDate(), DateTimeFormatter.ISO_DATE);
-        return RecruitmentInfoListResponse.builder()
+        return RecruitmentInfoListForTeacherResponse.builder()
                 .recruitments(recruitmentRepository.getRecruitmentInfoList(request.getRecruitmentYear(), request.getKeyword(), recruitmentStatus, beginDate, endDate) // null 처리 추가 요망
-                        .stream().map(recruitment -> RecruitmentInfoListResponse.RecruitmentInfo.builder()
+                        .stream().map(recruitment -> RecruitmentInfoListForTeacherResponse.RecruitmentInfo.builder()
                                 .status(recruitment.getStatus())
                                 .name(recruitment.getName())
                                 .hiring(recruitment.getHiring().stream().map(HiringAreaCode::getValue).collect(Collectors.toList()))

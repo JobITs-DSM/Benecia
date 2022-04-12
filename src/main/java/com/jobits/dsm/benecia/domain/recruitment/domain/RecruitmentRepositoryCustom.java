@@ -6,5 +6,5 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface RecruitmentRepositoryCustom {
-    List<RecruitmentVO> getRecruitmentInfoList(String receptionYear, String keyword, RecruitmentStatusCode recruitStatus, LocalDate beginDate, LocalDate endDate);
+    List<RecruitmentInfoListForTeacherVO> getRecruitmentInfoList(String receptionYear, String keyword, RecruitmentStatusCode recruitStatus, LocalDate beginDate, LocalDate endDate);
 }
