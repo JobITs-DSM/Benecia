@@ -9,6 +9,7 @@ import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
 import com.jobits.dsm.benecia.domain.recruitment.domain.hiringarea.HiringArea;
 import com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage.ProgrammingLanguage;
 import com.jobits.dsm.benecia.domain.recruitment.domain.screeningprocess.ScreeningProcess;
+import com.jobits.dsm.benecia.domain.recruitment.domain.tag.RecruitmentTag;
 import com.jobits.dsm.benecia.domain.recruitment.domain.tag.Tag;
 import com.jobits.dsm.benecia.domain.recruitment.domain.technology.Technology;
 import com.jobits.dsm.benecia.domain.recruitment.domain.welfare.Welfare;
@@ -117,7 +118,7 @@ public class Recruitment implements Savable {
     private final List<Technology> technologies = new ArrayList<>();
 
     @OneToMany(mappedBy = "recruitment", orphanRemoval = true)
-    private final List<Tag> tags = new ArrayList<>();
+    private final List<RecruitmentTag> tags = new ArrayList<>();
 
     @OneToMany(mappedBy = "recruitment", orphanRemoval = true)
     private final List<Application> applications = new ArrayList<>();
