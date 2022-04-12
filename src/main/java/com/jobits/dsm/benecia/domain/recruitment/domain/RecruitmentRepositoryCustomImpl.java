@@ -38,7 +38,7 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                 )
                 .orderBy(recruitment.recruitmentDate.recruitBeginDate.desc())
                 .transform(groupBy(recruitment.enterprise.registrationNumber, recruitment.recruitmentId.receptionYear, recruitment.recruitmentDate.recruitBeginDate)
-                        .list(new QRecruitmentVO(
+                        .list(new QRecruitmentInfoListForTeacherVO(
                                 recruitment.status,
                                 recruitment.enterprise.name,
                                 GroupBy.list(hiringArea.code),
