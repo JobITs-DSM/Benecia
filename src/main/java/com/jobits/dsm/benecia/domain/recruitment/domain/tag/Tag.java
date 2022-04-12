@@ -20,9 +20,4 @@ public class Tag {
     @NotNull
     @Column(length = 30)
     private String name;
-
-    @ManyToOne
-    @JoinColumn(name = "reception_year")
-    @JoinColumn(name = "registration_number")
-    private Recruitment recruitment;
 }

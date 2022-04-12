@@ -42,7 +42,6 @@ public class RecruitmentFacade {
     public void addTag(String name, Recruitment recruitment) {
         tagRepository.save(Tag.builder()
                 .name(name)
-                .recruitment(recruitment)
                 .build());
     }
 
