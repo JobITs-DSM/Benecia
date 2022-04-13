@@ -1,6 +1,7 @@
 package com.jobits.dsm.benecia.domain.recruitment.presentation;
 
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.RecruitmentInfoListForTeacherRequest;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.CurrentRecruitmentInfoListForStudentResponse;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentInfoListForTeacherResponse;
 import com.jobits.dsm.benecia.domain.recruitment.service.RecruitmentService;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +30,10 @@ public class RecruitmentController {
     @ResponseStatus(HttpStatus.CREATED)
     void create(@Valid @RequestBody CreateRecruitmentRequest request) {
         recruitmentService.createRecruitment(request);
+    }
+
+    @GetMapping("/current")
+    public CurrentRecruitmentInfoListForStudentResponse getCurrentRecruitmentInfoList() {
+        return recruitmentService.getCurrentRecruitmentInfoList();
     }
 }
