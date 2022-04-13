@@ -1,6 +1,7 @@
 package com.jobits.dsm.benecia.domain.recruitment.domain;
 
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
+import com.jobits.dsm.benecia.domain.recruitment.domain.vo.RecruitmentInfoListForTeacherVO;
 
 import java.time.LocalDate;
 import java.util.List;
