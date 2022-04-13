@@ -71,7 +71,6 @@ public class RecruitmentFacade {
         hiringAreaRepository.save(HiringArea.builder()
                 .code(hiringArea.getCode())
                 .task(hiringArea.getTask())
-                .count(hiringArea.getCount())
                 .recruitment(recruitment)
                 .build());
     }
