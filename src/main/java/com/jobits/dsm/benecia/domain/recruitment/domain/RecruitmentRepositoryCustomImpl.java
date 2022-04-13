@@ -1,6 +1,10 @@
 package com.jobits.dsm.benecia.domain.recruitment.domain;
 
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
+import com.jobits.dsm.benecia.domain.recruitment.domain.tag.QRecruitmentTag;
+import com.jobits.dsm.benecia.domain.recruitment.domain.tag.QTag;
+import com.jobits.dsm.benecia.domain.recruitment.domain.vo.CurrentRecruitmentInfoListForStudentVO;
+import com.jobits.dsm.benecia.domain.recruitment.domain.vo.QCurrentRecruitmentInfoListForStudentVO;
 import com.jobits.dsm.benecia.domain.recruitment.domain.vo.QRecruitmentInfoListForTeacherVO;
 import com.jobits.dsm.benecia.domain.recruitment.domain.vo.RecruitmentInfoListForTeacherVO;
 import com.querydsl.core.group.GroupBy;
@@ -17,7 +21,10 @@ import static com.jobits.dsm.benecia.domain.application.domain.QApplication.*;
 import static com.jobits.dsm.benecia.domain.enterprise.domain.QEnterprise.*;
 import static com.jobits.dsm.benecia.domain.recruitment.domain.QRecruitment.*;
 import static com.jobits.dsm.benecia.domain.recruitment.domain.hiringarea.QHiringArea.*;
+import static com.jobits.dsm.benecia.domain.recruitment.domain.tag.QRecruitmentTag.recruitmentTag;
+import static com.jobits.dsm.benecia.domain.recruitment.domain.tag.QTag.tag;
 import static com.querydsl.core.group.GroupBy.groupBy;
+import static com.querydsl.core.group.GroupBy.list;
 
 @RequiredArgsConstructor
 public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCustom {
@@ -57,6 +64,28 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                                 enterprise.division,
                                 recruitment.recruitmentDate.recruitBeginDate,
                                 recruitment.recruitmentDate.recruitEndDate
+                        ))
+                );
+    }
+
+    @Override
+    public List<CurrentRecruitmentInfoListForStudentVO> getCurrentRecruitmentInfoList() {
+        return queryFactory
+                .selectFrom(recruitment)
+                .join(recruitment.hiringAreas, hiringArea)
+                .join(recruitment.enterprise, enterprise)
+                .join(recruitment.tags, recruitmentTag)
+                .join(recruitmentTag.tag, tag)
+//                .on(tag.id.eq(recruitmentTag.recruitmentTagId.tagId))
+                .transform(groupBy(recruitment.recruitmentId.receptionYear)
+                        .list(new QCurrentRecruitmentInfoListForStudentVO(
+                                hiringArea.code,
+                                hiringArea.count,
+                                enterprise.name,
+                                recruitment.workPlace,
+                                list(tag.name),
+                                enterprise.logo.originalFileName,
+                                enterprise.foreground.originalFileName
                         ))
                 );
     }
