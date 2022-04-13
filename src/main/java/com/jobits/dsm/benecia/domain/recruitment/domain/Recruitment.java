@@ -69,6 +69,10 @@ public class Recruitment implements Savable {
     @NotNull
     private RecruitmentFullTimePayCode fullTimePay;
 
+    @NotNull
+    @Column(columnDefinition = "TINYINT")
+    private Integer recruitCount;
+
     @Delegate
     @Embedded
     private RecruitmentDate recruitmentDate;
