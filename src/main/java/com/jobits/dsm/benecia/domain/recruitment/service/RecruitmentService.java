@@ -4,6 +4,7 @@ import com.jobits.dsm.benecia.domain.recruitment.code.HiringAreaCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
 import com.jobits.dsm.benecia.domain.recruitment.domain.RecruitmentRepository;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.RecruitmentInfoListForTeacherRequest;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.CurrentRecruitmentInfoListForStudentResponse;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentInfoListForTeacherResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,22 @@ public class RecruitmentService {
                                 .division(recruitment.getDivision())
                                 .recruitBeginDate(recruitment.getRecruitBeginDate())
                                 .recruitEndDate(recruitment.getRecruitEndDate())
+                                .build()
+                        ).collect(Collectors.toList()))
+                .build();
+    }
+
+    public CurrentRecruitmentInfoListForStudentResponse getCurrentRecruitmentInfoList() {
+        return CurrentRecruitmentInfoListForStudentResponse.builder()
+                .recruitments(recruitmentRepository.getCurrentRecruitmentInfoList()
+                        .stream().map(recruitment -> CurrentRecruitmentInfoListForStudentResponse.CurrentRecruitmentInfo.builder()
+                                .hiring(recruitment.getHiring().getValue())
+                                .recruitCount(recruitment.getRecruitCount())
+                                .enterpriseName(recruitment.getEnterpriseName())
+                                .workPlace(recruitment.getWorkPlace())
+                                .tags(recruitment.getTags())
+                                .enterpriseBackgroundImageUrl(recruitment.getEnterpriseBackgroundImageUrl())
+                                .enterpriseProfileImageUrl(recruitment.getEnterpriseProfileImageUrl())
                                 .build()
                         ).collect(Collectors.toList()))
                 .build();
