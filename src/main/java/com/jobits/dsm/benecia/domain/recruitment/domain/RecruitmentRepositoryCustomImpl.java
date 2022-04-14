@@ -72,7 +72,7 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
     @Override
     public List<CurrentRecruitmentInfoListForStudentVO> getCurrentRecruitmentInfoList(List<Integer> tags, List<HiringAreaCode> hiringAreaCodes, String keyword, Integer region, SortCondition sort) {
         return queryFactory
-                .selectFrom(recruitment)
+                .selectFrom(recruitment).distinct()
                 .join(recruitment.hiringAreas, hiringArea)
                 .join(recruitment.enterprise, enterprise)
                 .join(recruitment.tags, recruitmentTag)
@@ -80,9 +80,9 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                 .join(enterprise.logo, attachment)
                 .join(enterprise.foreground, attachment)
                 .where(
-                        tagsEq(tags),
-                        hiringAreaEq(hiringAreaCodes),
                         keywordEq(keyword),
+                        hiringAreaEq(hiringAreaCodes),
+                        tagsEq(tags),
                         regionEq(region)
                 )
                 .orderBy(buildSortCondition(sort))
@@ -100,7 +100,7 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
     }
 
     private BooleanExpression keywordEq(String keyword) {
-        return keyword == null || keyword.isEmpty() ? null : recruitment.enterprise.name.eq(keyword);
+        return keyword == null || keyword.isEmpty() ? null : recruitment.enterprise.name.contains(keyword);
     }
 
     private OrderSpecifier[] buildSortCondition(SortCondition sort) {
