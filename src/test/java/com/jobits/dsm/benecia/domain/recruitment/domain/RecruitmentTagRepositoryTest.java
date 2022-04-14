@@ -129,6 +129,7 @@ public class RecruitmentTagRepositoryTest {
                 .fullTimePay(RecruitmentFullTimePayCode.LESS_2400)
                 .otherLanguage("Languages")
                 .otherSpecifics("Specifics")
+                .recruitCount(1)
                 .otherTechnology("technology")
                 .trainingPay(11)
                 .workPlace("workplace")
