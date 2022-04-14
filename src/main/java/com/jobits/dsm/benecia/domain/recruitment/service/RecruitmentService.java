@@ -3,6 +3,7 @@ package com.jobits.dsm.benecia.domain.recruitment.service;
 import com.jobits.dsm.benecia.domain.recruitment.code.HiringAreaCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
 import com.jobits.dsm.benecia.domain.recruitment.domain.RecruitmentRepository;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.CurrentRecruitmentInfoListForStudentRequest;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.RecruitmentInfoListForTeacherRequest;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.CurrentRecruitmentInfoListForStudentResponse;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentInfoListForTeacherResponse;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -51,9 +53,13 @@ public class RecruitmentService {
                 .build();
     }
 
-    public CurrentRecruitmentInfoListForStudentResponse getCurrentRecruitmentInfoList() {
+    public CurrentRecruitmentInfoListForStudentResponse getCurrentRecruitmentInfoList(CurrentRecruitmentInfoListForStudentRequest request) {
+        List<HiringAreaCode> hiringAreaCodes = null;
+        if (request.getHirings() != null) {
+            hiringAreaCodes = request.getHirings().stream().map(HiringAreaCode::find).toList();
+        }
         return CurrentRecruitmentInfoListForStudentResponse.builder()
-                .recruitments(recruitmentRepository.getCurrentRecruitmentInfoList()
+                .recruitments(recruitmentRepository.getCurrentRecruitmentInfoList(request.getTags(), hiringAreaCodes, request.getKeyword(), request.getRegion(), request.getSort())
                         .stream().map(recruitment -> CurrentRecruitmentInfoListForStudentResponse.CurrentRecruitmentInfo.builder()
                                 .hiring(recruitment.getHiring().getValue())
                                 .recruitCount(recruitment.getRecruitCount())
