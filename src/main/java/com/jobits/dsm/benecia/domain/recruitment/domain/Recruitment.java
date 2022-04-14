@@ -83,10 +83,6 @@ public class Recruitment implements Savable {
     @NotNull
     private String otherTechnology;
 
-    @NotNull
-    @Column(columnDefinition = "TINYINT")
-    private Integer hiringCount;
-
     private String preferential;
 
     @Column(columnDefinition = "TINYINT")
