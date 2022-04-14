@@ -21,10 +21,6 @@ public class HiringArea {
     @Convert(converter = HiringAreaCode.HiringAreaCodeConverter.class)
     private HiringAreaCode code;
 
-    @NotNull
-    @Column(columnDefinition = "TINYINT")
-    private Integer count;
-
     @Size(max = 255)
     private String task;
 

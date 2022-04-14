@@ -41,6 +41,8 @@ public class CreateRecruitmentRequest {
 
     private RecruitmentFullTimePayCode fullTimePay;
 
+    private Integer recruitCount;
+
     private LocalDate recruitBeginDate;
 
     private LocalDate recruitEndDate;
@@ -76,8 +78,6 @@ public class CreateRecruitmentRequest {
     public static class HiringArea {
 
         private HiringAreaCode code;
-
-        private Integer count;
 
         private String task;
     }

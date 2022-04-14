@@ -51,11 +51,7 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                                 recruitment.status,
                                 recruitment.enterprise.name,
                                 GroupBy.list(hiringArea.code),
-                                Expressions.asNumber(
-                                        JPAExpressions.select(hiringArea.count.sum())
-                                                .from(hiringArea)
-                                                .where(hiringArea.recruitment.recruitmentId.registrationNumber.eq(recruitment.recruitmentId.registrationNumber))
-                                ).intValue(),
+                                recruitment.recruitCount,
                                 Expressions.asNumber(
                                         JPAExpressions.select(application.count())
                                                 .from(application)
