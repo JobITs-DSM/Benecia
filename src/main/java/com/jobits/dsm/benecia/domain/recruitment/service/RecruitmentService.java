@@ -65,6 +65,7 @@ public class RecruitmentService {
                 .reportingTime(request.getReportingTime())
                 .trainingPay(request.getTrainingPay())
                 .fullTimePay(request.getFullTimePay())
+                .recruitCount(request.getRecruitCount())
                 .recruitmentDate(RecruitmentDate.builder()
                         .requestBeginDate(LocalDate.now())
                         .recruitBeginDate(request.getRecruitBeginDate())
@@ -87,7 +88,7 @@ public class RecruitmentService {
         request.getHiringAreas().forEach(hiringArea -> recruitmentFacade.addHiringArea(hiringArea, recruitment));
         request.getTags().forEach(name -> recruitmentFacade.addTag(name, recruitment));
         IntStream.range(0, request.getScreeningProcesses().size())
-                .forEach(idx -> recruitmentFacade.addScreeningProcess(request.getScreeningProcesses().get(idx), idx+1, recruitment));
+                .forEach(idx -> recruitmentFacade.addScreeningProcess(request.getScreeningProcesses().get(idx), idx + 1, recruitment));
         request.getTechnologies().forEach(code -> recruitmentFacade.addTechnology(code, recruitment));
         request.getWelfare().forEach(code -> recruitmentFacade.addWelfare(code, recruitment));
         request.getProgrammingLanguages().forEach(code -> recruitmentFacade.addProgrammingLanguage(code, recruitment));
