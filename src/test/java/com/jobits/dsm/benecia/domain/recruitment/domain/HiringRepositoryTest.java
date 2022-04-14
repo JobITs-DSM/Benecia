@@ -36,13 +36,4 @@ public class HiringRepositoryTest {
                 .build();
         assertThat(hiringAreaRepository.save(hiringArea).getCode()).isEqualTo(HiringAreaCode.AI);
     }
-
-    @Test
-    void 저장_실패_테스트_SIZE_초과() {
-        HiringArea hiringArea = HiringArea.builder()
-                .code(HiringAreaCode.AI)
-                .task("인공지능")
-                .build();
-        assertThrows(DataIntegrityViolationException.class, () -> hiringAreaRepository.saveAndFlush(hiringArea));
-    }
 }
