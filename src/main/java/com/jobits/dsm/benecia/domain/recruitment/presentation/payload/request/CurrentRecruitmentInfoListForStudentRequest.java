@@ -9,9 +9,9 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class CurrentRecruitmentInfoListForStudentRequest {
-    private List<Integer> tags;
+    private List<Integer> tagIds;
     private List<String> hirings;
     private String keyword;
-    private Integer region;
+    private Integer regionId;
     private SortCondition sort;
 }

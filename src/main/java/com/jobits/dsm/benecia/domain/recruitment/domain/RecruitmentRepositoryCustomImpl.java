@@ -70,7 +70,7 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
     }
 
     @Override
-    public List<CurrentRecruitmentInfoListForStudentVO> getCurrentRecruitmentInfoList(List<Integer> tags, List<HiringAreaCode> hiringAreaCodes, String keyword, Integer region, SortCondition sort) {
+    public List<CurrentRecruitmentInfoListForStudentVO> getCurrentRecruitmentInfoList(List<Integer> tagIds, List<HiringAreaCode> hiringAreaCodes, String keyword, Integer regionId, SortCondition sort) {
         return queryFactory
                 .selectFrom(recruitment).distinct()
                 .join(recruitment.hiringAreas, hiringArea)
@@ -82,8 +82,8 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                 .where(
                         keywordEq(keyword),
                         hiringAreaEq(hiringAreaCodes),
-                        tagsEq(tags),
-                        regionEq(region)
+                        tagsEq(tagIds),
+                        regionEq(regionId)
                 )
                 .orderBy(buildSortCondition(sort))
                 .transform(groupBy(recruitment.recruitmentId.registrationNumber, hiringArea.code)
@@ -117,15 +117,15 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
         };
     }
 
-    private BooleanExpression tagsEq(List<Integer> tags) {
-        return tags != null ? tag.id.in(tags) : null;
+    private BooleanExpression tagsEq(List<Integer> tagIds) {
+        return tagIds != null ? tag.id.in(tagIds) : null;
     }
 
     private BooleanExpression hiringAreaEq(List<HiringAreaCode> hiringAreaCodes) {
         return hiringAreaCodes != null ? hiringArea.code.in(hiringAreaCodes) : null;
     }
 
-    private BooleanExpression regionEq(Integer region) {
-        return region != null ? enterprise.region.id.eq(region) : null;
+    private BooleanExpression regionEq(Integer regionId) {
+        return regionId != null ? enterprise.region.id.eq(regionId) : null;
     }
 }
