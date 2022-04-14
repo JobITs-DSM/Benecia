@@ -1,4 +1,4 @@
-package com.jobits.dsm.benecia.domain.recruitment.domain;
+package com.jobits.dsm.benecia.domain.recruitment.domain.vo;
 
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.HiringAreaCode;

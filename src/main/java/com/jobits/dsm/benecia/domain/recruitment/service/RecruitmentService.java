@@ -3,7 +3,9 @@ package com.jobits.dsm.benecia.domain.recruitment.service;
 import com.jobits.dsm.benecia.domain.recruitment.code.HiringAreaCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
 import com.jobits.dsm.benecia.domain.recruitment.domain.RecruitmentRepository;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.CurrentRecruitmentInfoListForStudentRequest;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.RecruitmentInfoListForTeacherRequest;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.CurrentRecruitmentInfoListForStudentResponse;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentInfoListForTeacherResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -45,6 +48,23 @@ public class RecruitmentService {
                                 .division(recruitment.getDivision())
                                 .recruitBeginDate(recruitment.getRecruitBeginDate())
                                 .recruitEndDate(recruitment.getRecruitEndDate())
+                                .build()
+                        ).collect(Collectors.toList()))
+                .build();
+    }
+
+    public CurrentRecruitmentInfoListForStudentResponse getCurrentRecruitmentInfoList(CurrentRecruitmentInfoListForStudentRequest request) {
+        List<HiringAreaCode> hiringAreaCodes = request.getHirings() != null ? request.getHirings().stream().map(HiringAreaCode::find).toList() : null;
+        return CurrentRecruitmentInfoListForStudentResponse.builder()
+                .recruitments(recruitmentRepository.getCurrentRecruitmentInfoList(request.getTagIds(), hiringAreaCodes, request.getKeyword(), request.getRegionId(), request.getSort())
+                        .stream().map(recruitment -> CurrentRecruitmentInfoListForStudentResponse.CurrentRecruitmentInfo.builder()
+                                .hiring(recruitment.getHiring().getValue())
+                                .recruitCount(recruitment.getRecruitCount())
+                                .enterpriseName(recruitment.getEnterpriseName())
+                                .workPlace(recruitment.getWorkPlace())
+                                .tags(recruitment.getTags())
+                                .enterpriseBackgroundImageUrl(recruitment.getEnterpriseBackgroundImageUrl())
+                                .enterpriseProfileImageUrl(recruitment.getEnterpriseProfileImageUrl())
                                 .build()
                         ).collect(Collectors.toList()))
                 .build();
