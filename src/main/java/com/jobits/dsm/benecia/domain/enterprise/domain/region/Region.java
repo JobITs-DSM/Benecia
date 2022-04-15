@@ -1,4 +1,4 @@
-package com.jobits.dsm.benecia.domain.enterprise.domain;
+package com.jobits.dsm.benecia.domain.enterprise.domain.region;
 
 import lombok.*;
 
