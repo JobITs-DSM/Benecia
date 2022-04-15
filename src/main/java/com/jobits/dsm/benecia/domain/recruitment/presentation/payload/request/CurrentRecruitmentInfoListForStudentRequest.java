@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CurrentRecruitmentInfoListForStudentRequest {
     private List<Integer> tagIds;
-    private List<HiringAreaCode> hirings;
+    private List<HiringAreaCode> hiringCodes;
     private String keyword;
     private Integer regionId;
     private SortCondition sort;
