@@ -5,6 +5,8 @@ import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.T
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class TagService {
@@ -12,7 +14,10 @@ public class TagService {
 
     public TagListResponse getTagList(String keyword) {
         return TagListResponse.builder()
-                .tags(tagRepository.findByNameContains(keyword))
+                .tags(tagRepository.findAllByNameContains(keyword)
+                        .stream().map(tags -> new TagListResponse.TagInfo(tags.getId(), tags.getName()))
+                        .collect(Collectors.toList())
+                )
                 .build();
     }
 }
