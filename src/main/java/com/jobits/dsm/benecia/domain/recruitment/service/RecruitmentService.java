@@ -54,9 +54,8 @@ public class RecruitmentService {
     }
 
     public CurrentRecruitmentInfoListForStudentResponse getCurrentRecruitmentInfoList(CurrentRecruitmentInfoListForStudentRequest request) {
-        List<HiringAreaCode> hiringAreaCodes = request.getHirings() != null ? request.getHirings().stream().map(HiringAreaCode::find).toList() : null;
         return CurrentRecruitmentInfoListForStudentResponse.builder()
-                .recruitments(recruitmentRepository.getCurrentRecruitmentInfoList(request.getTagIds(), hiringAreaCodes, request.getKeyword(), request.getRegionId(), request.getSort())
+                .recruitments(recruitmentRepository.getCurrentRecruitmentInfoList(request.getTagIds(), request.getHirings(), request.getKeyword(), request.getRegionId(), request.getSort())
                         .stream().map(recruitment -> CurrentRecruitmentInfoListForStudentResponse.CurrentRecruitmentInfo.builder()
                                 .hiring(recruitment.getHiring().getValue())
                                 .recruitCount(recruitment.getRecruitCount())
