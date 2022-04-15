@@ -1,6 +1,7 @@
 package com.jobits.dsm.benecia.domain.student.domain;
 
 import com.jobits.dsm.benecia.domain.application.domain.Application;
+import com.jobits.dsm.benecia.domain.attachment.domain.Attachment;
 import com.jobits.dsm.benecia.global.security.auth.UserMarker;
 import lombok.*;
 
@@ -48,6 +49,11 @@ public class Student implements UserMarker {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
     private Department department;
+
+    @Setter
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_image")
+    private Attachment profileImage;
 
     @Override
     public String getId() {
