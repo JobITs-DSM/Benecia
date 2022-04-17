@@ -1,8 +1,10 @@
 package com.jobits.dsm.benecia.domain.recruitment.presentation;
 
+import com.jobits.dsm.benecia.domain.recruitment.domain.vo.RecruitmentDetailVO;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.CurrentRecruitmentInfoListForStudentRequest;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.RecruitmentInfoListForTeacherRequest;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.CurrentRecruitmentInfoListForStudentResponse;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentDetailResponse;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentInfoListForTeacherResponse;
 import com.jobits.dsm.benecia.domain.recruitment.service.RecruitmentService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -36,5 +39,10 @@ public class RecruitmentController {
     @GetMapping("/current")
     public CurrentRecruitmentInfoListForStudentResponse getCurrentRecruitmentInfoList(CurrentRecruitmentInfoListForStudentRequest request) {
         return recruitmentService.getCurrentRecruitmentInfoList(request);
+    }
+
+    @GetMapping("/{hiring-id}")
+    public RecruitmentDetailResponse queryRecruitmentDetail(@PathVariable("hiring-id") Integer hiringId) {
+        return recruitmentService.queryRecruitmentDetail(hiringId);
     }
 }
