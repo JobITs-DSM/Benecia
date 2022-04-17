@@ -12,7 +12,7 @@ public class RecruitmentDetailResponse {
     private final String enterpriseBackgroundImageUrl;
     private final String enterpriseProfileImageUrl;
     private final String introduce;
-    private final String name;
+    private final String enterpriseName;
     private final String workPlace;
     private final HiringInfo hiringArea;
     private final Integer recruitCount;
