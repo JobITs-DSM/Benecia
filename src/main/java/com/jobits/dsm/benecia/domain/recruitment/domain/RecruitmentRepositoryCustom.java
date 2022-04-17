@@ -13,5 +13,5 @@ import java.util.List;
 public interface RecruitmentRepositoryCustom {
     List<RecruitmentInfoListForTeacherVO> getRecruitmentInfoList(String receptionYear, String keyword, RecruitmentStatusCode recruitStatus, LocalDate beginDate, LocalDate endDate);
     List<CurrentRecruitmentInfoListForStudentVO> getCurrentRecruitmentInfoList(List<Integer> tagIds, List<HiringAreaCode> hiringAreaCodes, String keyword, Integer regionId, SortCondition sort);
-    List<RecruitmentDetailVO> queryRecruitmentDetail(Integer hiringId);
+    RecruitmentDetailVO queryRecruitmentDetail(Integer hiringId);
 }
