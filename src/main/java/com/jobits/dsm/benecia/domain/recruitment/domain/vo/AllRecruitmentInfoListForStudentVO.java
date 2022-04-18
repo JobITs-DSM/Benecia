@@ -5,29 +5,30 @@ import com.querydsl.core.annotations.QueryProjection;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
 @Builder
-public class CurrentRecruitmentInfoListForStudentVO {
+public class AllRecruitmentInfoListForStudentVO {
     private final Long count;
     private final HiringAreaCode hiring;
     private final Integer recruitCount;
     private final String enterpriseName;
-    private final String workPlace;
+    private final String introduction;
     private final List<String> tags;
     private final String enterpriseProfileImageUrl;
-    private final String enterpriseBackgroundImageUrl;
+    private final LocalDate recruitEndDate;
 
     @QueryProjection
-    public CurrentRecruitmentInfoListForStudentVO(Long count, HiringAreaCode hiring, Integer recruitCount, String enterpriseName, String workPlace, List<String> tags, String enterpriseProfileImageUrl, String enterpriseBackgroundImageUrl) {
+    public AllRecruitmentInfoListForStudentVO(Long count, HiringAreaCode hiring, Integer recruitCount, String enterpriseName, String introduction, List<String> tags, String enterpriseProfileImageUrl, LocalDate recruitEndDate) {
         this.count = count;
         this.hiring = hiring;
         this.recruitCount = recruitCount;
         this.enterpriseName = enterpriseName;
-        this.workPlace = workPlace;
+        this.introduction = introduction;
         this.tags = tags;
         this.enterpriseProfileImageUrl = enterpriseProfileImageUrl;
-        this.enterpriseBackgroundImageUrl = enterpriseBackgroundImageUrl;
+        this.recruitEndDate = recruitEndDate;
     }
 }
