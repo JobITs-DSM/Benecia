@@ -168,6 +168,7 @@ public class RecruitmentService {
                 .form1(recruitmentDetailVO.getForm1())
                 .form2(recruitmentDetailVO.getForm2())
                 .form3(recruitmentDetailVO.getForm3())
+                .build();
     }
   
     public AllRecruitmentInfoListForStudentResponse queryAllRecruitmentInfoList(AllRecruitmentInfoListForStudentRequest request) {
