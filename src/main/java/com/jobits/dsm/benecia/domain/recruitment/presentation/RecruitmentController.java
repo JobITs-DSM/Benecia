@@ -1,8 +1,10 @@
 package com.jobits.dsm.benecia.domain.recruitment.presentation;
 
 import com.jobits.dsm.benecia.domain.recruitment.domain.vo.RecruitmentDetailVO;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.AllRecruitmentInfoListForStudentRequest;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.CurrentRecruitmentInfoListForStudentRequest;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.RecruitmentInfoListForTeacherRequest;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.AllRecruitmentInfoListForStudentResponse;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.CurrentRecruitmentInfoListForStudentResponse;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentDetailResponse;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentInfoListForTeacherResponse;
@@ -44,5 +46,10 @@ public class RecruitmentController {
     @GetMapping("/{hiring-id}")
     public RecruitmentDetailResponse queryRecruitmentDetail(@PathVariable("hiring-id") Integer hiringId) {
         return recruitmentService.queryRecruitmentDetail(hiringId);
+    }
+  
+    @GetMapping("/all")
+    public AllRecruitmentInfoListForStudentResponse queryAllRecruitmentInfoList(AllRecruitmentInfoListForStudentRequest request) {
+        return recruitmentService.queryAllRecruitmentInfoList(request);
     }
 }

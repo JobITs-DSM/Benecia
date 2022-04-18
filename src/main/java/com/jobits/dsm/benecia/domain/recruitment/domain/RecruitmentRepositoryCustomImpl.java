@@ -36,8 +36,9 @@ import static com.jobits.dsm.benecia.domain.recruitment.domain.tag.QTag.tag;
 import static com.jobits.dsm.benecia.domain.recruitment.domain.technology.QTechnology.technology;
 import static com.jobits.dsm.benecia.domain.recruitment.domain.welfare.QWelfare.welfare;
 import static com.querydsl.core.group.GroupBy.*;
-import static com.querydsl.core.group.GroupBy.groupBy;
-import static com.querydsl.core.group.GroupBy.list;
+import static com.jobits.dsm.benecia.domain.recruitment.type.SortCondition.LATEST;
+import static com.jobits.dsm.benecia.domain.recruitment.type.SortCondition.POPULAR;
+import static com.querydsl.jpa.JPAExpressions.select;
 
 @RequiredArgsConstructor
 public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCustom {
@@ -66,7 +67,7 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                                 list(hiringArea.code),
                                 recruitment.recruitCount,
                                 Expressions.asNumber(
-                                        JPAExpressions.select(application.count())
+                                        select(application.count())
                                                 .from(application)
                                                 .where(application.recruitment.recruitmentId.registrationNumber.eq(recruitment.recruitmentId.registrationNumber))
                                 ).longValue(),
@@ -87,15 +88,19 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                 .join(recruitmentTag.tag, tag)
                 .join(enterprise.logo, attachment)
                 .join(enterprise.foreground, attachment)
+                .leftJoin(recruitment.applications, application)
                 .where(
+                        recruitment.recruitmentId.receptionYear.eq(Integer.toString(LocalDate.now().getYear())),
                         keywordEq(keyword),
                         hiringAreaEq(hiringAreaCodes),
                         tagsEq(tagIds),
                         regionEq(regionId)
                 )
                 .orderBy(buildSortCondition(sort))
-                .transform(groupBy(recruitment.recruitmentId.registrationNumber, hiringArea.code)
+                .groupBy(recruitment.recruitmentId.registrationNumber, recruitment.recruitmentId.receptionYear, hiringArea.code, recruitment.recruitCount, tag.name, attachment.id, recruitment.recruitmentDate.recruitEndDate, recruitment.fullTimePay)
+                .transform(groupBy(recruitment.recruitmentId.registrationNumber, recruitment.recruitmentId.receptionYear, recruitment.recruitCount, recruitment.recruitmentDate.recruitEndDate, recruitment.fullTimePay, hiringArea.code)
                         .list(new QCurrentRecruitmentInfoListForStudentVO(
+                                application.count(),
                                 hiringArea.code,
                                 recruitment.recruitCount,
                                 enterprise.name,
@@ -149,6 +154,36 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                 .join(recruitment.form.form3, attachment)
                 .where(hiringArea.id.eq(hiringId))
                 .fetchFirst();
+    } 
+
+    public List<AllRecruitmentInfoListForStudentVO> queryAllRecruitmentInfoList(List<Integer> tagIds, List<HiringAreaCode> hiringAreaCodes, String keyword) {
+        return queryFactory
+                .selectFrom(recruitment)
+                .join(recruitment.hiringAreas, hiringArea)
+                .join(recruitment.enterprise, enterprise)
+                .join(recruitment.tags, recruitmentTag)
+                .join(recruitmentTag.tag, tag).distinct()
+                .join(enterprise.logo, attachment)
+                .leftJoin(recruitment.applications, application)
+                .where(
+                        keywordEq(keyword),
+                        hiringAreaEq(hiringAreaCodes),
+                        tagsEq(tagIds)
+                )
+                .orderBy(buildSortCondition(POPULAR))
+                .groupBy(recruitment.recruitmentId.registrationNumber, recruitment.recruitmentId.receptionYear, hiringArea.code, recruitment.recruitCount, tag.name, attachment.id, recruitment.recruitmentDate.recruitEndDate, recruitment.fullTimePay)
+                .transform(groupBy(recruitment.recruitmentId.registrationNumber, recruitment.recruitmentId.receptionYear, recruitment.recruitCount, recruitment.recruitmentDate.recruitEndDate, recruitment.fullTimePay, hiringArea.code)
+                        .list(new QAllRecruitmentInfoListForStudentVO(
+                                application.count(),
+                                hiringArea.code,
+                                recruitment.recruitCount,
+                                enterprise.name,
+                                enterprise.introduction,
+                                list(tag.name),
+                                enterprise.logo.fileName,
+                                recruitment.recruitmentDate.recruitEndDate
+                        ))
+                );
     }
 
     private BooleanExpression keywordEq(String keyword) {

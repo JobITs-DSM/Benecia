@@ -10,8 +10,10 @@ import com.jobits.dsm.benecia.domain.recruitment.domain.tag.TagRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.technology.TechnologyRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.vo.RecruitmentDetailVO;
 import com.jobits.dsm.benecia.domain.recruitment.domain.welfare.WelfareRepository;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.AllRecruitmentInfoListForStudentRequest;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.CurrentRecruitmentInfoListForStudentRequest;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.RecruitmentInfoListForTeacherRequest;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.AllRecruitmentInfoListForStudentResponse;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.CurrentRecruitmentInfoListForStudentResponse;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentDetailResponse;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentInfoListForTeacherResponse;
@@ -166,6 +168,21 @@ public class RecruitmentService {
                 .form1(recruitmentDetailVO.getForm1())
                 .form2(recruitmentDetailVO.getForm2())
                 .form3(recruitmentDetailVO.getForm3())
+    }
+  
+    public AllRecruitmentInfoListForStudentResponse queryAllRecruitmentInfoList(AllRecruitmentInfoListForStudentRequest request) {
+        return AllRecruitmentInfoListForStudentResponse.builder()
+                .recruitments(recruitmentRepository.queryAllRecruitmentInfoList(request.getTagIds(), request.getHiringCodes(), request.getKeyword())
+                        .stream().map(recruitment -> AllRecruitmentInfoListForStudentResponse.AllRecruitmentInfo.builder()
+                                .hiring(recruitment.getHiring().getValue())
+                                .recruitCount(recruitment.getRecruitCount())
+                                .enterpriseName(recruitment.getEnterpriseName())
+                                .introduction(recruitment.getIntroduction())
+                                .tags(recruitment.getTags())
+                                .enterpriseProfileImageUrl(recruitment.getEnterpriseProfileImageUrl())
+                                .recruitEndDate(recruitment.getRecruitEndDate())
+                                .build()
+                        ).collect(Collectors.toList()))
                 .build();
     }
 
