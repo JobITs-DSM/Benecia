@@ -10,6 +10,7 @@ import java.util.List;
 @Getter
 @Builder
 public class CurrentRecruitmentInfoListForStudentVO {
+    private final Long count;
     private final HiringAreaCode hiring;
     private final Integer recruitCount;
     private final String enterpriseName;
@@ -19,7 +20,8 @@ public class CurrentRecruitmentInfoListForStudentVO {
     private final String enterpriseBackgroundImageUrl;
 
     @QueryProjection
-    public CurrentRecruitmentInfoListForStudentVO(HiringAreaCode hiring, Integer recruitCount, String enterpriseName, String workPlace, List<String> tags, String enterpriseProfileImageUrl, String enterpriseBackgroundImageUrl) {
+    public CurrentRecruitmentInfoListForStudentVO(Long count, HiringAreaCode hiring, Integer recruitCount, String enterpriseName, String workPlace, List<String> tags, String enterpriseProfileImageUrl, String enterpriseBackgroundImageUrl) {
+        this.count = count;
         this.hiring = hiring;
         this.recruitCount = recruitCount;
         this.enterpriseName = enterpriseName;
