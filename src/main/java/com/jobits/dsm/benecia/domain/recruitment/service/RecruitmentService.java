@@ -174,8 +174,6 @@ public class RecruitmentService {
     }
 
     private List<String> convertScreeningProcessCodeToString(String receptionYear, String registrationNumber) {
-        System.out.println("receptionYear = " + receptionYear);
-        System.out.println("registrationNumber = " + registrationNumber);
         return screeningProcessRepository.findAllByRecruitment(receptionYear, registrationNumber)
                 .stream().map(Enum::name)
                 .collect(Collectors.toList());
