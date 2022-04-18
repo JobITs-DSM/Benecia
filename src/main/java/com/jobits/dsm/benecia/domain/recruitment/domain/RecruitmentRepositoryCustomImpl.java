@@ -3,11 +3,16 @@ package com.jobits.dsm.benecia.domain.recruitment.domain;
 import com.jobits.dsm.benecia.domain.attachment.domain.QAttachment;
 import com.jobits.dsm.benecia.domain.recruitment.code.HiringAreaCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
+import com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage.QProgrammingLanguage;
+import com.jobits.dsm.benecia.domain.recruitment.domain.screeningprocess.QScreeningProcess;
 import com.jobits.dsm.benecia.domain.recruitment.domain.tag.QRecruitmentTag;
 import com.jobits.dsm.benecia.domain.recruitment.domain.tag.QTag;
+import com.jobits.dsm.benecia.domain.recruitment.domain.technology.QTechnology;
 import com.jobits.dsm.benecia.domain.recruitment.domain.vo.*;
+import com.jobits.dsm.benecia.domain.recruitment.domain.welfare.QWelfare;
 import com.jobits.dsm.benecia.domain.recruitment.type.SortCondition;
 import com.querydsl.core.group.GroupBy;
+import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Expressions;
@@ -17,18 +22,22 @@ import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import static com.jobits.dsm.benecia.domain.application.domain.QApplication.*;
 import static com.jobits.dsm.benecia.domain.attachment.domain.QAttachment.attachment;
 import static com.jobits.dsm.benecia.domain.enterprise.domain.QEnterprise.*;
 import static com.jobits.dsm.benecia.domain.recruitment.domain.QRecruitment.*;
 import static com.jobits.dsm.benecia.domain.recruitment.domain.hiringarea.QHiringArea.*;
+import static com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage.QProgrammingLanguage.programmingLanguage;
+import static com.jobits.dsm.benecia.domain.recruitment.domain.screeningprocess.QScreeningProcess.screeningProcess;
 import static com.jobits.dsm.benecia.domain.recruitment.domain.tag.QRecruitmentTag.recruitmentTag;
 import static com.jobits.dsm.benecia.domain.recruitment.domain.tag.QTag.tag;
+import static com.jobits.dsm.benecia.domain.recruitment.domain.technology.QTechnology.technology;
+import static com.jobits.dsm.benecia.domain.recruitment.domain.welfare.QWelfare.welfare;
+import static com.querydsl.core.group.GroupBy.*;
 import static com.jobits.dsm.benecia.domain.recruitment.type.SortCondition.LATEST;
 import static com.jobits.dsm.benecia.domain.recruitment.type.SortCondition.POPULAR;
-import static com.querydsl.core.group.GroupBy.groupBy;
-import static com.querydsl.core.group.GroupBy.list;
 import static com.querydsl.jpa.JPAExpressions.select;
 
 @RequiredArgsConstructor
@@ -55,7 +64,7 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                         .list(new QRecruitmentInfoListForTeacherVO(
                                 recruitment.status,
                                 recruitment.enterprise.name,
-                                GroupBy.list(hiringArea.code),
+                                list(hiringArea.code),
                                 recruitment.recruitCount,
                                 Expressions.asNumber(
                                         select(application.count())
@@ -104,6 +113,49 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
     }
 
     @Override
+    public RecruitmentDetailVO queryRecruitmentDetail(Integer hiringId) {
+        return queryFactory
+                .select(new QRecruitmentDetailVO(
+                        recruitment.recruitmentId.registrationNumber,
+                        recruitment.recruitmentId.receptionYear,
+                        enterprise.foreground.fileName,
+                        enterprise.logo.fileName,
+                        enterprise.introduction,
+                        enterprise.name,
+                        recruitment.workPlace,
+                        hiringArea.code,
+                        hiringArea.task,
+                        recruitment.recruitCount,
+                        recruitment.workingHour,
+                        recruitment.reportingTime,
+                        recruitment.trainingPay,
+                        recruitment.fullTimePay,
+                        recruitment.recruitmentDate.recruitBeginDate,
+                        recruitment.recruitmentDate.recruitEndDate,
+                        recruitment.otherLanguage,
+                        recruitment.otherTechnology,
+                        recruitment.preferential,
+                        recruitment.report,
+                        recruitment.qualification,
+                        recruitment.otherSpecifics,
+                        recruitment.documentation.documentation1,
+                        recruitment.documentation.documentation2,
+                        recruitment.documentation.documentation3,
+                        recruitment.form.form1.id,
+                        recruitment.form.form2.id,
+                        recruitment.form.form3.id))
+                .from(recruitment)
+                .join(recruitment.hiringAreas, hiringArea)
+                .join(recruitment.enterprise, enterprise)
+                .join(enterprise.logo, attachment)
+                .join(enterprise.foreground, attachment)
+                .join(recruitment.form.form1, attachment)
+                .join(recruitment.form.form2, attachment)
+                .join(recruitment.form.form3, attachment)
+                .where(hiringArea.id.eq(hiringId))
+                .fetchFirst();
+    } 
+
     public List<AllRecruitmentInfoListForStudentVO> queryAllRecruitmentInfoList(List<Integer> tagIds, List<HiringAreaCode> hiringAreaCodes, String keyword) {
         return queryFactory
                 .selectFrom(recruitment)
