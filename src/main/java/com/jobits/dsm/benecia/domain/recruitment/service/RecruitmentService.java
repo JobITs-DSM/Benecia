@@ -128,6 +128,7 @@ public class RecruitmentService {
         request.getProgrammingLanguages().forEach(code -> recruitmentFacade.addProgrammingLanguage(code, recruitment));
     }
 
+    @Transactional(readOnly = true)
     public RecruitmentDetailResponse queryRecruitmentDetail(Integer hiringId) {
         RecruitmentDetailVO recruitmentDetailVO = recruitmentRepository.queryRecruitmentDetail(hiringId);
         return RecruitmentDetailResponse.builder()
