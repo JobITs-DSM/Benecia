@@ -3,8 +3,10 @@ package com.jobits.dsm.benecia.domain.recruitment.service;
 import com.jobits.dsm.benecia.domain.recruitment.code.HiringAreaCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
 import com.jobits.dsm.benecia.domain.recruitment.domain.RecruitmentRepository;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.AllRecruitmentInfoListForStudentRequest;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.CurrentRecruitmentInfoListForStudentRequest;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.RecruitmentInfoListForTeacherRequest;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.AllRecruitmentInfoListForStudentResponse;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.CurrentRecruitmentInfoListForStudentResponse;
 import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentInfoListForTeacherResponse;
 import lombok.RequiredArgsConstructor;
@@ -111,6 +113,22 @@ public class RecruitmentService {
         request.getTechnologies().forEach(code -> recruitmentFacade.addTechnology(code, recruitment));
         request.getWelfare().forEach(code -> recruitmentFacade.addWelfare(code, recruitment));
         request.getProgrammingLanguages().forEach(code -> recruitmentFacade.addProgrammingLanguage(code, recruitment));
+    }
+
+    public AllRecruitmentInfoListForStudentResponse queryAllRecruitmentInfoList(AllRecruitmentInfoListForStudentRequest request) {
+        return AllRecruitmentInfoListForStudentResponse.builder()
+                .recruitments(recruitmentRepository.queryAllRecruitmentInfoList(request.getTagIds(), request.getHiringCodes(), request.getKeyword())
+                        .stream().map(recruitment -> AllRecruitmentInfoListForStudentResponse.AllRecruitmentInfo.builder()
+                                .hiring(recruitment.getHiring().getValue())
+                                .recruitCount(recruitment.getRecruitCount())
+                                .enterpriseName(recruitment.getEnterpriseName())
+                                .introduction(recruitment.getIntroduction())
+                                .tags(recruitment.getTags())
+                                .enterpriseProfileImageUrl(recruitment.getEnterpriseProfileImageUrl())
+                                .recruitEndDate(recruitment.getRecruitEndDate())
+                                .build()
+                        ).collect(Collectors.toList()))
+                .build();
     }
 
     private Attachment wrapNullableAttachment(Integer id) {
