@@ -12,7 +12,8 @@ import java.util.List;
 @Builder
 public class AllRecruitmentInfoListForStudentVO {
     private final Long count;
-    private final HiringAreaCode hiring;
+    private final Integer hiringId;
+    private final HiringAreaCode hiringCode;
     private final Integer recruitCount;
     private final String enterpriseName;
     private final String introduction;
@@ -21,9 +22,10 @@ public class AllRecruitmentInfoListForStudentVO {
     private final LocalDate recruitEndDate;
 
     @QueryProjection
-    public AllRecruitmentInfoListForStudentVO(Long count, HiringAreaCode hiring, Integer recruitCount, String enterpriseName, String introduction, List<String> tags, String enterpriseProfileImageUrl, LocalDate recruitEndDate) {
+    public AllRecruitmentInfoListForStudentVO(Long count, Integer hiringId, HiringAreaCode hiringCode, Integer recruitCount, String enterpriseName, String introduction, List<String> tags, String enterpriseProfileImageUrl, LocalDate recruitEndDate) {
         this.count = count;
-        this.hiring = hiring;
+        this.hiringId = hiringId;
+        this.hiringCode = hiringCode;
         this.recruitCount = recruitCount;
         this.enterpriseName = enterpriseName;
         this.introduction = introduction;
