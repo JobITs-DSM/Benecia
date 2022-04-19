@@ -109,7 +109,12 @@ public class EnterpriseServiceTest {
                 "070-7763-74563",
                 "010-8442-7456",
                 "인사부 담당",
-                codes
+                codes,
+                1,
+                1,
+                1,
+                1,
+                "대전"
         );
     }
 
