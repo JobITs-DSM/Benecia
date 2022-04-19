@@ -11,7 +11,9 @@ import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessArea
 import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessAreaRepository;
 import com.jobits.dsm.benecia.domain.enterprise.domain.cache.EnterpriseRefreshToken;
 import com.jobits.dsm.benecia.domain.enterprise.domain.cache.EnterpriseRefreshTokenRepository;
+import com.jobits.dsm.benecia.domain.enterprise.domain.region.RegionRepository;
 import com.jobits.dsm.benecia.domain.enterprise.exceptions.EnterpriseNotFoundException;
+import com.jobits.dsm.benecia.domain.enterprise.exceptions.RegionNotFoundException;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.EnterpriseSignInRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.ModifyEnterpriseInfoRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.RegisterEnterpriseRequest;
@@ -45,6 +47,7 @@ public class EnterpriseService {
     private final EnterpriseRefreshTokenRepository refreshTokenRepository;
     private final BusinessAreaRepository businessAreaRepository;
     private final AttachmentRepository attachmentRepository;
+    private final RegionRepository regionRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final JwtProperty jwtProperty;
     private final AttachmentFacade attachmentFacade;
@@ -63,8 +66,14 @@ public class EnterpriseService {
                 .introduction(request.getIntroduction())
                 .employeeCount(request.getEmployeeCount())
                 .site(request.getSite())
+                .region(regionRepository.findById(request.getRegion())
+                        .orElseThrow(() -> RegionNotFoundException.EXCEPTION))
                 .turnover(request.getTurnover())
                 .director(request.getDirector())
+                .businessLicense(attachmentFacade.findById(request.getBusinessLicense()))
+                .logo(request.getLogo() != null ? attachmentFacade.findById(request.getLogo()) : attachmentFacade.findById(1))
+                .material(request.getMaterial() != null ? attachmentFacade.findById(request.getMaterial()) : null)
+                .foreground(request.getForeground() != null ? attachmentFacade.findById(request.getForeground()) : attachmentFacade.findById(1))
                 .build());
 
         request.getBusinessAreas()
