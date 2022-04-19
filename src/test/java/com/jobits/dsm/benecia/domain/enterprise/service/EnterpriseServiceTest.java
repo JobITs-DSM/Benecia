@@ -1,5 +1,8 @@
 package com.jobits.dsm.benecia.domain.enterprise.service;
 
+import com.jobits.dsm.benecia.domain.attachment.domain.Attachment;
+import com.jobits.dsm.benecia.domain.attachment.domain.AttachmentRepository;
+import com.jobits.dsm.benecia.domain.attachment.facade.AttachmentFacade;
 import com.jobits.dsm.benecia.domain.enterprise.code.BusinessAreaCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
@@ -9,6 +12,8 @@ import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
 import com.jobits.dsm.benecia.domain.enterprise.domain.EnterpriseRepository;
 import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessArea;
 import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessAreaRepository;
+import com.jobits.dsm.benecia.domain.enterprise.domain.region.Region;
+import com.jobits.dsm.benecia.domain.enterprise.domain.region.RegionRepository;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.ModifyEnterpriseInfoRequest;
 import com.jobits.dsm.benecia.infrastructure.querydsl.QuerydslConfig;
 import com.jobits.dsm.benecia.infrastructure.redis.EmbeddedRedisConfig;
@@ -36,6 +41,12 @@ public class EnterpriseServiceTest {
 
     @Autowired
     private BusinessAreaRepository businessAreaRepository;
+
+    @Autowired
+    private RegionRepository regionRepository;
+
+    @Autowired
+    private AttachmentRepository attachmentRepository;
 
     @BeforeEach
     void cleanUp() {
@@ -123,6 +134,25 @@ public class EnterpriseServiceTest {
                 .department("팀장")
                 .build();
 
+        Attachment logo = attachmentRepository.save(Attachment.builder()
+                .fileName("wakjenf")
+                .originalFileName("aklwejnf")
+                .build());
+
+        Attachment businessLicense = attachmentRepository.save(Attachment.builder()
+                .fileName("wakjenf")
+                .originalFileName("aklwejnf")
+                .build());
+
+        Attachment foreground = attachmentRepository.save(Attachment.builder()
+                .fileName("wakjenf")
+                .originalFileName("aklwejnf")
+                .build());
+
+        Region region = regionRepository.save(Region.builder()
+                .name("대전")
+                .build());
+
         return Enterprise.builder()
                 .registrationNumber("000-00-00000")
                 .name("잡플래닛")
@@ -137,6 +167,10 @@ public class EnterpriseServiceTest {
                 .site("url")
                 .turnover(128394)
                 .director(director)
+                .businessLicense(businessLicense)
+                .logo(logo)
+                .foreground(foreground)
+                .region(region)
                 .build();
     }
 
