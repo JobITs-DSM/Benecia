@@ -49,15 +49,12 @@ public class RecruitmentService {
     private final AttachmentFacade attachmentFacade;
 
     public RecruitmentInfoListForTeacherResponse getRecruitmentInfoList(RecruitmentInfoListForTeacherRequest request) {
-        RecruitmentStatusCode recruitmentStatus = RecruitmentStatusCode.find(request.getRecruitStatus());
-        LocalDate beginDate = LocalDate.parse(request.getBeginDate(), DateTimeFormatter.ISO_DATE);
-        LocalDate endDate = LocalDate.parse(request.getEndDate(), DateTimeFormatter.ISO_DATE);
         return RecruitmentInfoListForTeacherResponse.builder()
-                .recruitments(recruitmentRepository.getRecruitmentInfoList(request.getRecruitmentYear(), request.getKeyword(), recruitmentStatus, beginDate, endDate) // null 처리 추가 요망
+                .recruitments(recruitmentRepository.getRecruitmentInfoList(request.getRecruitmentYear(), request.getKeyword(), request.getRecruitStatus(), request.getBeginDate(), request.getEndDate()) // null 처리 추가 요망
                         .stream().map(recruitment -> RecruitmentInfoListForTeacherResponse.RecruitmentInfo.builder()
                                 .status(recruitment.getStatus())
                                 .name(recruitment.getName())
-                                .hiring(recruitment.getHiring().stream().map(HiringAreaCode::getValue).collect(Collectors.toList()))
+                                .hiring(recruitment.getHiring())
                                 .recruitCount(recruitment.getRecruitmentCount())
                                 .applicantCount(recruitment.getApplicantCount())
                                 .division(recruitment.getDivision())
@@ -72,7 +69,11 @@ public class RecruitmentService {
         return CurrentRecruitmentInfoListForStudentResponse.builder()
                 .recruitments(recruitmentRepository.getCurrentRecruitmentInfoList(request.getTagIds(), request.getHiringCodes(), request.getKeyword(), request.getRegionId(), request.getSort())
                         .stream().map(recruitment -> CurrentRecruitmentInfoListForStudentResponse.CurrentRecruitmentInfo.builder()
-                                .hiring(recruitment.getHiring().getValue())
+                                .hiring(CurrentRecruitmentInfoListForStudentResponse.HiringInfo.builder()
+                                        .id(recruitment.getHiringId())
+                                        .code(recruitment.getHiringCode())
+                                        .build()
+                                )
                                 .recruitCount(recruitment.getRecruitCount())
                                 .enterpriseName(recruitment.getEnterpriseName())
                                 .workPlace(recruitment.getWorkPlace())
@@ -144,10 +145,10 @@ public class RecruitmentService {
                 )
                 .recruitCount(recruitmentDetailVO.getRecruitCount())
                 .tags(tagRepository.findAllByRecruitment(recruitmentDetailVO.getReceptionYear(), recruitmentDetailVO.getRegistrationNumber()))
-                .screeningProcesses(convertScreeningProcessCodeToString(recruitmentDetailVO.getReceptionYear(), recruitmentDetailVO.getRegistrationNumber()))
-                .technologies(convertTechnologyCodeToString(recruitmentDetailVO.getReceptionYear(), recruitmentDetailVO.getRegistrationNumber()))
-                .welfare(convertWelfareCodeToString(recruitmentDetailVO.getReceptionYear(), recruitmentDetailVO.getRegistrationNumber()))
-                .programmingLanguages(convertProgrammingLanguageCodeToString(recruitmentDetailVO.getReceptionYear(), recruitmentDetailVO.getRegistrationNumber()))
+                .screeningProcesses(screeningProcessRepository.findAllByRecruitment(recruitmentDetailVO.getReceptionYear(), recruitmentDetailVO.getRegistrationNumber()))
+                .technologies(technologyRepository.findAllByRecruitment(recruitmentDetailVO.getReceptionYear(), recruitmentDetailVO.getRegistrationNumber()))
+                .welfare(welfareRepository.findAllByRecruitment(recruitmentDetailVO.getReceptionYear(), recruitmentDetailVO.getRegistrationNumber()))
+                .programmingLanguages(programmingLanguageRepository.findAllByRecruitment(recruitmentDetailVO.getReceptionYear(), recruitmentDetailVO.getRegistrationNumber()))
                 .workingHour(recruitmentDetailVO.getWorkingHour())
                 .reportingTime(recruitmentDetailVO.getReportingTime().name())
                 .trainingPay(recruitmentDetailVO.getTrainingPay())
@@ -171,12 +172,16 @@ public class RecruitmentService {
                 .form3(recruitmentDetailVO.getForm3())
                 .build();
     }
-  
+
     public AllRecruitmentInfoListForStudentResponse queryAllRecruitmentInfoList(AllRecruitmentInfoListForStudentRequest request) {
         return AllRecruitmentInfoListForStudentResponse.builder()
                 .recruitments(recruitmentRepository.queryAllRecruitmentInfoList(request.getTagIds(), request.getHiringCodes(), request.getKeyword())
                         .stream().map(recruitment -> AllRecruitmentInfoListForStudentResponse.AllRecruitmentInfo.builder()
-                                .hiring(recruitment.getHiring().getValue())
+                                .hiring(AllRecruitmentInfoListForStudentResponse.HiringInfo.builder()
+                                        .id(recruitment.getHiringId())
+                                        .code(recruitment.getHiringCode())
+                                        .build()
+                                )
                                 .recruitCount(recruitment.getRecruitCount())
                                 .enterpriseName(recruitment.getEnterpriseName())
                                 .introduction(recruitment.getIntroduction())
@@ -190,29 +195,5 @@ public class RecruitmentService {
 
     private Attachment wrapNullableAttachment(Integer id) {
         return id == null ? null : attachmentFacade.findById(id);
-    }
-
-    private List<String> convertScreeningProcessCodeToString(String receptionYear, String registrationNumber) {
-        return screeningProcessRepository.findAllByRecruitment(receptionYear, registrationNumber)
-                .stream().map(Enum::name)
-                .collect(Collectors.toList());
-    }
-
-    private List<String> convertTechnologyCodeToString(String receptionYear, String registrationNumber) {
-        return technologyRepository.findAllByRecruitment(receptionYear, registrationNumber)
-                .stream().map(Enum::name)
-                .collect(Collectors.toList());
-    }
-
-    private List<String> convertWelfareCodeToString(String receptionYear, String registrationNumber) {
-        return welfareRepository.findAllByRecruitment(receptionYear, registrationNumber)
-                .stream().map(Enum::name)
-                .collect(Collectors.toList());
-    }
-
-    private List<String> convertProgrammingLanguageCodeToString(String receptionYear, String registrationNumber) {
-        return programmingLanguageRepository.findAllByRecruitment(receptionYear, registrationNumber)
-                .stream().map(Enum::name)
-                .collect(Collectors.toList());
     }
 }
