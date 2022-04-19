@@ -20,8 +20,6 @@ import static com.jobits.dsm.benecia.domain.review.domain.QReview.review;
 public class EnterpriseRepositoryCustomImpl implements EnterpriseRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
-    private final AttachmentRepository attachmentRepository;
-    private final RegionRepository regionRepository;
 
     @Override
     public List<BusinessAreaCode> getBusinessAreas(String registrationNumber) {
@@ -49,41 +47,5 @@ public class EnterpriseRepositoryCustomImpl implements EnterpriseRepositoryCusto
                 .join(review.enterprise, enterprise)
                 .where(enterprise.registrationNumber.eq(registrationNumber))
                 .fetchCount();
-    }
-
-    @Override
-    public void modifyEnterpriseInfo(String registrationNumber, ModifyEnterpriseInfoRequest request) {
-        queryFactory
-                .update(enterprise)
-                .set(enterprise.name, request.getName())
-                .set(enterprise.establishYear, request.getEstablishYear())
-                .set(enterprise.representativeName, request.getRepresentativeName())
-                .set(enterprise.address.postalCode, request.getPostalCode())
-                .set(enterprise.address.address, request.getAddress())
-                .set(enterprise.address.addressDetail, request.getAddressDetail())
-                .set(enterprise.branchAddress.postalCode, request.getBranchPostalCode())
-                .set(enterprise.branchAddress.address, request.getBranchAddress())
-                .set(enterprise.branchAddress.addressDetail, request.getBranchAddressDetail())
-                .set(enterprise.introduction, request.getIntroduction())
-                .set(enterprise.employeeCount, request.getEmployeeCount())
-                .set(enterprise.site, request.getSite())
-                .set(enterprise.turnover, request.getTurnover())
-                .set(enterprise.director.email, request.getDirectorEmail())
-                .set(enterprise.director.name, request.getDirectorName())
-                .set(enterprise.director.telephoneNumber, request.getDirectorTelephoneNumber())
-                .set(enterprise.director.phoneNumber, request.getDirectorPhoneNumber())
-                .set(enterprise.director.department, request.getDirectorDepartment())
-                .set(enterprise.businessLicense, attachmentRepository.getById(request.getBusinessLicense()))
-                .set(enterprise.logo, attachmentRepository.getById(request.getLogo()))
-                .set(enterprise.foreground, attachmentRepository.getById(request.getForeground()))
-                .set(enterprise.material, request.getMaterial() != null ? attachmentRepository.getById(request.getMaterial()) : null)
-                .set(enterprise.region, regionRepository.findByName(request.getRegion()))
-                .where(enterprise.registrationNumber.eq(registrationNumber))
-                .execute();
-
-        queryFactory
-                .delete(businessArea)
-                .where(businessArea.enterprise.registrationNumber.eq(registrationNumber))
-                .execute();
     }
 }
