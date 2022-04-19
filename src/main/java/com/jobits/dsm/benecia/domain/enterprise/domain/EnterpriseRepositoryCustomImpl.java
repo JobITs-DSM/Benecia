@@ -1,6 +1,8 @@
 package com.jobits.dsm.benecia.domain.enterprise.domain;
 
+import com.jobits.dsm.benecia.domain.attachment.facade.AttachmentFacade;
 import com.jobits.dsm.benecia.domain.enterprise.code.BusinessAreaCode;
+import com.jobits.dsm.benecia.domain.enterprise.domain.region.RegionRepository;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.ModifyEnterpriseInfoRequest;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,8 @@ import static com.jobits.dsm.benecia.domain.review.domain.QReview.review;
 public class EnterpriseRepositoryCustomImpl implements EnterpriseRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
+    private final AttachmentFacade attachmentFacade;
+    private final RegionRepository regionRepository;
 
     @Override
     public List<BusinessAreaCode> getBusinessAreas(String registrationNumber) {
@@ -68,6 +72,11 @@ public class EnterpriseRepositoryCustomImpl implements EnterpriseRepositoryCusto
                 .set(enterprise.director.telephoneNumber, request.getDirectorTelephoneNumber())
                 .set(enterprise.director.phoneNumber, request.getDirectorPhoneNumber())
                 .set(enterprise.director.department, request.getDirectorDepartment())
+                .set(enterprise.businessLicense, attachmentFacade.findById(request.getBusinessLicense()))
+                .set(enterprise.logo, attachmentFacade.findById(request.getLogo()))
+                .set(enterprise.foreground, attachmentFacade.findById(request.getForeground()))
+                .set(enterprise.material, request.getMaterial() != null ? attachmentFacade.findById(request.getMaterial()) : null)
+                .set(enterprise.region, regionRepository.findByName(request.getRegion()))
                 .where(enterprise.registrationNumber.eq(registrationNumber))
                 .execute();
 
