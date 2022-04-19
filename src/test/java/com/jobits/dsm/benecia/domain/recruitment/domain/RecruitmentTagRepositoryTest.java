@@ -1,11 +1,15 @@
 package com.jobits.dsm.benecia.domain.recruitment.domain;
 
+import com.jobits.dsm.benecia.domain.attachment.domain.Attachment;
+import com.jobits.dsm.benecia.domain.attachment.domain.AttachmentRepository;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Address;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Director;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
 import com.jobits.dsm.benecia.domain.enterprise.domain.EnterpriseRepository;
+import com.jobits.dsm.benecia.domain.enterprise.domain.region.Region;
+import com.jobits.dsm.benecia.domain.enterprise.domain.region.RegionRepository;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentFullTimePayCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentReportingTimeCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
@@ -34,6 +38,10 @@ public class RecruitmentTagRepositoryTest {
     private TagRepository tagRepository;
     @Autowired
     private RecruitmentRepository recruitmentRepository;
+    @Autowired
+    private RegionRepository regionRepository;
+    @Autowired
+    private AttachmentRepository attachmentRepository;
 
     @BeforeEach
     void cleanUp() {
@@ -41,6 +49,8 @@ public class RecruitmentTagRepositoryTest {
         enterpriseRepository.deleteAll();
         tagRepository.deleteAll();
         recruitmentRepository.deleteAll();
+        regionRepository.deleteAll();
+
     }
 
     @Test
@@ -99,6 +109,15 @@ public class RecruitmentTagRepositoryTest {
                 .department("팀장")
                 .build();
 
+        Attachment attachment = attachmentRepository.save(Attachment.builder()
+                .fileName("awlkejfn")
+                .originalFileName("kawjenfawk")
+                .build());
+
+        Region region = regionRepository.save(Region.builder()
+                .name("대전")
+                .build());
+
         Enterprise enterprise = Enterprise.builder()
                 .registrationNumber("305-83-23458")
                 .name("잡플래닛")
@@ -113,6 +132,11 @@ public class RecruitmentTagRepositoryTest {
                 .site("url")
                 .turnover(128394)
                 .director(director)
+                .region(region)
+                .logo(attachment)
+                .foreground(attachment)
+                .businessLicense(attachment)
+                .material(attachment)
                 .build();
         return enterpriseRepository.save(enterprise);
     }
