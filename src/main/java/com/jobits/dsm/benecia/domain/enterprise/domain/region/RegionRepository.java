@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface RegionRepository extends JpaRepository<Region, Integer> {
     List<Region> findAllByNameContains(String keyword);
+    Region findByName(String name);
 }
