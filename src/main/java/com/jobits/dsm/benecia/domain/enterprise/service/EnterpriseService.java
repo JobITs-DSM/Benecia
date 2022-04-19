@@ -165,7 +165,7 @@ public class EnterpriseService {
     public void modifyEnterpriseInfo(String registrationNumber, ModifyEnterpriseInfoRequest request) {
         Enterprise enterprise = enterpriseRepository.findById(registrationNumber)
                 .orElseThrow(() -> EnterpriseNotFoundException.EXCEPTION);
-        
+
         Enterprise modifiedEnterprise = Enterprise.builder()
                 .registrationNumber(registrationNumber)
                 .name(request.getName())
@@ -199,7 +199,7 @@ public class EnterpriseService {
                 .logo(attachmentFacade.findById(request.getLogo()))
                 .material(request.getMaterial() != null ? attachmentFacade.findById(request.getMaterial()) : null)
                 .foreground(attachmentFacade.findById(request.getForeground()))
-                .region(regionRepository.findByName(request.getRegion()))
+                .region(regionRepository.findByName(request.getRegion()).orElseThrow(() -> RegionNotFoundException.EXCEPTION))
                 .build();
 
         enterpriseRepository.save(modifiedEnterprise);
