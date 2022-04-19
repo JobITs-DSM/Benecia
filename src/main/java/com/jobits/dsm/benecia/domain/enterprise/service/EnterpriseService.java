@@ -5,6 +5,8 @@ import com.jobits.dsm.benecia.domain.attachment.domain.AttachmentRepository;
 import com.jobits.dsm.benecia.domain.attachment.facade.AttachmentFacade;
 import com.jobits.dsm.benecia.domain.enterprise.code.BusinessAreaCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
+import com.jobits.dsm.benecia.domain.enterprise.domain.Address;
+import com.jobits.dsm.benecia.domain.enterprise.domain.Director;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
 import com.jobits.dsm.benecia.domain.enterprise.domain.EnterpriseRepository;
 import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessArea;
@@ -163,8 +165,46 @@ public class EnterpriseService {
     public void modifyEnterpriseInfo(String registrationNumber, ModifyEnterpriseInfoRequest request) {
         Enterprise enterprise = enterpriseRepository.findById(registrationNumber)
                 .orElseThrow(() -> EnterpriseNotFoundException.EXCEPTION);
+        
+        Enterprise modifiedEnterprise = Enterprise.builder()
+                .registrationNumber(registrationNumber)
+                .name(request.getName())
+                .establishYear(request.getEstablishYear())
+                .representativeName(request.getRepresentativeName())
+                .address(Address.builder()
+                        .postalCode(request.getPostalCode())
+                        .address(request.getAddress())
+                        .addressDetail(request.getAddressDetail())
+                        .build()
+                )
+                .branchAddress(Address.builder()
+                        .postalCode(request.getBranchPostalCode())
+                        .address(request.getAddress())
+                        .addressDetail(request.getBranchAddressDetail())
+                        .build()
+                )
+                .introduction(request.getIntroduction())
+                .employeeCount(request.getEmployeeCount())
+                .site(request.getSite())
+                .turnover(request.getTurnover())
+                .director(Director.builder()
+                        .email(request.getDirectorEmail())
+                        .name(request.getDirectorName())
+                        .telephoneNumber(request.getDirectorTelephoneNumber())
+                        .phoneNumber(request.getDirectorPhoneNumber())
+                        .department(request.getDirectorDepartment())
+                        .build()
+                )
+                .businessLicense(attachmentFacade.findById(request.getBusinessLicense()))
+                .logo(attachmentFacade.findById(request.getLogo()))
+                .material(request.getMaterial() != null ? attachmentFacade.findById(request.getMaterial()) : null)
+                .foreground(attachmentFacade.findById(request.getForeground()))
+                .region(regionRepository.findByName(request.getRegion()))
+                .build();
 
-        enterpriseRepository.modifyEnterpriseInfo(registrationNumber, request);
+        enterpriseRepository.save(modifiedEnterprise);
+
+        businessAreaRepository.deleteAllByEnterprise(enterprise);
 
         enterprise.getBusinessAreas().clear();
 
