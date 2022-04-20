@@ -129,9 +129,10 @@ public class EnterpriseService {
                 .build();
     }
 
-    public List<EnterpriseInfoResponse> getEnterpriseInfo(String registrationNumber) {
-        return enterpriseRepository.findById(registrationNumber)
-                .stream().map(enterprise -> EnterpriseInfoResponse.builder()
+    public EnterpriseInfoResponse getEnterpriseInfo(String registrationNumber) {
+        Enterprise enterprise = enterpriseRepository.findById(registrationNumber)
+                .orElseThrow(() -> EnterpriseNotFoundException.EXCEPTION);
+        return EnterpriseInfoResponse.builder()
                         .registrationNumber(enterprise.getRegistrationNumber())
                         .name(enterprise.getName())
                         .establishYear(enterprise.getEstablishYear())
@@ -150,15 +151,14 @@ public class EnterpriseService {
                         .logo(checkNull(enterprise.getLogo()))
                         .material(checkNull(enterprise.getMaterial()))
                         .foreground(checkNull(enterprise.getForeground()))
-                        .build()
-                ).collect(Collectors.toList());
+                        .build();
     }
 
     private AttachmentDetails checkNull(Attachment attachment) {
         if (attachment == null) {
             return null;
         }
-        return new AttachmentDetails(attachment.getFileName(), attachment.getOriginalFileName());
+        return new AttachmentDetails(attachment.getId(), attachment.getFileName(), attachment.getOriginalFileName());
     }
 
     @Transactional

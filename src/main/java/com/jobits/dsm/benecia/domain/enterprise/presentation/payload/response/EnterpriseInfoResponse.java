@@ -30,10 +30,10 @@ public class EnterpriseInfoResponse {
     private final AttachmentDetails foreground;
 
     @Getter
-    @NoArgsConstructor
     @AllArgsConstructor
     public static class AttachmentDetails {
-        private String fileName;
-        private String originalFileName;
+        private final Integer id;
+        private final String fileName;
+        private final String originalFileName;
     }
 }
