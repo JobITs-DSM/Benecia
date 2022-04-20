@@ -88,12 +88,12 @@ public class Enterprise implements UserMarker, Savable {
     private Integer lastReceptionYear;
 
     @Setter
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "businessLicense")
     private Attachment businessLicense;
 
     @Setter
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "logo")
     private Attachment logo;
 
@@ -103,7 +103,7 @@ public class Enterprise implements UserMarker, Savable {
     private Attachment material;
 
     @Setter
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "foreground")
     private Attachment foreground;
 
@@ -113,7 +113,7 @@ public class Enterprise implements UserMarker, Savable {
     @OneToMany(mappedBy = "enterprise", orphanRemoval = true)
     private List<Review> reviews;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "region")
     private Region region;
 

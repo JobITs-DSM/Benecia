@@ -5,13 +5,17 @@ import com.jobits.dsm.benecia.domain.attachment.domain.AttachmentRepository;
 import com.jobits.dsm.benecia.domain.attachment.facade.AttachmentFacade;
 import com.jobits.dsm.benecia.domain.enterprise.code.BusinessAreaCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
+import com.jobits.dsm.benecia.domain.enterprise.domain.Address;
+import com.jobits.dsm.benecia.domain.enterprise.domain.Director;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
 import com.jobits.dsm.benecia.domain.enterprise.domain.EnterpriseRepository;
 import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessArea;
 import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessAreaRepository;
 import com.jobits.dsm.benecia.domain.enterprise.domain.cache.EnterpriseRefreshToken;
 import com.jobits.dsm.benecia.domain.enterprise.domain.cache.EnterpriseRefreshTokenRepository;
+import com.jobits.dsm.benecia.domain.enterprise.domain.region.RegionRepository;
 import com.jobits.dsm.benecia.domain.enterprise.exceptions.EnterpriseNotFoundException;
+import com.jobits.dsm.benecia.domain.enterprise.exceptions.RegionNotFoundException;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.EnterpriseSignInRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.ModifyEnterpriseInfoRequest;
 import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.RegisterEnterpriseRequest;
@@ -45,6 +49,7 @@ public class EnterpriseService {
     private final EnterpriseRefreshTokenRepository refreshTokenRepository;
     private final BusinessAreaRepository businessAreaRepository;
     private final AttachmentRepository attachmentRepository;
+    private final RegionRepository regionRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final JwtProperty jwtProperty;
     private final AttachmentFacade attachmentFacade;
@@ -63,8 +68,14 @@ public class EnterpriseService {
                 .introduction(request.getIntroduction())
                 .employeeCount(request.getEmployeeCount())
                 .site(request.getSite())
+                .region(regionRepository.findById(request.getRegion())
+                        .orElseThrow(() -> RegionNotFoundException.EXCEPTION))
                 .turnover(request.getTurnover())
                 .director(request.getDirector())
+                .businessLicense(attachmentFacade.findById(request.getBusinessLicense()))
+                .logo(request.getLogo() != null ? attachmentFacade.findById(request.getLogo()) : attachmentFacade.findById(1))
+                .material(request.getMaterial() != null ? attachmentFacade.findById(request.getMaterial()) : null)
+                .foreground(request.getForeground() != null ? attachmentFacade.findById(request.getForeground()) : attachmentFacade.findById(1))
                 .build());
 
         request.getBusinessAreas()
@@ -118,9 +129,10 @@ public class EnterpriseService {
                 .build();
     }
 
-    public List<EnterpriseInfoResponse> getEnterpriseInfo(String registrationNumber) {
-        return enterpriseRepository.findById(registrationNumber)
-                .stream().map(enterprise -> EnterpriseInfoResponse.builder()
+    public EnterpriseInfoResponse getEnterpriseInfo(String registrationNumber) {
+        Enterprise enterprise = enterpriseRepository.findById(registrationNumber)
+                .orElseThrow(() -> EnterpriseNotFoundException.EXCEPTION);
+        return EnterpriseInfoResponse.builder()
                         .registrationNumber(enterprise.getRegistrationNumber())
                         .name(enterprise.getName())
                         .establishYear(enterprise.getEstablishYear())
@@ -139,15 +151,14 @@ public class EnterpriseService {
                         .logo(checkNull(enterprise.getLogo()))
                         .material(checkNull(enterprise.getMaterial()))
                         .foreground(checkNull(enterprise.getForeground()))
-                        .build()
-                ).collect(Collectors.toList());
+                        .build();
     }
 
     private AttachmentDetails checkNull(Attachment attachment) {
         if (attachment == null) {
             return null;
         }
-        return new AttachmentDetails(attachment.getFileName(), attachment.getOriginalFileName());
+        return new AttachmentDetails(attachment.getId(), attachment.getFileName(), attachment.getOriginalFileName());
     }
 
     @Transactional
@@ -155,7 +166,45 @@ public class EnterpriseService {
         Enterprise enterprise = enterpriseRepository.findById(registrationNumber)
                 .orElseThrow(() -> EnterpriseNotFoundException.EXCEPTION);
 
-        enterpriseRepository.modifyEnterpriseInfo(registrationNumber, request);
+        Enterprise modifiedEnterprise = Enterprise.builder()
+                .registrationNumber(registrationNumber)
+                .name(request.getName())
+                .establishYear(request.getEstablishYear())
+                .representativeName(request.getRepresentativeName())
+                .address(Address.builder()
+                        .postalCode(request.getPostalCode())
+                        .address(request.getAddress())
+                        .addressDetail(request.getAddressDetail())
+                        .build()
+                )
+                .branchAddress(Address.builder()
+                        .postalCode(request.getBranchPostalCode())
+                        .address(request.getAddress())
+                        .addressDetail(request.getBranchAddressDetail())
+                        .build()
+                )
+                .introduction(request.getIntroduction())
+                .employeeCount(request.getEmployeeCount())
+                .site(request.getSite())
+                .turnover(request.getTurnover())
+                .director(Director.builder()
+                        .email(request.getDirectorEmail())
+                        .name(request.getDirectorName())
+                        .telephoneNumber(request.getDirectorTelephoneNumber())
+                        .phoneNumber(request.getDirectorPhoneNumber())
+                        .department(request.getDirectorDepartment())
+                        .build()
+                )
+                .businessLicense(attachmentFacade.findById(request.getBusinessLicense()))
+                .logo(attachmentFacade.findById(request.getLogo()))
+                .material(request.getMaterial() != null ? attachmentFacade.findById(request.getMaterial()) : null)
+                .foreground(attachmentFacade.findById(request.getForeground()))
+                .region(regionRepository.findByName(request.getRegion()).orElseThrow(() -> RegionNotFoundException.EXCEPTION))
+                .build();
+
+        enterpriseRepository.save(modifiedEnterprise);
+
+        businessAreaRepository.deleteAllByEnterprise(enterprise);
 
         enterprise.getBusinessAreas().clear();
 

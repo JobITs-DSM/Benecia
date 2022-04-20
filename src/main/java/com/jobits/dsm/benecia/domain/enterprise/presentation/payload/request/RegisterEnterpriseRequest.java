@@ -52,6 +52,10 @@ public class RegisterEnterpriseRequest {
 
     private List<BusinessAreaCode> businessAreas;
 
+    @NotNull
+    private Integer region;
+
+    @NotNull
     private Integer businessLicense;
 
     private Integer logo;

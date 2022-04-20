@@ -80,4 +80,17 @@ public class ModifyEnterpriseInfoRequest {
 
     @NotNull
     private List<BusinessAreaCode> businessAreas;
+
+    @NotNull
+    private Integer businessLicense;
+
+    @NotNull
+    private Integer logo;
+
+    private Integer material;
+
+    @NotNull
+    private Integer foreground;
+
+    private String region;
 }

@@ -41,7 +41,7 @@ public class EnterpriseController {
     }
 
     @GetMapping("/{registration_number}")
-    List<EnterpriseInfoResponse> getEnterpriseInfo(@PathVariable("registration_number") String request) {
+    EnterpriseInfoResponse getEnterpriseInfo(@PathVariable("registration_number") String request) {
         return enterpriseService.getEnterpriseInfo(request);
     }
   
