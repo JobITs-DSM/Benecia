@@ -1,5 +1,9 @@
 package com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response;
 
+import com.jobits.dsm.benecia.domain.recruitment.code.ProgrammingLanguageCode;
+import com.jobits.dsm.benecia.domain.recruitment.code.ScreeningProcessCode;
+import com.jobits.dsm.benecia.domain.recruitment.code.TechnologyCode;
+import com.jobits.dsm.benecia.domain.recruitment.code.WelfareCode;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -17,10 +21,10 @@ public class RecruitmentDetailResponse {
     private final HiringInfo hiringArea;
     private final Integer recruitCount;
     private final List<String> tags;
-    private final List<String> screeningProcesses;
-    private final List<String> technologies;
-    private final List<String> welfare;
-    private final List<String> programmingLanguages;
+    private final List<ScreeningProcessCode> screeningProcesses;
+    private final List<TechnologyCode> technologies;
+    private final List<WelfareCode> welfare;
+    private final List<ProgrammingLanguageCode> programmingLanguages;
     private final Integer workingHour;
     private final String reportingTime;
     private final Integer trainingPay;

@@ -97,10 +97,11 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                         regionEq(regionId)
                 )
                 .orderBy(buildSortCondition(sort))
-                .groupBy(recruitment.recruitmentId.registrationNumber, recruitment.recruitmentId.receptionYear, hiringArea.code, recruitment.recruitCount, tag.name, attachment.id, recruitment.recruitmentDate.recruitEndDate, recruitment.fullTimePay)
-                .transform(groupBy(recruitment.recruitmentId.registrationNumber, recruitment.recruitmentId.receptionYear, recruitment.recruitCount, recruitment.recruitmentDate.recruitEndDate, recruitment.fullTimePay, hiringArea.code)
+                .groupBy(recruitment.recruitmentId.registrationNumber, recruitment.recruitmentId.receptionYear, hiringArea.code, recruitment.recruitCount, tag.name, attachment.id)
+                .transform(groupBy(recruitment.recruitmentId.registrationNumber, recruitment.recruitmentId.receptionYear, recruitment.recruitCount, hiringArea.code)
                         .list(new QCurrentRecruitmentInfoListForStudentVO(
                                 application.count(),
+                                hiringArea.id,
                                 hiringArea.code,
                                 recruitment.recruitCount,
                                 enterprise.name,
@@ -175,6 +176,7 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                 .transform(groupBy(recruitment.recruitmentId.registrationNumber, recruitment.recruitmentId.receptionYear, recruitment.recruitCount, recruitment.recruitmentDate.recruitEndDate, recruitment.fullTimePay, hiringArea.code)
                         .list(new QAllRecruitmentInfoListForStudentVO(
                                 application.count(),
+                                hiringArea.id,
                                 hiringArea.code,
                                 recruitment.recruitCount,
                                 enterprise.name,

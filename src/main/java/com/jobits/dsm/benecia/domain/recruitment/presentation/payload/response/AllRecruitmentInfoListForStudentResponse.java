@@ -1,5 +1,6 @@
 package com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response;
 
+import com.jobits.dsm.benecia.domain.recruitment.code.HiringAreaCode;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -14,12 +15,19 @@ public class AllRecruitmentInfoListForStudentResponse {
     @Getter
     @Builder
     public static class AllRecruitmentInfo {
-        private final String hiring;
+        private final HiringInfo hiring;
         private final Integer recruitCount;
         private final String enterpriseName;
         private final String introduction;
         private final List<String> tags;
         private final String enterpriseProfileImageUrl;
         private final LocalDate recruitEndDate;
+    }
+
+    @Getter
+    @Builder
+    public static class HiringInfo {
+        private final Integer id;
+        private final HiringAreaCode code;
     }
 }

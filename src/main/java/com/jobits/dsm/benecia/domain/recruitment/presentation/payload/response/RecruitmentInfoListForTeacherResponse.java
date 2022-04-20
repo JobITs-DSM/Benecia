@@ -1,6 +1,7 @@
 package com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response;
 
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
+import com.jobits.dsm.benecia.domain.recruitment.code.HiringAreaCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,7 +19,7 @@ public class RecruitmentInfoListForTeacherResponse {
     public static class RecruitmentInfo {
         private final RecruitmentStatusCode status;
         private final String name;
-        private final List<String> hiring;
+        private final List<HiringAreaCode> hiring;
         private final Integer recruitCount;
         private final Long applicantCount;
         private final EnterpriseDivisionCode division;
