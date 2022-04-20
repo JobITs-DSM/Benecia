@@ -6,6 +6,6 @@ public class EnterpriseNotFoundException extends GlobalException {
     public static final GlobalException EXCEPTION = new EnterpriseNotFoundException();
 
     private EnterpriseNotFoundException() {
-        super(EnterpriseErrorCode.NOT_FOUND);
+        super(EnterpriseErrorCode.ENTERPRISE_NOT_FOUND);
     }
 }

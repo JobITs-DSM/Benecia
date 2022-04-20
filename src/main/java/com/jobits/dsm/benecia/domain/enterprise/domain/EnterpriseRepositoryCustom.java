@@ -12,6 +12,4 @@ public interface EnterpriseRepositoryCustom {
     Long getContractStudentCount(String registrationNumber);
 
     Long getReviewCount(String registrationNumber);
-
-    void modifyEnterpriseInfo(String registrationNumber, ModifyEnterpriseInfoRequest request);
 }

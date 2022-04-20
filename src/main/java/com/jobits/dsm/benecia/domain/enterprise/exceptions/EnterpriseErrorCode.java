@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum EnterpriseErrorCode implements ErrorAttribute {
 
-    NOT_FOUND(404, "Enterprise Not Found");
+    ENTERPRISE_NOT_FOUND(404, "Enterprise Not Found"),
+    REGION_NOT_FOUND(404, "Region Not Found");
+
 
     private final int status;
     private final String message;
