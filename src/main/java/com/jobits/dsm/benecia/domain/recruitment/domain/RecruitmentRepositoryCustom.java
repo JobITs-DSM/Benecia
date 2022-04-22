@@ -2,11 +2,7 @@ package com.jobits.dsm.benecia.domain.recruitment.domain;
 
 import com.jobits.dsm.benecia.domain.recruitment.code.HiringAreaCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
-import com.jobits.dsm.benecia.domain.recruitment.domain.vo.AllRecruitmentInfoListForStudentVO;
-import com.jobits.dsm.benecia.domain.recruitment.domain.vo.CurrentRecruitmentInfoListForStudentVO;
-import com.jobits.dsm.benecia.domain.recruitment.domain.vo.RecruitmentDetailVO;
-import com.jobits.dsm.benecia.domain.recruitment.domain.vo.RecruitmentInfoListForTeacherVO;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.SimilarRecruitmentInfoListForStudentResponse;
+import com.jobits.dsm.benecia.domain.recruitment.domain.vo.*;
 import com.jobits.dsm.benecia.domain.recruitment.type.SortCondition;
 
 import java.time.LocalDate;
@@ -17,6 +13,5 @@ public interface RecruitmentRepositoryCustom {
     List<CurrentRecruitmentInfoListForStudentVO> getCurrentRecruitmentInfoList(List<Integer> tagIds, List<HiringAreaCode> hiringAreaCodes, String keyword, Integer regionId, SortCondition sort);
     RecruitmentDetailVO queryRecruitmentDetail(Integer hiringId);
     List<AllRecruitmentInfoListForStudentVO> queryAllRecruitmentInfoList(List<Integer> tagIds, List<HiringAreaCode> hiringAreaCodes, String keyword);
-
-    List<SimilarRecruitmentInfoListForStudentResponse> querySimilarRecruitmentInfoList();
+    List<SimilarRecruitmentInfoListForStudentVO> querySimilarRecruitmentInfoList(List<HiringAreaCode> hiringAreaCodes, Integer regionId);
 }
