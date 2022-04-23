@@ -9,13 +9,19 @@ import java.util.List;
 @Getter
 @Builder
 public class SimilarRecruitmentInfoListForStudentResponse {
-    private final HiringInfo hiringAreas;
-    private final Integer recruitCount;
-    private final String enterpriseName;
-    private final String workPlace;
-    private final List<String> tags;
-    private final String enterpriseProfileImageUrl;
-    private final String enterpriseBackgroundImageUrl;
+    private final List<SimilarRecruitmentInfo> recruitments;
+
+    @Getter
+    @Builder
+    public static class SimilarRecruitmentInfo {
+        private final HiringInfo hiringAreas;
+        private final Integer recruitCount;
+        private final String enterpriseName;
+        private final String workPlace;
+        private final List<String> tags;
+        private final String enterpriseProfileImageUrl;
+        private final String enterpriseBackgroundImageUrl;
+    }
 
     @Getter
     @Builder
