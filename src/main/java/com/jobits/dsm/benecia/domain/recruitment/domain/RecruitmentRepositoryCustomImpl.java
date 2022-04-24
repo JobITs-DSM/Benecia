@@ -10,6 +10,7 @@ import com.jobits.dsm.benecia.domain.recruitment.domain.tag.QTag;
 import com.jobits.dsm.benecia.domain.recruitment.domain.technology.QTechnology;
 import com.jobits.dsm.benecia.domain.recruitment.domain.vo.*;
 import com.jobits.dsm.benecia.domain.recruitment.domain.welfare.QWelfare;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.SimilarRecruitmentInfoListForStudentResponse;
 import com.jobits.dsm.benecia.domain.recruitment.type.SortCondition;
 import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.ExpressionUtils;
@@ -184,6 +185,38 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                                 list(tag.name),
                                 enterprise.logo.fileName,
                                 recruitment.recruitmentDate.recruitEndDate
+                        ))
+                );
+    }
+
+    @Override
+    public List<SimilarRecruitmentInfoListForStudentVO> querySimilarRecruitmentInfoList(List<HiringAreaCode> hiringAreaCodes, Integer regionId) {
+        return queryFactory
+                .selectFrom(recruitment).distinct()
+                .join(recruitment.hiringAreas, hiringArea)
+                .join(recruitment.enterprise, enterprise)
+                .join(recruitment.tags, recruitmentTag)
+                .join(recruitmentTag.tag, tag)
+                .join(enterprise.logo, attachment)
+                .join(enterprise.foreground, attachment)
+                .leftJoin(recruitment.applications, application)
+                .where(
+                        recruitment.recruitmentId.receptionYear.eq(Integer.toString(LocalDate.now().getYear())),
+                        hiringAreaEq(hiringAreaCodes),
+                        regionEq(regionId)
+                )
+                .orderBy(recruitment.fullTimePay.desc())
+                .groupBy(recruitment.recruitmentId.registrationNumber, recruitment.recruitmentId.receptionYear, hiringArea.code, recruitment.recruitCount, tag.name, attachment.id)
+                .transform(groupBy(recruitment.recruitmentId.registrationNumber, recruitment.recruitmentId.receptionYear, recruitment.recruitCount, hiringArea.code)
+                        .list(new QSimilarRecruitmentInfoListForStudentVO(
+                                hiringArea.id,
+                                hiringArea.code,
+                                recruitment.recruitCount,
+                                enterprise.name,
+                                recruitment.workPlace,
+                                list(tag.name),
+                                enterprise.logo.fileName,
+                                enterprise.foreground.fileName
                         ))
                 );
     }

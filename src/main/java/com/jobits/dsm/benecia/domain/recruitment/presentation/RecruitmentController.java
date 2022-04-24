@@ -1,19 +1,13 @@
 package com.jobits.dsm.benecia.domain.recruitment.presentation;
 
 import com.jobits.dsm.benecia.domain.recruitment.domain.vo.RecruitmentDetailVO;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.AllRecruitmentInfoListForStudentRequest;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.CurrentRecruitmentInfoListForStudentRequest;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.RecruitmentInfoListForTeacherRequest;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.AllRecruitmentInfoListForStudentResponse;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.CurrentRecruitmentInfoListForStudentResponse;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentDetailResponse;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentInfoListForTeacherResponse;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.*;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.*;
 import com.jobits.dsm.benecia.domain.recruitment.service.RecruitmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.CreateRecruitmentRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +22,7 @@ public class RecruitmentController {
     private final RecruitmentService recruitmentService;
 
     @GetMapping
-    public RecruitmentInfoListForTeacherResponse getRecruitmentInfoList(RecruitmentInfoListForTeacherRequest request) {
+    public RecruitmentInfoListForTeacherResponse getRecruitmentInfoList(@Valid RecruitmentInfoListForTeacherRequest request) {
         return recruitmentService.getRecruitmentInfoList(request);
     }
     
@@ -51,5 +45,10 @@ public class RecruitmentController {
     @GetMapping("/all")
     public AllRecruitmentInfoListForStudentResponse queryAllRecruitmentInfoList(AllRecruitmentInfoListForStudentRequest request) {
         return recruitmentService.queryAllRecruitmentInfoList(request);
+    }
+
+    @GetMapping("/similar")
+    public SimilarRecruitmentInfoListForStudentResponse querySimilarRecruitmentInfoList(@Valid SimilarRecruitmentInfoListForStudentRequest request) {
+        return recruitmentService.querySimilarRecruitmentInfoList(request);
     }
 }

@@ -1,6 +1,7 @@
 package com.jobits.dsm.benecia.domain.student.presentation;
 
 import com.jobits.dsm.benecia.domain.student.presentation.payload.response.DepartmentInformationListResponse;
+import com.jobits.dsm.benecia.domain.student.presentation.payload.response.StudentCurrentStatusResponse;
 import com.jobits.dsm.benecia.domain.student.presentation.payload.response.StudentEmploymentRateResponse;
 import com.jobits.dsm.benecia.domain.student.service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +26,10 @@ public class StudentController {
     @GetMapping("/department")
     public List<DepartmentInformationListResponse> departmentInformation() {
         return studentService.getDepartmentInformationList();
+    }
+
+    @GetMapping("/status")
+    public StudentCurrentStatusResponse queryStudentCurrentStatus() {
+        return studentService.queryStudentCurrentStatus();
     }
 }

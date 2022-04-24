@@ -4,7 +4,10 @@ import com.jobits.dsm.benecia.domain.student.domain.Department;
 import com.jobits.dsm.benecia.domain.student.domain.DepartmentRepository;
 import com.jobits.dsm.benecia.domain.student.domain.Student;
 import com.jobits.dsm.benecia.domain.student.domain.StudentRepository;
+import com.jobits.dsm.benecia.domain.student.domain.vo.StudentCurrentStatusVO;
+import com.jobits.dsm.benecia.domain.student.facade.StudentFacade;
 import com.jobits.dsm.benecia.domain.student.presentation.payload.response.DepartmentInformationListResponse;
+import com.jobits.dsm.benecia.domain.student.presentation.payload.response.StudentCurrentStatusResponse;
 import com.jobits.dsm.benecia.domain.student.presentation.payload.response.StudentEmploymentRateResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,7 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
     private final DepartmentRepository departmentRepository;
+    private final StudentFacade studentFacade;
 
     public StudentEmploymentRateResponse getEmploymentRate() {
 
@@ -51,5 +55,17 @@ public class StudentService {
                     .description(department.getDescription())
                     .build();
         }).collect(Collectors.toList());
+    }
+
+    public StudentCurrentStatusResponse queryStudentCurrentStatus() {
+        Student student = studentFacade.getCurrentUser();
+        StudentCurrentStatusVO studentStatus = studentRepository.queryStudentCurrentStatus(student.getSerialNumber());
+        return StudentCurrentStatusResponse.builder()
+                .userName(studentStatus.getUserName())
+                .userProfileImageUrl(studentStatus.getUserProfileImageUrl())
+                .employmentStatus(studentStatus.getEmploymentStatus().getCode())
+                .enterpriseImageUrl(studentStatus.getEnterpriseImageUrl())
+                .field(studentStatus.getField().getValue())
+                .build();
     }
 }

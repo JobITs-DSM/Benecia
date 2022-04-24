@@ -10,13 +10,8 @@ import com.jobits.dsm.benecia.domain.recruitment.domain.tag.TagRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.technology.TechnologyRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.vo.RecruitmentDetailVO;
 import com.jobits.dsm.benecia.domain.recruitment.domain.welfare.WelfareRepository;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.AllRecruitmentInfoListForStudentRequest;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.CurrentRecruitmentInfoListForStudentRequest;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.RecruitmentInfoListForTeacherRequest;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.AllRecruitmentInfoListForStudentResponse;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.CurrentRecruitmentInfoListForStudentResponse;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentDetailResponse;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.RecruitmentInfoListForTeacherResponse;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.*;
+import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +19,6 @@ import com.jobits.dsm.benecia.domain.attachment.domain.Attachment;
 import com.jobits.dsm.benecia.domain.attachment.facade.AttachmentFacade;
 import com.jobits.dsm.benecia.domain.recruitment.domain.*;
 import com.jobits.dsm.benecia.domain.recruitment.facade.RecruitmentFacade;
-import com.jobits.dsm.benecia.domain.recruitment.presentation.payload.request.CreateRecruitmentRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -188,6 +182,26 @@ public class RecruitmentService {
                                 .tags(recruitment.getTags())
                                 .enterpriseProfileImageUrl(recruitment.getEnterpriseProfileImageUrl())
                                 .recruitEndDate(recruitment.getRecruitEndDate())
+                                .build()
+                        ).collect(Collectors.toList()))
+                .build();
+    }
+
+    public SimilarRecruitmentInfoListForStudentResponse querySimilarRecruitmentInfoList(SimilarRecruitmentInfoListForStudentRequest request) {
+        return SimilarRecruitmentInfoListForStudentResponse.builder()
+                .recruitments(recruitmentRepository.querySimilarRecruitmentInfoList(request.getHiringCodes(), request.getRegion())
+                        .stream().map(recruitment -> SimilarRecruitmentInfoListForStudentResponse.SimilarRecruitmentInfo.builder()
+                                .hiringAreas(SimilarRecruitmentInfoListForStudentResponse.HiringInfo.builder()
+                                        .id(recruitment.getHiringId())
+                                        .code(recruitment.getHiringCode())
+                                        .build()
+                                )
+                                .recruitCount(recruitment.getRecruitCount())
+                                .enterpriseName(recruitment.getEnterpriseName())
+                                .workPlace(recruitment.getWorkPlace())
+                                .tags(recruitment.getTags())
+                                .enterpriseProfileImageUrl(recruitment.getEnterpriseProfileImageUrl())
+                                .enterpriseBackgroundImageUrl(recruitment.getEnterpriseBackgroundImageUrl())
                                 .build()
                         ).collect(Collectors.toList()))
                 .build();
