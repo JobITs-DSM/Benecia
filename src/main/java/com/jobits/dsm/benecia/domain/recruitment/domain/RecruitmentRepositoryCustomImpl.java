@@ -150,6 +150,7 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                         recruitment.form.form2.id,
                         recruitment.form.form3.id))
                 .from(recruitment)
+                .join(recruitment.region, region)
                 .join(recruitment.hiringAreas, hiringArea)
                 .join(recruitment.enterprise, enterprise)
                 .join(enterprise.logo, attachment)
