@@ -127,6 +127,7 @@ public class RecruitmentService {
     public RecruitmentDetailResponse queryRecruitmentDetail(Integer hiringId) {
         RecruitmentDetailVO recruitmentDetailVO = recruitmentRepository.queryRecruitmentDetail(hiringId);
         return RecruitmentDetailResponse.builder()
+                .region(recruitmentDetailVO.getRegion())
                 .enterpriseBackgroundImageUrl(recruitmentDetailVO.getEnterpriseBackgroundImageUrl())
                 .enterpriseProfileImageUrl(recruitmentDetailVO.getEnterpriseProfileImageUrl())
                 .introduce(recruitmentDetailVO.getIntroduce())

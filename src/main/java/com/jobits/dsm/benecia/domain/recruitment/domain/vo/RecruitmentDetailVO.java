@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 @Getter
 public class RecruitmentDetailVO {
+    private final Integer region;
     private final String registrationNumber;
     private final String receptionYear;
     private final String enterpriseBackgroundImageUrl;
@@ -38,7 +39,8 @@ public class RecruitmentDetailVO {
     private final Integer form3;
 
     @QueryProjection
-    public RecruitmentDetailVO(String registrationNumber, String receptionYear,String enterpriseBackgroundImageUrl, String enterpriseProfileImageUrl, String introduce, String enterpriseName, String workPlace, HiringAreaCode hiringCode, String task, Integer recruitCount, Integer workingHour, RecruitmentReportingTimeCode reportingTime, Integer trainingPay, RecruitmentFullTimePayCode fullTimePay, LocalDate recruitBeginDate, LocalDate recruitEndDate, String otherLanguage, String otherTechnology, String preferential, Integer report, String qualification, String otherSpecifics, String documentation1, String documentation2, String documentation3, Integer form1, Integer form2, Integer form3) {
+    public RecruitmentDetailVO(Integer region, String registrationNumber, String receptionYear,String enterpriseBackgroundImageUrl, String enterpriseProfileImageUrl, String introduce, String enterpriseName, String workPlace, HiringAreaCode hiringCode, String task, Integer recruitCount, Integer workingHour, RecruitmentReportingTimeCode reportingTime, Integer trainingPay, RecruitmentFullTimePayCode fullTimePay, LocalDate recruitBeginDate, LocalDate recruitEndDate, String otherLanguage, String otherTechnology, String preferential, Integer report, String qualification, String otherSpecifics, String documentation1, String documentation2, String documentation3, Integer form1, Integer form2, Integer form3) {
+        this.region = region;
         this.registrationNumber = registrationNumber;
         this.receptionYear = receptionYear;
         this.enterpriseBackgroundImageUrl = enterpriseBackgroundImageUrl;
