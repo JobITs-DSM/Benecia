@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 @Builder
 public class RecruitmentDetailResponse {
+    private final Integer region;
     private final String enterpriseBackgroundImageUrl;
     private final String enterpriseProfileImageUrl;
     private final String introduce;

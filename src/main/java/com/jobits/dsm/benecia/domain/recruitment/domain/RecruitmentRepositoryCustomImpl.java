@@ -1,6 +1,7 @@
 package com.jobits.dsm.benecia.domain.recruitment.domain;
 
 import com.jobits.dsm.benecia.domain.attachment.domain.QAttachment;
+import com.jobits.dsm.benecia.domain.enterprise.domain.region.QRegion;
 import com.jobits.dsm.benecia.domain.recruitment.code.HiringAreaCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
 import com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage.QProgrammingLanguage;
@@ -28,6 +29,7 @@ import java.util.Map;
 import static com.jobits.dsm.benecia.domain.application.domain.QApplication.*;
 import static com.jobits.dsm.benecia.domain.attachment.domain.QAttachment.attachment;
 import static com.jobits.dsm.benecia.domain.enterprise.domain.QEnterprise.*;
+import static com.jobits.dsm.benecia.domain.enterprise.domain.region.QRegion.region;
 import static com.jobits.dsm.benecia.domain.recruitment.domain.QRecruitment.*;
 import static com.jobits.dsm.benecia.domain.recruitment.domain.hiringarea.QHiringArea.*;
 import static com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage.QProgrammingLanguage.programmingLanguage;
@@ -118,6 +120,7 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
     public RecruitmentDetailVO queryRecruitmentDetail(Integer hiringId) {
         return queryFactory
                 .select(new QRecruitmentDetailVO(
+                        region.id,
                         recruitment.recruitmentId.registrationNumber,
                         recruitment.recruitmentId.receptionYear,
                         enterprise.foreground.fileName,
@@ -147,6 +150,7 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                         recruitment.form.form2.id,
                         recruitment.form.form3.id))
                 .from(recruitment)
+                .join(recruitment.region, region)
                 .join(recruitment.hiringAreas, hiringArea)
                 .join(recruitment.enterprise, enterprise)
                 .join(enterprise.logo, attachment)
