@@ -3,6 +3,7 @@ package com.jobits.dsm.benecia.domain.recruitment.domain;
 import com.jobits.dsm.benecia.domain.application.domain.Application;
 import com.jobits.dsm.benecia.domain.contract.domain.Contract;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
+import com.jobits.dsm.benecia.domain.enterprise.domain.region.Region;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentFullTimePayCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentReportingTimeCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
@@ -99,6 +100,10 @@ public class Recruitment implements Savable {
     @Delegate
     @Embedded
     private Form form;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
+    private Region region;
 
     @OneToMany(mappedBy = "recruitment", orphanRemoval = true)
     private final List<ProgrammingLanguage> programmingLanguages = new ArrayList<>();
