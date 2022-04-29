@@ -25,16 +25,16 @@ public class ReviewService {
 
     @Transactional
     public void registerTrainingReview(String registrationNumber, String studentId, RegisterTrainingReviewRequest request) {
-        LocalDateTime localDateTime = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now();
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> StudentNotFoundException.EXCEPTION);
         Enterprise enterprise = enterpriseRepository.findById(registrationNumber)
                 .orElseThrow(() -> EnterpriseNotFoundException.EXCEPTION);
         Review review = Review.builder()
-                .trainingYear(String.valueOf(localDateTime.getYear()))
+                .trainingYear(String.valueOf(now.getYear()))
                 .content(request.getContent())
                 .division(request.getDivision())
-                .registrationDateTime(localDateTime)
+                .registrationDateTime(now)
                 .enterprise(enterprise)
                 .student(student)
                 .build();
