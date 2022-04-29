@@ -2,6 +2,7 @@ package com.jobits.dsm.benecia.domain.review.domain;
 
 import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
 import com.jobits.dsm.benecia.domain.review.code.ReviewCode;
+import com.jobits.dsm.benecia.domain.student.domain.Student;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,4 +37,8 @@ public class Review {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "registration_number")
     private Enterprise enterprise;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
+    private Student student;
 }
