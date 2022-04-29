@@ -1,6 +1,5 @@
 package com.jobits.dsm.benecia.domain.review.code;
 
-import com.jobits.dsm.benecia.domain.recruitment.code.TechnologyCode;
 import com.jobits.dsm.benecia.global.error.exception.AttributeConvertFailedException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 @Getter
 @RequiredArgsConstructor
 public enum ReviewCode {
-    PRACTICE_REVIEW("REVW01", "실습후기"),
+    TRAINING_REVIEW("REVW01", "실습후기"),
     INTERVIEW_REVIEW("REVW02", "면접후기");
 
     private final String code;
