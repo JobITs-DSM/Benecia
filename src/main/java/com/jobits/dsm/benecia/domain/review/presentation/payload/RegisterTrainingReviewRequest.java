@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Getter
 public class RegisterTrainingReviewRequest {
+    @NotEmpty
     private ReviewCode division;
     @NotEmpty
     private String content;
