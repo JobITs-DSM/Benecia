@@ -101,10 +101,6 @@ public class Recruitment implements Savable {
     @Embedded
     private Form form;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
-    private Region region;
-
     @OneToMany(mappedBy = "recruitment", orphanRemoval = true)
     private final List<ProgrammingLanguage> programmingLanguages = new ArrayList<>();
 
