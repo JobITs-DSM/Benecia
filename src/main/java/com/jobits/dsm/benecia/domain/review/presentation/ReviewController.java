@@ -13,10 +13,9 @@ import javax.validation.Valid;
 public class ReviewController {
     private final ReviewService reviewService;
 
-    @PostMapping("/{registration-number}/{student-id}")
-    public void registerTrainingReview(@PathVariable("registration-number") String registrationNumber,
-                                                 @PathVariable("student-id") String studentId,
+    @PostMapping("/{registration-number}")
+    public void registerTrainingReviewForStudent(@PathVariable("registration-number") String registrationNumber,
                                                  @RequestBody @Valid RegisterTrainingReviewRequest request) {
-        reviewService.registerTrainingReview(registrationNumber, studentId, request);
+        reviewService.registerTrainingReviewForStudent(registrationNumber, request);
     }
 }
