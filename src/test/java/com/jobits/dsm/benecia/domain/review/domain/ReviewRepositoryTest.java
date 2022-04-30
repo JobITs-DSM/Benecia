@@ -30,6 +30,7 @@ public class ReviewRepositoryTest {
                 .trainingYear("2004")
                 .content("내용")
                 .division(ReviewCode.INTERVIEW_REVIEW)
+                .isConfirmed(false)
                 .registrationDateTime(LocalDateTime.now())
                 .build();
         assertThat(reviewRepository.save(review).getDivision()).isEqualTo(ReviewCode.INTERVIEW_REVIEW);
