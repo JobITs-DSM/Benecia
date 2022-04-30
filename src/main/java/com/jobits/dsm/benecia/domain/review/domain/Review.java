@@ -43,6 +43,6 @@ public class Review {
     private Enterprise enterprise;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
+    @JoinColumn(name = "student_serial_number")
     private Student student;
 }
