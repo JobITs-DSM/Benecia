@@ -31,11 +31,11 @@ public class Application {
     private LocalDateTime dateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "student_serial_number")
     private Student studentSerialNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "hiring_area_id")
     private HiringArea hiringAreaId;
 
     @ManyToOne
