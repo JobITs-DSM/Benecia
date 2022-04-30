@@ -128,6 +128,7 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                         enterprise.introduction,
                         enterprise.name,
                         recruitment.workPlace,
+                        hiringArea.id,
                         hiringArea.code,
                         hiringArea.task,
                         recruitment.recruitCount,
