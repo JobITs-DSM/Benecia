@@ -16,6 +16,7 @@ public class RecruitmentDetailVO {
     private final String introduce;
     private final String enterpriseName;
     private final String workPlace;
+    private final Integer hiringId;
     private final HiringAreaCode hiringCode;
     private final String task;
     private final Integer recruitCount;
@@ -39,7 +40,7 @@ public class RecruitmentDetailVO {
     private final Integer form3;
 
     @QueryProjection
-    public RecruitmentDetailVO(Integer region, String registrationNumber, String receptionYear,String enterpriseBackgroundImageUrl, String enterpriseProfileImageUrl, String introduce, String enterpriseName, String workPlace, HiringAreaCode hiringCode, String task, Integer recruitCount, Integer workingHour, RecruitmentReportingTimeCode reportingTime, Integer trainingPay, RecruitmentFullTimePayCode fullTimePay, LocalDate recruitBeginDate, LocalDate recruitEndDate, String otherLanguage, String otherTechnology, String preferential, Integer report, String qualification, String otherSpecifics, String documentation1, String documentation2, String documentation3, Integer form1, Integer form2, Integer form3) {
+    public RecruitmentDetailVO(Integer region, String registrationNumber, String receptionYear,String enterpriseBackgroundImageUrl, String enterpriseProfileImageUrl, String introduce, String enterpriseName, String workPlace, Integer hiringId, HiringAreaCode hiringCode, String task, Integer recruitCount, Integer workingHour, RecruitmentReportingTimeCode reportingTime, Integer trainingPay, RecruitmentFullTimePayCode fullTimePay, LocalDate recruitBeginDate, LocalDate recruitEndDate, String otherLanguage, String otherTechnology, String preferential, Integer report, String qualification, String otherSpecifics, String documentation1, String documentation2, String documentation3, Integer form1, Integer form2, Integer form3) {
         this.region = region;
         this.registrationNumber = registrationNumber;
         this.receptionYear = receptionYear;
@@ -48,6 +49,7 @@ public class RecruitmentDetailVO {
         this.introduce = introduce;
         this.enterpriseName = enterpriseName;
         this.workPlace = workPlace;
+        this.hiringId = hiringId;
         this.hiringCode = hiringCode;
         this.task = task;
         this.recruitCount = recruitCount;

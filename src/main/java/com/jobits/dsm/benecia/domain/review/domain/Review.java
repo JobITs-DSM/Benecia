@@ -34,11 +34,15 @@ public class Review {
     @NotNull
     private LocalDateTime registrationDateTime;
 
+    @NotNull
+    @Column(columnDefinition = "TINYINT(1)")
+    private Boolean isConfirmed;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "registration_number")
     private Enterprise enterprise;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
+    @JoinColumn(name = "student_serial_number")
     private Student student;
 }
