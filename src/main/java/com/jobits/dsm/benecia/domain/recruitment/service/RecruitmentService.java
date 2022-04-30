@@ -127,6 +127,8 @@ public class RecruitmentService {
     public RecruitmentDetailResponse queryRecruitmentDetail(Integer hiringId) {
         RecruitmentDetailVO recruitmentDetailVO = recruitmentRepository.queryRecruitmentDetail(hiringId);
         return RecruitmentDetailResponse.builder()
+                .registrationNumber(recruitmentDetailVO.getRegistrationNumber())
+                .receptionYear(recruitmentDetailVO.getReceptionYear())
                 .region(recruitmentDetailVO.getRegion())
                 .enterpriseBackgroundImageUrl(recruitmentDetailVO.getEnterpriseBackgroundImageUrl())
                 .enterpriseProfileImageUrl(recruitmentDetailVO.getEnterpriseProfileImageUrl())
@@ -134,6 +136,7 @@ public class RecruitmentService {
                 .enterpriseName(recruitmentDetailVO.getEnterpriseName())
                 .workPlace(recruitmentDetailVO.getWorkPlace())
                 .hiringArea(RecruitmentDetailResponse.HiringInfo.builder()
+                        .hiringId(recruitmentDetailVO.getHiringId())
                         .code(recruitmentDetailVO.getHiringCode().name())
                         .task(recruitmentDetailVO.getTask())
                         .build()

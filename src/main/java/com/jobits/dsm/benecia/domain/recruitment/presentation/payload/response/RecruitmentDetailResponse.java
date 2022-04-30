@@ -13,6 +13,8 @@ import java.util.List;
 @Getter
 @Builder
 public class RecruitmentDetailResponse {
+    private final String registrationNumber;
+    private final String receptionYear;
     private final Integer region;
     private final String enterpriseBackgroundImageUrl;
     private final String enterpriseProfileImageUrl;
@@ -46,6 +48,7 @@ public class RecruitmentDetailResponse {
     @Getter
     @Builder
     public static class HiringInfo {
+        private final Integer hiringId;
         private final String code;
         private final String task;
     }
