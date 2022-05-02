@@ -1,4 +1,4 @@
-package com.jobits.dsm.benecia.domain.review.presentation.payload;
+package com.jobits.dsm.benecia.domain.review.presentation.payload.request;
 
 import com.jobits.dsm.benecia.domain.review.code.ReviewCode;
 import lombok.Getter;
