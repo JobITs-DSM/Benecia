@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -48,26 +49,34 @@ public class ReviewService {
     @Transactional(readOnly = true)
     public QueryEnterpriseReviewForStudent queryEnterpriseReviewForStudent(String registrationNumber) {
         Enterprise enterprise = enterpriseRepository.findById(registrationNumber)
-                        .orElseThrow(() -> EnterpriseNotFoundException.EXCEPTION);
-        List<QueryEnterpriseReviewForStudent.ReviewInfo> interviewReview = reviewRepository.findByEnterpriseAndDivision(enterprise, ReviewCode.INTERVIEW_REVIEW)
-                .stream().map(interviewReviews -> QueryEnterpriseReviewForStudent.ReviewInfo.builder()
-                        .userName(interviewReviews.getStudent().getName())
-                        .userProfileImageUrl(interviewReviews.getStudent().getProfileImage().getFileName())
-                        .content(interviewReviews.getContent())
-                        .build()
-                ).toList();
+                .orElseThrow(() -> EnterpriseNotFoundException.EXCEPTION);
 
-        List<QueryEnterpriseReviewForStudent.ReviewInfo> trainingReview = reviewRepository.findByEnterpriseAndDivision(enterprise, ReviewCode.TRAINING_REVIEW)
-                .stream().map(trainingReviews -> QueryEnterpriseReviewForStudent.ReviewInfo.builder()
-                        .userName(trainingReviews.getStudent().getName())
-                        .userProfileImageUrl(trainingReviews.getStudent().getProfileImage().getFileName())
-                        .content(trainingReviews.getContent())
+        List<QueryEnterpriseReviewForStudent.ReviewInfo> interviewReviews = new ArrayList<>();
+        List<QueryEnterpriseReviewForStudent.ReviewInfo> trainingReviews = new ArrayList<>();
+
+        List<Review> reviews = reviewRepository.findByEnterprise(enterprise);
+
+        for (Review review : reviews) {
+            if (review.getDivision() == ReviewCode.INTERVIEW_REVIEW) {
+                interviewReviews.add(QueryEnterpriseReviewForStudent.ReviewInfo.builder()
+                        .userName(review.getStudent().getName())
+                        .userProfileImageUrl(review.getStudent().getProfileImage().getFileName())
+                        .content(review.getContent())
                         .build()
-                ).toList();
+                );
+            } else if (review.getDivision() == ReviewCode.TRAINING_REVIEW) {
+                trainingReviews.add(QueryEnterpriseReviewForStudent.ReviewInfo.builder()
+                        .userName(review.getStudent().getName())
+                        .userProfileImageUrl(review.getStudent().getProfileImage().getFileName())
+                        .content(review.getContent())
+                        .build()
+                );
+            }
+        }
 
         return QueryEnterpriseReviewForStudent.builder()
-                .interviewReviewList(interviewReview)
-                .trainingReviewList(trainingReview)
+                .interviewReviewList(interviewReviews)
+                .trainingReviewList(trainingReviews)
                 .build();
     }
 }
