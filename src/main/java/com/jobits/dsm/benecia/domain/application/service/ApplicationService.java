@@ -23,6 +23,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ApplicationService {
@@ -52,14 +55,17 @@ public class ApplicationService {
                 .build()
         );
 
+        List<ApplicationAttachment> attachments = new ArrayList<>();
+
         for (Integer id : request.getAttachmentId()) {
-            applicationAttachmentRepository.save(ApplicationAttachment.builder()
+            attachments.add(ApplicationAttachment.builder()
                     .application(application)
                     .attachment(attachmentRepository.findById(id)
                             .orElseThrow(() -> AttachmentNotFoundException.EXCEPTION))
-                    .build()
-            );
+                    .build());
         }
+
+        applicationAttachmentRepository.saveAll(attachments);
 
     }
 }
