@@ -17,7 +17,6 @@ import com.jobits.dsm.benecia.domain.recruitment.exceptions.HiringAreaNotFoundEx
 import com.jobits.dsm.benecia.domain.recruitment.exceptions.RecruitmentNotFoundException;
 import com.jobits.dsm.benecia.domain.student.domain.Student;
 import com.jobits.dsm.benecia.domain.student.domain.StudentRepository;
-import com.jobits.dsm.benecia.domain.student.exceptions.StudentNotFoundException;
 import com.jobits.dsm.benecia.domain.student.facade.StudentFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
