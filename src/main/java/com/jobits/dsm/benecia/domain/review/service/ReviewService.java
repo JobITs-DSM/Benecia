@@ -79,4 +79,11 @@ public class ReviewService {
                 .trainingReviewList(trainingReviews)
                 .build();
     }
+
+    @Transactional
+    public void checkEnterpriseReviewForTeacher(Integer reviewId) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow();
+        review.updateIsConfirmed(true);
+    }
 }
