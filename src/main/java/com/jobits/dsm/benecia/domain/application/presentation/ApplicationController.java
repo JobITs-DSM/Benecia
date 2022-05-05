@@ -16,7 +16,7 @@ public class ApplicationController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void ApplyEnterprise(@RequestBody @Valid ApplyEnterpriseRequest request) {
+    public void applyEnterprise(@RequestBody @Valid ApplyEnterpriseRequest request) {
         applicationService.applyEnterprise(request);
     }
 }
