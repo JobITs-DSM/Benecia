@@ -4,6 +4,7 @@ import com.jobits.dsm.benecia.domain.review.presentation.payload.request.Registe
 import com.jobits.dsm.benecia.domain.review.presentation.payload.response.QueryEnterpriseReviewForStudent;
 import com.jobits.dsm.benecia.domain.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,5 +24,11 @@ public class ReviewController {
     @GetMapping("/{registration-number}")
     public QueryEnterpriseReviewForStudent queryEnterpriseReviewForStudent(@PathVariable("registration-number") String registrationNumber) {
         return reviewService.queryEnterpriseReviewForStudent(registrationNumber);
+    }
+
+    @DeleteMapping("/{review-id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeEnterpriseReview(@PathVariable("review-id") Integer reviewId) {
+        reviewService.removeEnterpriseReview(reviewId);
     }
 }
