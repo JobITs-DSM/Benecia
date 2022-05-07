@@ -56,7 +56,7 @@ public class ReviewService {
         List<QueryEnterpriseReviewForStudent.ReviewInfo> interviewReviews = new ArrayList<>();
         List<QueryEnterpriseReviewForStudent.ReviewInfo> trainingReviews = new ArrayList<>();
 
-        List<Review> reviews = reviewRepository.findByEnterprise(enterprise);
+        List<Review> reviews = reviewRepository.findByEnterpriseAndIsConfirmedIsTrue(enterprise);
 
         for (Review review : reviews) {
             if (review.getDivision() == ReviewCode.INTERVIEW_REVIEW) {
