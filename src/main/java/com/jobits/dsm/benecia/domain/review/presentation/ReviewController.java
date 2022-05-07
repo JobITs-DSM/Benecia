@@ -26,9 +26,9 @@ public class ReviewController {
         return reviewService.queryEnterpriseReviewForStudent(registrationNumber);
     }
 
-    @PatchMapping("/check/{review-id}")
+    @PatchMapping("/confirm/{review-id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void checkEnterpriseReviewForTeacher(@PathVariable("review-id") Integer reviewId) {
-        reviewService.checkEnterpriseReviewForTeacher(reviewId);
+    public void confirmEnterpriseReviewForTeacher(@PathVariable("review-id") Integer reviewId) {
+        reviewService.confirmEnterpriseReviewForTeacher(reviewId);
     }
 }

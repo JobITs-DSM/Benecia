@@ -81,7 +81,7 @@ public class ReviewService {
     }
 
     @Transactional
-    public void checkEnterpriseReviewForTeacher(Integer reviewId) {
+    public void confirmEnterpriseReviewForTeacher(Integer reviewId) {
         Review review = reviewRepository.findById(reviewId)
                 .orElseThrow();
         review.updateIsConfirmed(true);
