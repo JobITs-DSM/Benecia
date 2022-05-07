@@ -83,6 +83,12 @@ public class ReviewService {
     }
 
     @Transactional
+    public void confirmEnterpriseReviewForTeacher(Integer reviewId) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow();
+        review.updateIsConfirmed(true);
+    }
+  
     public void reviseEnterpriseReview(ReviseEnterpriseReviewRequest request, Integer reviewId) {
         Review review = reviewRepository.findById(reviewId)
                 .orElseThrow();

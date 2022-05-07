@@ -46,6 +46,10 @@ public class Review {
     @JoinColumn(name = "student_serial_number")
     private Student student;
 
+    public void updateIsConfirmed(Boolean isConfirmed) {
+        this.isConfirmed = isConfirmed;
+    }
+  
     public void updateReviewContent(String content) {
         this.content = content;
     }
