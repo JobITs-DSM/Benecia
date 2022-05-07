@@ -49,4 +49,8 @@ public class Review {
     public void updateIsConfirmed(Boolean isConfirmed) {
         this.isConfirmed = isConfirmed;
     }
+  
+    public void updateReviewContent(String content) {
+        this.content = content;
+    }
 }
