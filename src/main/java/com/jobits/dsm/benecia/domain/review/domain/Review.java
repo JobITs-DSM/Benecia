@@ -45,4 +45,8 @@ public class Review {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "student_serial_number")
     private Student student;
+
+    public void updateReviewContent(String content) {
+        this.content = content;
+    }
 }
