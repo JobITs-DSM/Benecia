@@ -33,4 +33,10 @@ public class ReviewController {
                                        @RequestBody @Valid ReviseEnterpriseReviewRequest request) {
         reviewService.reviseEnterpriseReview(request, reviewId);
     }
+  
+    @DeleteMapping("/{review-id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeEnterpriseReview(@PathVariable("review-id") Integer reviewId) {
+        reviewService.removeEnterpriseReview(reviewId);
+    }
 }

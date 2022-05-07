@@ -6,6 +6,7 @@ import com.jobits.dsm.benecia.domain.enterprise.exceptions.EnterpriseNotFoundExc
 import com.jobits.dsm.benecia.domain.review.code.ReviewCode;
 import com.jobits.dsm.benecia.domain.review.domain.Review;
 import com.jobits.dsm.benecia.domain.review.domain.ReviewRepository;
+import com.jobits.dsm.benecia.domain.review.exceptions.ReviewNotFoundException;
 import com.jobits.dsm.benecia.domain.review.presentation.payload.request.RegisterTrainingReviewRequest;
 import com.jobits.dsm.benecia.domain.review.presentation.payload.request.ReviseEnterpriseReviewRequest;
 import com.jobits.dsm.benecia.domain.review.presentation.payload.response.QueryEnterpriseReviewForStudent;
@@ -86,5 +87,11 @@ public class ReviewService {
         Review review = reviewRepository.findById(reviewId)
                 .orElseThrow();
         review.updateReviewContent(request.getContent());
+    }
+  
+    public void removeEnterpriseReview(Integer reviewId) {
+        Review review = reviewRepository.findById(reviewId)
+                        .orElseThrow(() -> ReviewNotFoundException.EXCEPTION);
+        reviewRepository.delete(review);
     }
 }
