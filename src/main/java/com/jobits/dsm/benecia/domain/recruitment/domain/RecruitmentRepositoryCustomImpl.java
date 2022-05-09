@@ -169,7 +169,7 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                 .join(recruitment.hiringAreas, hiringArea)
                 .join(recruitment.enterprise, enterprise)
                 .leftJoin(recruitment.tags, recruitmentTag)
-                .leftJoin(recruitmentTag.tag, tag).distinct()
+                .leftJoin(recruitmentTag.tag, tag)
                 .join(enterprise.logo, attachment)
                 .leftJoin(recruitment.applications, application)
                 .where(
