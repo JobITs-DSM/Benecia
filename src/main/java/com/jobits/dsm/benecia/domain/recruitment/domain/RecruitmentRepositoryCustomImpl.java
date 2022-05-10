@@ -120,7 +120,7 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
     public RecruitmentDetailVO queryRecruitmentDetail(Integer hiringId) {
         return queryFactory
                 .select(new QRecruitmentDetailVO(
-                        region.id,
+                        enterprise.region.id,
                         recruitment.recruitmentId.registrationNumber,
                         recruitment.recruitmentId.receptionYear,
                         enterprise.foreground.fileName,
@@ -151,7 +151,6 @@ public class RecruitmentRepositoryCustomImpl implements RecruitmentRepositoryCus
                         recruitment.form.form2.id,
                         recruitment.form.form3.id))
                 .from(recruitment)
-                .join(enterprise.region, region)
                 .join(recruitment.hiringAreas, hiringArea)
                 .join(recruitment.enterprise, enterprise)
                 .join(enterprise.logo, attachment)
