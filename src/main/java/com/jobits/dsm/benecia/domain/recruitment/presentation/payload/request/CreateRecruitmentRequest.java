@@ -18,7 +18,7 @@ public class CreateRecruitmentRequest {
     @NotBlank
     private String receptionYear;
 
-    private List<HiringArea> hiringAreas;
+    private List<HiringArea> hiring;
 
     private List<String> tags;
 

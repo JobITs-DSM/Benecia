@@ -14,7 +14,7 @@ public class SimilarRecruitmentInfoListForStudentResponse {
     @Getter
     @Builder
     public static class SimilarRecruitmentInfo {
-        private final HiringInfo hiringAreas;
+        private final HiringInfo hiring;
         private final Integer recruitCount;
         private final String enterpriseName;
         private final String workPlace;

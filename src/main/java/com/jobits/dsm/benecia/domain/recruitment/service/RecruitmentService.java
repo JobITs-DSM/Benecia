@@ -114,7 +114,7 @@ public class RecruitmentService {
                 .documentation(request.getDocumentation())
                 .build());
 
-        request.getHiringAreas().forEach(hiringArea -> recruitmentFacade.addHiringArea(hiringArea, recruitment));
+        request.getHiring().forEach(hiringArea -> recruitmentFacade.addHiringArea(hiringArea, recruitment));
         request.getTags().forEach(name -> recruitmentFacade.addTag(name, recruitment));
         IntStream.range(0, request.getScreeningProcesses().size())
                 .forEach(idx -> recruitmentFacade.addScreeningProcess(request.getScreeningProcesses().get(idx), idx + 1, recruitment));
@@ -135,7 +135,7 @@ public class RecruitmentService {
                 .introduce(recruitmentDetailVO.getIntroduce())
                 .enterpriseName(recruitmentDetailVO.getEnterpriseName())
                 .workPlace(recruitmentDetailVO.getWorkPlace())
-                .hiringArea(RecruitmentDetailResponse.HiringInfo.builder()
+                .hiring(RecruitmentDetailResponse.HiringInfo.builder()
                         .hiringId(recruitmentDetailVO.getHiringId())
                         .code(recruitmentDetailVO.getHiringCode().name())
                         .task(recruitmentDetailVO.getTask())
@@ -195,7 +195,7 @@ public class RecruitmentService {
         return SimilarRecruitmentInfoListForStudentResponse.builder()
                 .recruitments(recruitmentRepository.querySimilarRecruitmentInfoList(request.getHiringCodes(), request.getRegion())
                         .stream().map(recruitment -> SimilarRecruitmentInfoListForStudentResponse.SimilarRecruitmentInfo.builder()
-                                .hiringAreas(SimilarRecruitmentInfoListForStudentResponse.HiringInfo.builder()
+                                .hiring(SimilarRecruitmentInfoListForStudentResponse.HiringInfo.builder()
                                         .id(recruitment.getHiringId())
                                         .code(recruitment.getHiringCode())
                                         .build()

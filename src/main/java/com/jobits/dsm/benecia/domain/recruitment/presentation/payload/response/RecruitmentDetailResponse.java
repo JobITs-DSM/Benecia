@@ -21,7 +21,7 @@ public class RecruitmentDetailResponse {
     private final String introduce;
     private final String enterpriseName;
     private final String workPlace;
-    private final HiringInfo hiringArea;
+    private final HiringInfo hiring;
     private final Integer recruitCount;
     private final List<String> tags;
     private final List<ScreeningProcessCode> screeningProcesses;
