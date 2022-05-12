@@ -6,6 +6,8 @@ import lombok.Getter;
 @Getter
 @Builder
 public class DepartmentInformationListResponse {
+
+    private final Integer id;
     
     private final String image;
 

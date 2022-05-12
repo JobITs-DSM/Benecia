@@ -46,6 +46,7 @@ public class StudentService {
             Float employmentRate = countOfStudent == 0 ? 0 : countOfFoundJobStudent.floatValue() / countOfStudent * 100;
 
             return DepartmentInformationListResponse.builder()
+                    .id(department.getId())
                     .image(department.getImage())
                     .name(department.getName())
                     .percent(employmentRate)
