@@ -8,8 +8,10 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 public class RegisterTrainingReviewRequest {
+
     @NotNull
     private ReviewCode division;
+
     @NotEmpty
     private String content;
 }
