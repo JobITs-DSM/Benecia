@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum StudentErrorCode implements ErrorAttribute {
+
+    DEPARTMENT_NOT_FOUND(404, "Department Not Found"),
     STUDENT_NOT_FOUND(404, "Student Not Found");
 
     private final int status;
