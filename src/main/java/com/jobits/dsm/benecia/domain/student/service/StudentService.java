@@ -5,8 +5,10 @@ import com.jobits.dsm.benecia.domain.student.domain.DepartmentRepository;
 import com.jobits.dsm.benecia.domain.student.domain.Student;
 import com.jobits.dsm.benecia.domain.student.domain.StudentRepository;
 import com.jobits.dsm.benecia.domain.student.domain.vo.StudentCurrentStatusVO;
+import com.jobits.dsm.benecia.domain.student.exceptions.DepartmentNotFoundException;
 import com.jobits.dsm.benecia.domain.student.facade.StudentFacade;
 import com.jobits.dsm.benecia.domain.student.presentation.payload.response.DepartmentInformationListResponse;
+import com.jobits.dsm.benecia.domain.student.presentation.payload.response.DepartmentStudentListResponse;
 import com.jobits.dsm.benecia.domain.student.presentation.payload.response.StudentCurrentStatusResponse;
 import com.jobits.dsm.benecia.domain.student.presentation.payload.response.StudentEmploymentRateResponse;
 import lombok.RequiredArgsConstructor;
@@ -56,6 +58,21 @@ public class StudentService {
                     .description(department.getDescription())
                     .build();
         }).collect(Collectors.toList());
+    }
+
+    public List<DepartmentStudentListResponse> getDepartmentStudentList(Integer departmentId) {
+        Department department = departmentRepository.findById(departmentId)
+                .orElseThrow(() -> DepartmentNotFoundException.EXCEPTION);
+
+        List<Student> students = studentRepository.findAllByDepartment(department);
+
+        return students.stream()
+                .map(student -> DepartmentStudentListResponse.builder()
+                    .name(student.getName())
+                    .isFoundJob(student.getIsFoundJob())
+                    .studentNumber(student.getStudentNumber())
+                    .build())
+                .collect(Collectors.toList());
     }
 
     public StudentCurrentStatusResponse queryStudentCurrentStatus() {
