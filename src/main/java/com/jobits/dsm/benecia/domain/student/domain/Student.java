@@ -43,7 +43,7 @@ public class Student implements UserMarker {
     @Column(columnDefinition = "TINYINT(1)")
     private Boolean isFoundJob;
 
-    @OneToMany(mappedBy = "studentSerialNumber", orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "studentSerialNumber", orphanRemoval = true)
     private List<Application> applications;
 
     @OneToOne(fetch = FetchType.EAGER)
