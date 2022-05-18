@@ -16,6 +16,6 @@ public interface StudentRepository extends JpaRepository<Student, String>, Stude
     Integer countAllBySerialNumberBetweenAndDepartment(String start, String end, Department department);
     Integer countAllByIsFoundJobIsTrueAndSerialNumberBetweenAndDepartment(String start, String end, Department department);
 
-    @Query("select s from Student s join fetch s.department where s.department = :department")
+    @Query("select s from Student s join fetch s.department where s.department = :department and s.studentNumber like '3%'")
     List<Student> findAllByDepartment(@Param("department") Department department);
 }
