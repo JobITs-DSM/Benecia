@@ -6,10 +6,8 @@ import com.jobits.dsm.benecia.domain.student.presentation.payload.response.Stude
 import com.jobits.dsm.benecia.domain.student.presentation.payload.response.StudentEmploymentRateResponse;
 import com.jobits.dsm.benecia.domain.student.service.StudentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,5 +36,17 @@ public class StudentController {
     @GetMapping("/status")
     public StudentCurrentStatusResponse queryStudentCurrentStatus() {
         return studentService.queryStudentCurrentStatus();
+    }
+
+    @PatchMapping("/{student-id}/status")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void patchStatus(@PathVariable("student-id") String studentId) {
+        studentService.patchStudentStatus(studentId, true);
+    }
+
+    @DeleteMapping("/{student-id}/status")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void patchFalseStatus(@PathVariable("student-id") String studentId) {
+        studentService.patchStudentStatus(studentId, false);
     }
 }
