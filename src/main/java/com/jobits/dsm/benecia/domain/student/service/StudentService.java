@@ -6,6 +6,7 @@ import com.jobits.dsm.benecia.domain.student.domain.Student;
 import com.jobits.dsm.benecia.domain.student.domain.StudentRepository;
 import com.jobits.dsm.benecia.domain.student.domain.vo.StudentCurrentStatusVO;
 import com.jobits.dsm.benecia.domain.student.exceptions.DepartmentNotFoundException;
+import com.jobits.dsm.benecia.domain.student.exceptions.StudentNotFoundException;
 import com.jobits.dsm.benecia.domain.student.facade.StudentFacade;
 import com.jobits.dsm.benecia.domain.student.presentation.payload.response.DepartmentInformationListResponse;
 import com.jobits.dsm.benecia.domain.student.presentation.payload.response.DepartmentStudentListResponse;
@@ -13,6 +14,7 @@ import com.jobits.dsm.benecia.domain.student.presentation.payload.response.Stude
 import com.jobits.dsm.benecia.domain.student.presentation.payload.response.StudentEmploymentRateResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -86,5 +88,14 @@ public class StudentService {
                 .enterpriseImageUrl(studentStatus.getEnterpriseImageUrl())
                 .field(studentStatus.getField().getValue())
                 .build();
+    }
+
+    @Transactional
+    public void patchStudentStatus(String studentId, Boolean status) {
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> StudentNotFoundException.EXCEPTION);
+
+        student.setEmail(student.getEmail());
+        student.setIsFoundJob(status);
     }
 }
