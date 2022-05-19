@@ -27,6 +27,7 @@ public class Student implements UserMarker {
     @Size(max = 30)
     private String name;
 
+    @Setter
     @NotNull
     @Size(max = 320)
     private String email;
@@ -40,7 +41,6 @@ public class Student implements UserMarker {
     private String password;
 
     @NotNull
-    @Column(columnDefinition = "TINYINT(1)")
     private Boolean isFoundJob;
 
     @OneToMany(mappedBy = "studentSerialNumber", orphanRemoval = true)
@@ -66,5 +66,9 @@ public class Student implements UserMarker {
 
     public static String getLastSerialNumber() {
         return LocalDate.now().minusYears(2).getYear() + "100";
+    }
+
+    public void setIsFoundJob(Boolean foundJob) {
+        isFoundJob = foundJob;
     }
 }
