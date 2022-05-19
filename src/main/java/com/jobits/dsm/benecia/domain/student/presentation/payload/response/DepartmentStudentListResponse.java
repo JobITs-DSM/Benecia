@@ -7,6 +7,8 @@ import lombok.Getter;
 @Builder
 public class DepartmentStudentListResponse {
 
+    private final String serialNumber;
+
     private final String studentNumber;
 
     private final String name;

@@ -68,6 +68,7 @@ public class StudentService {
 
         return students.stream()
                 .map(student -> DepartmentStudentListResponse.builder()
+                    .serialNumber(student.getSerialNumber())
                     .name(student.getName())
                     .isFoundJob(student.getIsFoundJob())
                     .studentNumber(student.getStudentNumber())
