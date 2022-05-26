@@ -17,6 +17,8 @@ public class RecruitmentInfoListForTeacherResponse {
     @Getter
     @Builder
     public static class RecruitmentInfo {
+        private final String registrationNumber;
+        private final String receptionYear;
         private final RecruitmentStatusCode status;
         private final String name;
         private final List<HiringAreaCode> hiring;

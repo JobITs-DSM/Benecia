@@ -44,6 +44,8 @@ public class RecruitmentService {
         return RecruitmentInfoListForTeacherResponse.builder()
                 .recruitments(recruitmentRepository.getRecruitmentInfoList(request.getRecruitmentYear(), request.getKeyword(), request.getRecruitStatus(), request.getBeginDate(), request.getEndDate()) // null 처리 추가 요망
                         .stream().map(recruitment -> RecruitmentInfoListForTeacherResponse.RecruitmentInfo.builder()
+                                .registrationNumber(recruitment.getRegistrationNumber())
+                                .receptionYear(recruitment.getReceptionYear())
                                 .status(recruitment.getStatus())
                                 .name(recruitment.getName())
                                 .hiring(recruitment.getHiring())
