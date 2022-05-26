@@ -10,5 +10,4 @@ import java.util.List;
 public interface ScreeningProcessRepository extends JpaRepository<ScreeningProcess, Integer> {
     @Query("SELECT sp.code FROM ScreeningProcess sp WHERE sp.recruitment.recruitmentId.receptionYear = :receptionYear and sp.recruitment.recruitmentId.registrationNumber = :registrationNumber")
     List<ScreeningProcessCode> findAllByRecruitment(String receptionYear, String registrationNumber);
-    void deleteAllByRecruitment(Recruitment recruitment);
 }

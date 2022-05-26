@@ -1,8 +1,6 @@
 package com.jobits.dsm.benecia.domain.recruitment.service;
 
-import com.jobits.dsm.benecia.domain.recruitment.code.HiringAreaCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
-import com.jobits.dsm.benecia.domain.recruitment.code.ScreeningProcessCode;
 import com.jobits.dsm.benecia.domain.recruitment.domain.RecruitmentRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.hiringarea.HiringAreaRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage.ProgrammingLanguageRepository;
@@ -26,8 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -37,8 +33,6 @@ public class RecruitmentService {
 
     private final RecruitmentRepository recruitmentRepository;
     private final TagRepository tagRepository;
-    private final RecruitmentTagRepository recruitmentTagRepository;
-    private final HiringAreaRepository hiringAreaRepository;
     private final ScreeningProcessRepository screeningProcessRepository;
     private final TechnologyRepository technologyRepository;
     private final WelfareRepository welfareRepository;
@@ -221,6 +215,8 @@ public class RecruitmentService {
 
         RecruitmentId recruitmentId = new RecruitmentId(request.getReceptionYear(), registrationNumber);
 
+        recruitmentRepository.deleteById(recruitmentId);
+
         Recruitment recruitment = recruitmentRepository.save(Recruitment.builder()
                 .recruitmentId(recruitmentId)
                 .status(RecruitmentStatusCode.RECRUITMENT_REQUEST)
@@ -249,13 +245,6 @@ public class RecruitmentService {
                         .build())
                 .documentation(request.getDocumentation())
                 .build());
-
-        hiringAreaRepository.deleteAllByRecruitment(recruitment);
-        recruitmentTagRepository.deleteAllByRecruitment(recruitment);
-        screeningProcessRepository.deleteAllByRecruitment(recruitment);
-        technologyRepository.deleteAllByRecruitment(recruitment);
-        welfareRepository.deleteAllByRecruitment(recruitment);
-        programmingLanguageRepository.deleteAllByRecruitment(recruitment);
 
         request.getHiring().forEach(hiringArea -> recruitmentFacade.addHiringArea(hiringArea, recruitment));
         request.getTags().forEach(name -> recruitmentFacade.addTag(name, recruitment));

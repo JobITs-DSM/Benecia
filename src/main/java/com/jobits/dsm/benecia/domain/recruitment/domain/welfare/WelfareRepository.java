@@ -10,5 +10,4 @@ import java.util.List;
 public interface WelfareRepository extends JpaRepository<Welfare, Integer> {
     @Query("SELECT w.code FROM Welfare w WHERE w.recruitment.recruitmentId.receptionYear = :receptionYear and w.recruitment.recruitmentId.registrationNumber = :registrationNumber")
     List<WelfareCode> findAllByRecruitment(String receptionYear, String registrationNumber);
-    void deleteAllByRecruitment(Recruitment recruitment);
 }
