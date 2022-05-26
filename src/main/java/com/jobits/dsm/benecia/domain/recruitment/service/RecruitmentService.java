@@ -1,11 +1,11 @@
 package com.jobits.dsm.benecia.domain.recruitment.service;
 
+import com.jobits.dsm.benecia.domain.application.domain.ApplicationAttachmentRepository;
+import com.jobits.dsm.benecia.domain.application.domain.ApplicationRepository;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
 import com.jobits.dsm.benecia.domain.recruitment.domain.RecruitmentRepository;
-import com.jobits.dsm.benecia.domain.recruitment.domain.hiringarea.HiringAreaRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage.ProgrammingLanguageRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.screeningprocess.ScreeningProcessRepository;
-import com.jobits.dsm.benecia.domain.recruitment.domain.tag.RecruitmentTagRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.tag.TagRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.technology.TechnologyRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.vo.RecruitmentDetailVO;
@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -35,6 +36,8 @@ public class RecruitmentService {
     private final TagRepository tagRepository;
     private final ScreeningProcessRepository screeningProcessRepository;
     private final TechnologyRepository technologyRepository;
+    private final ApplicationRepository applicationRepository;
+    private final ApplicationAttachmentRepository applicationAttachmentRepository;
     private final WelfareRepository welfareRepository;
     private final ProgrammingLanguageRepository programmingLanguageRepository;
     private final RecruitmentFacade recruitmentFacade;
@@ -256,7 +259,29 @@ public class RecruitmentService {
 
     }
 
+    public QueryApplicantListResponse queryApplicantList(String registrationNumber, String receptionYear) {
+        return QueryApplicantListResponse.builder()
+                .studentApplications(applicationRepository.findAllByRecruitment(registrationNumber, receptionYear)
+                        .stream().map(application -> QueryApplicantListResponse.ApplicationInfo.builder()
+                                .studentNumber(application.getStudentSerialNumber().getStudentNumber())
+                                .studentName(application.getStudentSerialNumber().getName())
+                                .dateTime(application.getDateTime())
+                                .attachments(buildAttachmentInfo(application.getId()))
+                                .build())
+                        .collect(Collectors.toList()))
+                .build();
+    }
+
     private Attachment wrapNullableAttachment(Integer id) {
         return id == null ? null : attachmentFacade.findById(id);
+    }
+
+    private List<QueryApplicantListResponse.AttachmentInfo> buildAttachmentInfo(Integer applicationId) {
+        return applicationAttachmentRepository.findAllByApplicationId(applicationId)
+                .stream().map(applicationAttachment -> QueryApplicantListResponse.AttachmentInfo.builder()
+                        .name(applicationAttachment.getAttachment().getOriginalFileName())
+                        .fileUrl(applicationAttachment.getAttachment().getFileName())
+                        .build()
+                ).collect(Collectors.toList());
     }
 }
