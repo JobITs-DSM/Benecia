@@ -13,6 +13,8 @@ import java.util.List;
 @Getter
 @Builder
 public class RecruitmentInfoListForTeacherVO {
+    private final String registrationNumber;
+    private final String receptionYear;
     private final RecruitmentStatusCode status;
     private final String name;
     private final List<HiringAreaCode> hiring;
@@ -23,7 +25,9 @@ public class RecruitmentInfoListForTeacherVO {
     private final LocalDate recruitEndDate;
 
     @QueryProjection
-    public RecruitmentInfoListForTeacherVO(RecruitmentStatusCode status, String name, List<HiringAreaCode> hiring, Integer recruitmentCount, Long applicantCount, EnterpriseDivisionCode division, LocalDate recruitBeginDate, LocalDate recruitEndDate) {
+    public RecruitmentInfoListForTeacherVO(String registrationNumber, String receptionYear, RecruitmentStatusCode status, String name, List<HiringAreaCode> hiring, Integer recruitmentCount, Long applicantCount, EnterpriseDivisionCode division, LocalDate recruitBeginDate, LocalDate recruitEndDate) {
+        this.registrationNumber = registrationNumber;
+        this.receptionYear = receptionYear;
         this.status = status;
         this.name = name;
         this.hiring = hiring;
