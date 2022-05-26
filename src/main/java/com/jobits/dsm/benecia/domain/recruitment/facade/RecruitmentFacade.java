@@ -11,6 +11,8 @@ import com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage.Prog
 import com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage.ProgrammingLanguageRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.screeningprocess.ScreeningProcess;
 import com.jobits.dsm.benecia.domain.recruitment.domain.screeningprocess.ScreeningProcessRepository;
+import com.jobits.dsm.benecia.domain.recruitment.domain.tag.RecruitmentTag;
+import com.jobits.dsm.benecia.domain.recruitment.domain.tag.RecruitmentTagRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.tag.Tag;
 import com.jobits.dsm.benecia.domain.recruitment.domain.tag.TagRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.technology.Technology;
@@ -29,6 +31,7 @@ public class RecruitmentFacade {
     private final TagRepository tagRepository;
     private final ScreeningProcessRepository screeningProcessRepository;
     private final TechnologyRepository technologyRepository;
+    private final RecruitmentTagRepository recruitmentTagRepository;
     private final WelfareRepository welfareRepository;
     private final HiringAreaRepository hiringAreaRepository;
 
@@ -40,9 +43,15 @@ public class RecruitmentFacade {
     }
 
     public void addTag(String name, Recruitment recruitment) {
-        tagRepository.save(Tag.builder()
+        Tag tag = tagRepository.save(Tag.builder()
                 .name(name)
                 .build());
+
+        recruitmentTagRepository.save(RecruitmentTag.builder()
+                .tag(tag)
+                .recruitment(recruitment)
+                .build()
+        );
     }
 
     public void addScreeningProcess(ScreeningProcessCode code, Integer procedure, Recruitment recruitment) {

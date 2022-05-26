@@ -1,6 +1,7 @@
 package com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage;
 
 import com.jobits.dsm.benecia.domain.recruitment.code.ProgrammingLanguageCode;
+import com.jobits.dsm.benecia.domain.recruitment.domain.Recruitment;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

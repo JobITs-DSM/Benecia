@@ -1,6 +1,7 @@
 package com.jobits.dsm.benecia.domain.recruitment.domain.technology;
 
 import com.jobits.dsm.benecia.domain.recruitment.code.TechnologyCode;
+import com.jobits.dsm.benecia.domain.recruitment.domain.Recruitment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
