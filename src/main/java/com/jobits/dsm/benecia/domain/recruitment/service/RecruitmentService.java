@@ -4,8 +4,10 @@ import com.jobits.dsm.benecia.domain.recruitment.code.HiringAreaCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
 import com.jobits.dsm.benecia.domain.recruitment.code.ScreeningProcessCode;
 import com.jobits.dsm.benecia.domain.recruitment.domain.RecruitmentRepository;
+import com.jobits.dsm.benecia.domain.recruitment.domain.hiringarea.HiringAreaRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.programminglanguage.ProgrammingLanguageRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.screeningprocess.ScreeningProcessRepository;
+import com.jobits.dsm.benecia.domain.recruitment.domain.tag.RecruitmentTagRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.tag.TagRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.technology.TechnologyRepository;
 import com.jobits.dsm.benecia.domain.recruitment.domain.vo.RecruitmentDetailVO;
@@ -35,6 +37,8 @@ public class RecruitmentService {
 
     private final RecruitmentRepository recruitmentRepository;
     private final TagRepository tagRepository;
+    private final RecruitmentTagRepository recruitmentTagRepository;
+    private final HiringAreaRepository hiringAreaRepository;
     private final ScreeningProcessRepository screeningProcessRepository;
     private final TechnologyRepository technologyRepository;
     private final WelfareRepository welfareRepository;
@@ -209,6 +213,58 @@ public class RecruitmentService {
                                 .build()
                         ).collect(Collectors.toList()))
                 .build();
+    }
+
+    @Transactional
+    public void modifyRecruitment(ModifyRecruitmentRequest request) {
+        String registrationNumber = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        RecruitmentId recruitmentId = new RecruitmentId(request.getReceptionYear(), registrationNumber);
+
+        Recruitment recruitment = recruitmentRepository.save(Recruitment.builder()
+                .recruitmentId(recruitmentId)
+                .status(RecruitmentStatusCode.RECRUITMENT_REQUEST)
+                .printDateTime(LocalDateTime.now())
+                .workPlace(request.getWorkPlace())
+                .workingHour(request.getWorkingHour())
+                .reportingTime(request.getReportingTime())
+                .trainingPay(request.getTrainingPay())
+                .fullTimePay(request.getFullTimePay())
+                .recruitCount(request.getRecruitCount())
+                .recruitmentDate(RecruitmentDate.builder()
+                        .requestBeginDate(LocalDate.now())
+                        .recruitBeginDate(request.getRecruitBeginDate())
+                        .recruitEndDate(request.getRecruitEndDate())
+                        .build())
+                .otherLanguage(request.getOtherLanguage())
+                .otherTechnology(request.getOtherTechnology())
+                .preferential(request.getPreferential())
+                .report(request.getReport())
+                .qualification(request.getQualification())
+                .otherSpecifics(request.getOtherSpecifics())
+                .form(Form.builder()
+                        .form1(wrapNullableAttachment(request.getForm1()))
+                        .form2(wrapNullableAttachment(request.getForm2()))
+                        .form3(wrapNullableAttachment(request.getForm3()))
+                        .build())
+                .documentation(request.getDocumentation())
+                .build());
+
+        hiringAreaRepository.deleteAllByRecruitment(recruitment);
+        recruitmentTagRepository.deleteAllByRecruitment(recruitment);
+        screeningProcessRepository.deleteAllByRecruitment(recruitment);
+        technologyRepository.deleteAllByRecruitment(recruitment);
+        welfareRepository.deleteAllByRecruitment(recruitment);
+        programmingLanguageRepository.deleteAllByRecruitment(recruitment);
+
+        request.getHiring().forEach(hiringArea -> recruitmentFacade.addHiringArea(hiringArea, recruitment));
+        request.getTags().forEach(name -> recruitmentFacade.addTag(name, recruitment));
+        IntStream.range(0, request.getScreeningProcesses().size())
+                .forEach(idx -> recruitmentFacade.addScreeningProcess(request.getScreeningProcesses().get(idx), idx + 1, recruitment));
+        request.getTechnologies().forEach(code -> recruitmentFacade.addTechnology(code, recruitment));
+        request.getWelfare().forEach(code -> recruitmentFacade.addWelfare(code, recruitment));
+        request.getProgrammingLanguages().forEach(code -> recruitmentFacade.addProgrammingLanguage(code, recruitment));
+
     }
 
     private Attachment wrapNullableAttachment(Integer id) {
