@@ -25,7 +25,7 @@ public class EnterpriseController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    void create(@ModelAttribute RegisterEnterpriseRequest request) {
+    void create(@RequestBody @Valid RegisterEnterpriseRequest request) {
         enterpriseService.registerEnterprise(request);
     }
 
