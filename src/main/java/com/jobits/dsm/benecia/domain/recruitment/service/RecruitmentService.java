@@ -185,7 +185,7 @@ public class RecruitmentService {
                                 .introduction(recruitment.getIntroduction())
                                 .tags(recruitment.getTags())
                                 .enterpriseProfileImageUrl(recruitment.getEnterpriseProfileImageUrl())
-                                .recruitEndDate(recruitment.getRecruitEndDate())
+                                .isEnd(LocalDate.now().isAfter(recruitment.getRecruitEndDate()))
                                 .build()
                         ).collect(Collectors.toList()))
                 .build();
