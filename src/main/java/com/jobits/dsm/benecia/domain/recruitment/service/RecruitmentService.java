@@ -259,29 +259,7 @@ public class RecruitmentService {
 
     }
 
-    public QueryApplicantListResponse queryApplicantList(String registrationNumber, String receptionYear) {
-        return QueryApplicantListResponse.builder()
-                .studentApplications(applicationRepository.findAllByRecruitment(registrationNumber, receptionYear)
-                        .stream().map(application -> QueryApplicantListResponse.ApplicationInfo.builder()
-                                .studentNumber(application.getStudentSerialNumber().getStudentNumber())
-                                .studentName(application.getStudentSerialNumber().getName())
-                                .dateTime(application.getDateTime())
-                                .attachments(buildAttachmentInfo(application.getId()))
-                                .build())
-                        .collect(Collectors.toList()))
-                .build();
-    }
-
     private Attachment wrapNullableAttachment(Integer id) {
         return id == null ? null : attachmentFacade.findById(id);
-    }
-
-    private List<QueryApplicantListResponse.AttachmentInfo> buildAttachmentInfo(Integer applicationId) {
-        return applicationAttachmentRepository.findAllByApplicationId(applicationId)
-                .stream().map(applicationAttachment -> QueryApplicantListResponse.AttachmentInfo.builder()
-                        .name(applicationAttachment.getAttachment().getOriginalFileName())
-                        .fileUrl(applicationAttachment.getAttachment().getFileName())
-                        .build()
-                ).collect(Collectors.toList());
     }
 }
