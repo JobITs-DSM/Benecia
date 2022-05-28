@@ -55,11 +55,4 @@ public class RecruitmentController {
     public void modifyRecruitment(@RequestBody @Valid ModifyRecruitmentRequest request) {
         recruitmentService.modifyRecruitment(request);
     }
-
-    @GetMapping("/{registration-number}/{reception-year}")
-    public QueryApplicantListResponse queryApplicantList(@PathVariable("registration-number") String registrationNumber,
-                                                         @PathVariable("reception-year") String receptionYear) {
-        return recruitmentService.queryApplicantList(registrationNumber, receptionYear);
-    }
-
 }
