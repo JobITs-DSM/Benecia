@@ -1,9 +1,6 @@
 package com.jobits.dsm.benecia.domain.student.presentation;
 
-import com.jobits.dsm.benecia.domain.student.presentation.payload.response.DepartmentInformationListResponse;
-import com.jobits.dsm.benecia.domain.student.presentation.payload.response.DepartmentStudentListResponse;
-import com.jobits.dsm.benecia.domain.student.presentation.payload.response.StudentCurrentStatusResponse;
-import com.jobits.dsm.benecia.domain.student.presentation.payload.response.StudentEmploymentRateResponse;
+import com.jobits.dsm.benecia.domain.student.presentation.payload.response.*;
 import com.jobits.dsm.benecia.domain.student.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -48,5 +45,10 @@ public class StudentController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void patchFalseStatus(@PathVariable("student-id") String studentId) {
         studentService.patchStudentStatus(studentId, false);
+    }
+
+    @GetMapping("/search")
+    public SearchStudentListResponse searchStudentList(@RequestParam(required = false) String name) {
+        return studentService.searchStudentList(name);
     }
 }
