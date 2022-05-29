@@ -11,6 +11,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -42,4 +44,7 @@ public class Application {
     @JoinColumn(name = "reception_year")
     @JoinColumn(name = "registration_number")
     private Recruitment recruitment;
+
+    @OneToMany(mappedBy = "application", orphanRemoval = true)
+    private final List<ApplicationAttachment> applicationAttachments = new ArrayList<>();
 }

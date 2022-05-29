@@ -23,7 +23,7 @@ public class RecruitmentController {
     public RecruitmentInfoListForTeacherResponse getRecruitmentInfoList(@Valid RecruitmentInfoListForTeacherRequest request) {
         return recruitmentService.getRecruitmentInfoList(request);
     }
-    
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     void create(@Valid @RequestBody CreateRecruitmentRequest request) {
@@ -39,7 +39,7 @@ public class RecruitmentController {
     public RecruitmentDetailResponse queryRecruitmentDetail(@PathVariable("hiring-id") Integer hiringId) {
         return recruitmentService.queryRecruitmentDetail(hiringId);
     }
-  
+
     @GetMapping("/all")
     public AllRecruitmentInfoListForStudentResponse queryAllRecruitmentInfoList(AllRecruitmentInfoListForStudentRequest request) {
         return recruitmentService.queryAllRecruitmentInfoList(request);

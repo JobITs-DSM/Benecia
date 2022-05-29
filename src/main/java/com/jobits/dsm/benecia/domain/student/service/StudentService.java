@@ -9,10 +9,7 @@ import com.jobits.dsm.benecia.domain.student.domain.vo.StudentCurrentStatusVO;
 import com.jobits.dsm.benecia.domain.student.exceptions.DepartmentNotFoundException;
 import com.jobits.dsm.benecia.domain.student.exceptions.StudentNotFoundException;
 import com.jobits.dsm.benecia.domain.student.facade.StudentFacade;
-import com.jobits.dsm.benecia.domain.student.presentation.payload.response.DepartmentInformationListResponse;
-import com.jobits.dsm.benecia.domain.student.presentation.payload.response.DepartmentStudentListResponse;
-import com.jobits.dsm.benecia.domain.student.presentation.payload.response.StudentCurrentStatusResponse;
-import com.jobits.dsm.benecia.domain.student.presentation.payload.response.StudentEmploymentRateResponse;
+import com.jobits.dsm.benecia.domain.student.presentation.payload.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -98,5 +95,16 @@ public class StudentService {
 
         student.setEmail(student.getEmail());
         student.setIsFoundJob(status);
+    }
+
+    public SearchStudentListResponse searchStudentList(String name) {
+        return SearchStudentListResponse.builder()
+                .students(studentRepository.searchStudentList(name)
+                        .stream().map(students -> SearchStudentListResponse.StudentInfo.builder()
+                                .name(students.getName())
+                                .number(students.getNumber())
+                                .build()
+                        ).collect(Collectors.toList())
+                ).build();
     }
 }

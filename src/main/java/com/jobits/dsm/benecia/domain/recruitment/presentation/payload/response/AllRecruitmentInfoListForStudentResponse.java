@@ -21,7 +21,7 @@ public class AllRecruitmentInfoListForStudentResponse {
         private final String introduction;
         private final List<String> tags;
         private final String enterpriseProfileImageUrl;
-        private final LocalDate recruitEndDate;
+        private final Boolean isEnd;
     }
 
     @Getter
