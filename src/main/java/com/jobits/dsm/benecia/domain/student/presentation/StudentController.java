@@ -1,5 +1,6 @@
 package com.jobits.dsm.benecia.domain.student.presentation;
 
+import com.jobits.dsm.benecia.domain.student.code.DepartmentCode;
 import com.jobits.dsm.benecia.domain.student.presentation.payload.response.DepartmentInformationListResponse;
 import com.jobits.dsm.benecia.domain.student.presentation.payload.response.DepartmentStudentListResponse;
 import com.jobits.dsm.benecia.domain.student.presentation.payload.response.StudentCurrentStatusResponse;
@@ -28,9 +29,9 @@ public class StudentController {
         return studentService.getDepartmentInformationList();
     }
 
-    @GetMapping("/department/{department-id}")
-    public List<DepartmentStudentListResponse> departmentStudents(@PathVariable("department-id") Integer departmentId) {
-        return studentService.getDepartmentStudentList(departmentId);
+    @GetMapping("/department/{department-code}")
+    public List<DepartmentStudentListResponse> departmentStudents(@PathVariable("department-code") DepartmentCode departmentCode) {
+        return studentService.getDepartmentStudentList(departmentCode);
     }
 
     @GetMapping("/status")
