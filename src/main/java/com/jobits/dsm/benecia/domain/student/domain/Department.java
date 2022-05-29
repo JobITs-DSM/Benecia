@@ -13,6 +13,8 @@ import javax.persistence.*;
 public class Department {
 
     @Id
+    @Column(columnDefinition = "CHAR(6)")
+    @Convert(converter = DepartmentCode.DepartmentCodeConverter.class)
     private DepartmentCode type;
 
     @Column(length = 30)
