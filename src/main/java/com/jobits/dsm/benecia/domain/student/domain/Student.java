@@ -47,7 +47,7 @@ public class Student implements UserMarker {
     private List<Application> applications;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "department_id")
+    @JoinColumn(name = "department_type")
     private Department department;
 
     @Setter

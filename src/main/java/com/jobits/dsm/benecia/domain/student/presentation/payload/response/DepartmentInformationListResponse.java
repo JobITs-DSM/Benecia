@@ -7,7 +7,7 @@ import lombok.Getter;
 @Builder
 public class DepartmentInformationListResponse {
 
-    private final Integer id;
+    private final String type;
     
     private final String image;
 

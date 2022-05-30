@@ -1,5 +1,6 @@
 package com.jobits.dsm.benecia.domain.student.domain;
 
+import com.jobits.dsm.benecia.domain.student.code.DepartmentCode;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,8 +13,9 @@ import javax.persistence.*;
 public class Department {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(columnDefinition = "CHAR(6)")
+    @Convert(converter = DepartmentCode.DepartmentCodeConverter.class)
+    private DepartmentCode type;
 
     @Column(length = 30)
     private String name;

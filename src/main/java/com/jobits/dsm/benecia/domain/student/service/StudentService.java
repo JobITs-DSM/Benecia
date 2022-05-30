@@ -1,5 +1,6 @@
 package com.jobits.dsm.benecia.domain.student.service;
 
+import com.jobits.dsm.benecia.domain.student.code.DepartmentCode;
 import com.jobits.dsm.benecia.domain.student.domain.Department;
 import com.jobits.dsm.benecia.domain.student.domain.DepartmentRepository;
 import com.jobits.dsm.benecia.domain.student.domain.Student;
@@ -47,7 +48,7 @@ public class StudentService {
             Float employmentRate = countOfStudent == 0 ? 0 : countOfFoundJobStudent.floatValue() / countOfStudent * 100;
 
             return DepartmentInformationListResponse.builder()
-                    .id(department.getId())
+                    .type(department.getType().getValue())
                     .image(department.getImage())
                     .name(department.getName())
                     .percent(employmentRate)
@@ -59,8 +60,8 @@ public class StudentService {
         }).collect(Collectors.toList());
     }
 
-    public List<DepartmentStudentListResponse> getDepartmentStudentList(Integer departmentId) {
-        Department department = departmentRepository.findById(departmentId)
+    public List<DepartmentStudentListResponse> getDepartmentStudentList(DepartmentCode departmentCode) {
+        Department department = departmentRepository.findById(departmentCode)
                 .orElseThrow(() -> DepartmentNotFoundException.EXCEPTION);
 
         List<Student> students = studentRepository.findAllByDepartment(department);
