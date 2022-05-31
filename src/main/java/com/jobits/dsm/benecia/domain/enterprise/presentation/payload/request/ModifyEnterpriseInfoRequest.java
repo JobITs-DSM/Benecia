@@ -28,24 +28,8 @@ public class ModifyEnterpriseInfoRequest {
     private String representativeName;
 
     @NotBlank
-    @Size(min = 5, max = 5)
-    private String postalCode;
-
-    @NotBlank
     @Size(max = 255)
     private String address;
-
-    @Size(max = 255)
-    private String addressDetail;
-
-    @Size(min = 5, max = 5)
-    private String branchPostalCode;
-
-    @Size(max = 255)
-    private String branchAddress;
-
-    @Size(max = 255)
-    private String branchAddressDetail;
 
     @NotNull
     private String introduction;
@@ -71,15 +55,11 @@ public class ModifyEnterpriseInfoRequest {
     private String directorTelephoneNumber;
 
     @NotNull
-    @Size(min = 13, max = 13)
-    private String directorPhoneNumber;
-
-    @NotNull
     @Size(max = 255)
     private String directorDepartment;
 
     @NotNull
-    private List<BusinessAreaCode> businessAreas;
+    private BusinessAreaCode businessArea;
 
     @NotNull
     private Integer businessLicense;
@@ -92,5 +72,6 @@ public class ModifyEnterpriseInfoRequest {
     @NotNull
     private Integer foreground;
 
+    @NotNull
     private String region;
 }

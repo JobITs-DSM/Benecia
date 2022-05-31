@@ -1,10 +1,10 @@
 package com.jobits.dsm.benecia.domain.enterprise.domain;
 
+import com.jobits.dsm.benecia.domain.enterprise.code.BusinessAreaCode;
 import com.jobits.dsm.benecia.domain.enterprise.domain.region.Region;
 import com.jobits.dsm.benecia.domain.attachment.domain.Attachment;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
-import com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.BusinessArea;
 import com.jobits.dsm.benecia.domain.review.domain.Review;
 import com.jobits.dsm.benecia.global.able.Savable;
 import com.jobits.dsm.benecia.global.security.auth.UserMarker;
@@ -13,7 +13,6 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -49,16 +48,8 @@ public class Enterprise implements UserMarker, Savable {
     @Size(max = 30)
     private String representativeName;
 
-    @Embedded
-    private Address address;
-
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "postalCode", column = @Column(name = "branch_postal_code", columnDefinition = "CHAR(5)")),
-            @AttributeOverride(name = "address", column = @Column(name = "branch_address")),
-            @AttributeOverride(name = "addressDetail", column = @Column(name = "branch_address_detail"))
-    })
-    private Address branchAddress;
+    @NotNull
+    private String address;
 
     @NotNull
     @Column(columnDefinition = "TEXT")
@@ -68,11 +59,9 @@ public class Enterprise implements UserMarker, Savable {
     @Column(columnDefinition = "CHAR(6)")
     private EnterpriseEmployeeCountCode employeeCount;
 
-    @NotNull
     @Size(max = 255)
     private String site;
 
-    @NotNull
     private Integer turnover;
 
     @Embedded
@@ -80,12 +69,15 @@ public class Enterprise implements UserMarker, Savable {
             @AttributeOverride(name = "email", column = @Column(name = "director_email", length = 320)),
             @AttributeOverride(name = "name", column = @Column(name = "director_name", length = 30)),
             @AttributeOverride(name = "telephoneNumber", column = @Column(name = "director_telephone_number", length = 14)),
-            @AttributeOverride(name = "phoneNumber", column = @Column(name = "director_phone_number", length = 13)),
             @AttributeOverride(name = "department", column = @Column(name = "director_department"))
     })
     private Director director;
 
     private Integer lastReceptionYear;
+
+    @Convert(converter = BusinessAreaCode.BusinessAreaCodeConverter.class)
+    @Column(columnDefinition = "CHAR(6)")
+    private BusinessAreaCode businessArea;
 
     @Setter
     @OneToOne(fetch = FetchType.LAZY, optional = false)
@@ -106,9 +98,6 @@ public class Enterprise implements UserMarker, Savable {
     @OneToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "foreground")
     private Attachment foreground;
-
-    @OneToMany(mappedBy = "enterprise", orphanRemoval = true)
-    private final List<BusinessArea> businessAreas = new ArrayList<>();
 
     @OneToMany(mappedBy = "enterprise", orphanRemoval = true)
     private List<Review> reviews;
