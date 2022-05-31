@@ -2,6 +2,7 @@ package com.jobits.dsm.benecia.domain.recruitment.domain;
 
 import com.jobits.dsm.benecia.domain.attachment.domain.Attachment;
 import com.jobits.dsm.benecia.domain.attachment.domain.AttachmentRepository;
+import com.jobits.dsm.benecia.domain.enterprise.code.BusinessAreaCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Director;
@@ -114,6 +115,7 @@ public class RecruitmentTagRepositoryTest {
                 .employeeCount(EnterpriseEmployeeCountCode.FIFTY_OR_MORE)
                 .site("url")
                 .turnover(128394)
+                .businessArea(BusinessAreaCode.WEB_SERVICE)
                 .director(director)
                 .region(region)
                 .logo(attachment)
