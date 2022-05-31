@@ -33,11 +33,6 @@ public class Director {
     private String telephoneNumber;
 
     @NotNull
-    @Size(min = 13, max = 14)
-    @Column(length = 13)
-    private String phoneNumber;
-
-    @NotNull
     @Size(max = 255)
     private String department;
 }

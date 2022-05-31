@@ -4,7 +4,6 @@ import com.jobits.dsm.benecia.domain.attachment.domain.Attachment;
 import com.jobits.dsm.benecia.domain.attachment.domain.AttachmentRepository;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseDivisionCode;
 import com.jobits.dsm.benecia.domain.enterprise.code.EnterpriseEmployeeCountCode;
-import com.jobits.dsm.benecia.domain.enterprise.domain.Address;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Director;
 import com.jobits.dsm.benecia.domain.enterprise.domain.Enterprise;
 import com.jobits.dsm.benecia.domain.enterprise.domain.EnterpriseRepository;
@@ -15,14 +14,12 @@ import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentReportingTimeCo
 import com.jobits.dsm.benecia.domain.recruitment.code.RecruitmentStatusCode;
 import com.jobits.dsm.benecia.domain.recruitment.domain.tag.*;
 import com.jobits.dsm.benecia.infrastructure.querydsl.QuerydslConfig;
-import org.assertj.core.api.AssertionsForInterfaceTypes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -89,23 +86,10 @@ public class RecruitmentTagRepositoryTest {
     }
 
     private Enterprise getEnterprise() {
-        Address address = Address.builder()
-                .postalCode("11111")
-                .address("headquarter_address")
-                .address("headquarter_address_detail")
-                .build();
-
-        Address branchAddress = Address.builder()
-                .postalCode("11111")
-                .address("branch_address")
-                .addressDetail("branch_address_detail")
-                .build();
-
         Director director = Director.builder()
                 .email("director@gmail.com")
                 .name("박상우")
                 .telephoneNumber("01012345678")
-                .phoneNumber("01023462123")
                 .department("팀장")
                 .build();
 
@@ -125,8 +109,7 @@ public class RecruitmentTagRepositoryTest {
                 .isConvention(true)
                 .division(EnterpriseDivisionCode.LEADING_COMPANY)
                 .representativeName("박상우")
-                .address(address)
-                .branchAddress(branchAddress)
+                .address("서울특별시")
                 .introduction("회사 소개")
                 .employeeCount(EnterpriseEmployeeCountCode.FIFTY_OR_MORE)
                 .site("url")

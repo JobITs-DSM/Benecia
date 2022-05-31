@@ -1,18 +1,10 @@
 package com.jobits.dsm.benecia.domain.enterprise.domain;
 
-import com.jobits.dsm.benecia.domain.attachment.domain.AttachmentRepository;
-import com.jobits.dsm.benecia.domain.attachment.facade.AttachmentFacade;
-import com.jobits.dsm.benecia.domain.enterprise.code.BusinessAreaCode;
-import com.jobits.dsm.benecia.domain.enterprise.domain.region.RegionRepository;
-import com.jobits.dsm.benecia.domain.enterprise.presentation.payload.request.ModifyEnterpriseInfoRequest;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
-
 import static com.jobits.dsm.benecia.domain.contract.domain.QContract.contract;
 import static com.jobits.dsm.benecia.domain.enterprise.domain.QEnterprise.enterprise;
-import static com.jobits.dsm.benecia.domain.enterprise.domain.businessarea.QBusinessArea.businessArea;
 import static com.jobits.dsm.benecia.domain.recruitment.domain.QRecruitment.recruitment;
 import static com.jobits.dsm.benecia.domain.review.domain.QReview.review;
 
@@ -20,16 +12,6 @@ import static com.jobits.dsm.benecia.domain.review.domain.QReview.review;
 public class EnterpriseRepositoryCustomImpl implements EnterpriseRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
-
-    @Override
-    public List<BusinessAreaCode> getBusinessAreas(String registrationNumber) {
-        return queryFactory
-                .select(businessArea.code)
-                .from(businessArea)
-                .join(businessArea.enterprise, enterprise)
-                .where(enterprise.registrationNumber.eq(registrationNumber))
-                .fetch();
-    }
 
     @Override
     public Long getContractStudentCount(String registrationNumber) {
